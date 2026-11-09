@@ -1,0 +1,3 @@
+# Private design preview. Do not index or submit this host to search engines.
+User-agent: *
+Disallow: /

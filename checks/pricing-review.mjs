@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {JSDOM} from 'jsdom';
+import {renderPage} from '../scripts/render-page.mjs';
+const html=readFileSync(new URL('../dist/pricing/index.html',import.meta.url),'utf8');
+const d=new JSDOM(html).window.document;
+const cards=[...d.querySelectorAll('.plan-card')];
+assert.equal(cards.length,3);
+for(const [i,name,price] of [[0,'AI Starter','US$149'],[1,'AI Growth','US$249'],[2,'Unlimited AI','US$349']]){
+ assert.equal(cards[i].querySelector('h3').textContent,name);
+ assert.equal(cards[i].querySelector('.plan-price strong').textContent,price);
+ assert.equal(cards[i].querySelector('.plan-price>span').textContent,'/ month');
+ assert.equal(cards[i].querySelector('.button').getAttribute('href'),'/contact');
+}
+const text=d.querySelector('main').textContent;
+assert.equal(d.querySelectorAll('main h1').length,1);
+assert.equal(d.querySelectorAll('.pricing-foundation-grid article').length,5);
+assert.equal(d.querySelectorAll('.pricing-platform-features li').length,19);
+assert.match(cards[1].querySelector('.pricing-usage').textContent,/1,000 AI responses \/ month\+100 voice minutes \/ month/);
+assert.match(cards[2].textContent,/1,000 Managed Agent runs \/ month/);
+assert.match(cards[0].textContent,/No customer-facing AI assistant allowance is included/);
+for(const s of ['Unlimited contacts, companies, notes and tasks','Same supported inbox channels across all plans, once connected','Facebook and Instagram DMs','self-configure','separately scoped paid assistance','3 initial setup hours','5 initial setup hours','1 hour of basic support','no rollover','Internal quality checks are separate','US$250','5-hour support block','fair-use terms','actual account behaviour','spend cap','No checkout is connected'])assert(text.toLowerCase().includes(s.toLowerCase()),s);
+assert(!/free trial|founder eligibility|supplier cost|40% markup|shared monetary allowance|US\$197/i.test(text));
+assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
+assert.equal(d.querySelectorAll('.plan-table thead th[scope="col"]').length,4);
+assert.equal(d.querySelectorAll('.plan-table tbody th[scope="row"]').length,7);
+assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));
+assert(d.querySelector('img[src$="whatsapp-business-official.png"][alt="WhatsApp Business"]'));
+assert.equal(d.querySelectorAll('.pricing-start-steps li').length,4);
+assert.match(d.querySelector('.pricing-campaign').textContent,/Price, duration, supported channels and scope will be agreed separately/);
+assert.equal(d.querySelectorAll('main form,main input,main iframe').length,0);
+for(const el of d.querySelectorAll('main img[src]'))assert(existsSync(new URL('../dist/'+el.getAttribute('src'),import.meta.url)));
+const runtime=renderPage(readFileSync(new URL('../source/shell.html',import.meta.url),'utf8'),'https://ayudagrow.com','/pricing',{navigation:true});
+assert.equal(runtime.window.document.querySelectorAll('.plan-card').length,3);
+assert.equal(runtime.window.document.querySelectorAll('.pricing-platform-features li').length,19);
+runtime.window.close();
+console.log('Pricing checks passed: shared platform, 19 extended features, equal channels, 3 accurate plans, separate Growth allowances, Unlimited Managed Agent runs, setup/support scope, campaign terms, semantic comparison, assets and runtime rendering. No checkout or trial.');

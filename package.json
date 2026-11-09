@@ -1,0 +1,20 @@
+{
+  "name": "ayuda-grow-site-november-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-search-pages.mjs",
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "node scripts/run-checks.mjs",
+    "check:search": "node checks/search-readiness-review.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "27.4.0"
+  },
+  "version": "0.1.0",
+  "description": "AyudaGrow website source package, November 2026",
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

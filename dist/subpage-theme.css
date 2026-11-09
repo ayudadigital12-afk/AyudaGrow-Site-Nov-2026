@@ -1,0 +1,53 @@
+/* Homepage-aligned type, spacing, surfaces and interaction feedback. */
+.subpage-theme{--subpage-heading:clamp(30px,3.4vw,44px)}
+.subpage-theme h1{font-size:clamp(38px,4.4vw,60px);line-height:1.12;letter-spacing:-.025em;max-width:1000px;margin-bottom:24px;text-wrap:pretty}
+.subpage-theme .subpage-heading-lead{font-size:calc(1em - 8px);display:inline-block;line-height:1.15}
+.subpage-theme h2{font-size:var(--subpage-heading);line-height:1.14;letter-spacing:-.025em;text-wrap:pretty}
+.subpage-theme .page-hero{padding:26px 0 34px}
+.subpage-theme .page-hero h1{max-width:1000px}
+.subpage-theme .page-hero p{max-width:780px;font-size:16px;line-height:1.7;margin-bottom:0}
+.subpage-theme .breadcrumb{margin-bottom:20px}
+.subpage-theme .page-hero .breadcrumb+.eyebrow{margin-top:0}
+.subpage-theme .page-hero .eyebrow{margin-bottom:18px}
+.subpage-theme .section{padding:42px 0}
+.subpage-theme .section-head{gap:28px;margin-bottom:30px;align-items:center}
+.subpage-theme .section-head>div{flex:1;min-width:0}
+.subpage-theme .section-head h2{max-width:800px;margin-bottom:0}
+.subpage-theme .section-head>p{flex:0 1 320px;line-height:1.7}
+.subpage-theme .how-layout{gap:40px;align-items:start}
+.subpage-theme .feature-grid,.subpage-theme .explore-grid{gap:20px}
+.subpage-theme .feature,.subpage-theme .explore-card{border-radius:14px}
+.subpage-theme .feature h3,.subpage-theme .explore-card h3{font-size:clamp(22px,2.2vw,28px);line-height:1.22;margin-bottom:14px;text-wrap:pretty}
+.subpage-theme .feature p,.subpage-theme .explore-card p{line-height:1.7}
+.subpage-theme .cta .wrap{padding-top:48px;padding-bottom:48px}
+.subpage-theme .cta h2{max-width:1000px}
+.subpage-theme .ib-hero h1,.subpage-theme .rp-hero h1,.subpage-theme .rf-hero h1{font-size:clamp(38px,4.4vw,60px)}
+.subpage-theme .ib-hero,.subpage-theme .rp-hero,.subpage-theme .rf-hero{padding-top:32px;padding-bottom:38px}
+.subpage-theme .gp-audience-copy h2{font-size:clamp(27px,2.6vw,34px)}
+.subpage-theme .ag-solutions-hero h1{font-size:clamp(32px,3.4vw,46px)}
+.subpage-theme .ag-card-heading h3{font-size:18px;line-height:1.3}
+.subpage-theme .ag-catalogue-header h2,.subpage-theme .ag-solutions-head h2{font-size:clamp(27px,2.7vw,36px)}
+.subpage-theme a.explore-card{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.subpage-theme a.explore-card:focus-visible{outline:3px solid #1668d9;outline-offset:4px;transform:translateY(-2px);box-shadow:0 7px 22px #173c6a12}
+@media(hover:hover) and (pointer:fine){.subpage-theme a.explore-card:hover{transform:translateY(-2px);box-shadow:0 7px 22px #173c6a12}}
+@media(hover:none){.subpage-theme a.explore-card:hover{transform:none}.subpage-theme a.explore-card:active{background:#eef5fc}}
+@media(max-width:900px){.subpage-theme .how-layout{gap:28px}.subpage-theme .section-head{display:block}.subpage-theme .section-head>p{max-width:680px;margin-top:18px}}
+@media(max-width:720px){.subpage-theme h1,.subpage-theme .ib-hero h1,.subpage-theme .rp-hero h1,.subpage-theme .rf-hero h1{font-size:clamp(34px,6.8vw,44px);line-height:1.12}.subpage-theme h2{font-size:clamp(28px,5.7vw,36px)}.subpage-theme .section{padding:30px 0}.subpage-theme .page-hero{padding:22px 0 28px}.subpage-theme .page-hero p{font-size:15px}.subpage-theme .breadcrumb{margin-bottom:17px}.subpage-theme .section-head{margin-bottom:24px}.subpage-theme .how-layout{gap:25px}.subpage-theme .cta .wrap{padding-top:34px;padding-bottom:34px}.subpage-theme .feature-grid,.subpage-theme .explore-grid{gap:16px}.subpage-theme .ib-hero,.subpage-theme .rp-hero,.subpage-theme .rf-hero{padding-top:24px;padding-bottom:30px}.subpage-theme .ag-card-heading h3{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.subpage-theme a.explore-card{transition:none!important;transform:none!important}}
+body.paused .subpage-theme a.explore-card{transition:none!important;transform:none!important}
+/* Avoid empty fourth cells in three-item feature groups. */
+@media(min-width:1000px){.subpage-theme .feature-grid:has(>.feature:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Keep original persona art in a consistent portrait window, not a giant face crop. */
+.subpage-theme .gp-audience-portrait{height:280px;background:linear-gradient(135deg,#e3edf5,#dceee3);padding:0 20px}
+.subpage-theme .gp-audience-portrait svg{display:block;width:220px;max-width:100%;height:100%;margin:0 auto}
+@media(max-width:720px){.subpage-theme .gp-audience-portrait{height:270px}.subpage-theme .gp-audience-portrait svg{width:210px}}
+.subpage-theme .subpage-keep-word{white-space:nowrap}
+.subpage-theme .av-disclaimer{font-size:12px!important;line-height:1.65}
+.subpage-theme .av-controls button{font-size:12px;min-height:44px}
+.subpage-theme .av-storyline{font-size:13px}
+@media(max-width:720px){.subpage-theme h1.subpage-title-multi{font-size:clamp(28px,6.3vw,34px)}.subpage-theme .av-journey-sub{font-size:13px}.subpage-theme .av-journey-steps li div>span{font-size:12px}.subpage-theme .av-journey-steps li strong{font-size:14px}}
+/* Let the card padding, not default paragraph/list margins, separate scope content. */
+.subpage-theme .how-layout>div>p:last-child{margin-bottom:0}
+.subpage-theme .scope-list>ul{margin-top:0;padding-left:20px}
+.subpage-theme .scope-list li:first-child{padding-top:0}
+@media(max-width:720px){.subpage-theme .scope-list{padding:22px}.subpage-theme .how-layout:has(>.scope-list){gap:20px}}

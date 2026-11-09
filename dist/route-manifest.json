@@ -1,0 +1,280 @@
+{
+  "mode": "private-preview",
+  "origin": "https://ayudagrow.com",
+  "indexing": "noindex,nofollow",
+  "publicLaunchApproved": false,
+  "pages": [
+    {
+      "path": "/",
+      "title": "AyudaGrow | Keep business moving",
+      "description": "Explore AyudaGrow’s AI, CRM, automation, setup and training approach for connected customer journeys in Jamaica and the Caribbean.",
+      "canonical": "https://ayudagrow.com/",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/platform",
+      "title": "AyudaGrow | AI & Connected Growth Platform",
+      "description": "Connect conversations, customer records, follow-up and reporting. Explore AyudaGrow’s illustrative AI-centered growth platform and agreed setup process.",
+      "canonical": "https://ayudagrow.com/platform",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions",
+      "title": "AyudaGrow | Solutions & Capabilities",
+      "description": "Explore how AyudaGrow connects customer enquiries, follow-up, appointments, sales opportunities and reviews through an agreed workflow.",
+      "canonical": "https://ayudagrow.com/solutions",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/inbox",
+      "title": "AyudaGrow | Unified Inbox",
+      "description": "Bring supported customer conversations into a shared inbox with context, ownership and human handoff. Channel availability and setup must be confirmed.",
+      "canonical": "https://ayudagrow.com/inbox",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/ai",
+      "title": "AyudaGrow | Your Business AI Assistant",
+      "description": "Explore an AI assistant grounded in approved business knowledge, configured actions and human handoff. Capabilities depend on the agreed setup.",
+      "canonical": "https://ayudagrow.com/ai",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/ai-concepts",
+      "title": "AyudaGrow | AI Illustration Concepts",
+      "description": "Private creative review of three illustrative treatments for AyudaGrow’s AI assistant. These are design concepts, not published customer services.",
+      "canonical": "https://ayudagrow.com/ai-concepts",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/crm",
+      "title": "AyudaGrow | CRM & Sales Pipeline",
+      "description": "Connect customer records, opportunity stages, responsibilities and next actions. Explore CRM views for sales teams, managers and business owners.",
+      "canonical": "https://ayudagrow.com/crm",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/appointments",
+      "title": "AyudaGrow | Appointment-Based Businesses",
+      "description": "Explore connected appointment enquiries, scheduling, changes and follow-up. Illustrative workflows require agreed calendar and channel configuration.",
+      "canonical": "https://ayudagrow.com/appointments",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/consultative-sales",
+      "title": "AyudaGrow | Consultative & Quote-Driven Sales",
+      "description": "Connect enquiries, discovery, quotations and follow-up for consultative sales. People lead advice, negotiation and customer commitments.",
+      "canonical": "https://ayudagrow.com/consultative-sales",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/use-cases",
+      "title": "AyudaGrow | Who We Serve",
+      "description": "Explore illustrative appointment-driven and consultative business journeys. AyudaGrow adapts connected workflows around how a business sells and serves.",
+      "canonical": "https://ayudagrow.com/use-cases",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/lead-capture",
+      "title": "AyudaGrow | Lead Capture",
+      "description": "Connect forms, campaigns and supported enquiries to a customer record, source and responsible owner. Configure permissions and follow-up around your process.",
+      "canonical": "https://ayudagrow.com/lead-capture",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/follow-up",
+      "title": "AyudaGrow | Follow-Up & Reminders",
+      "description": "Organise quotation, enquiry and appointment follow-up with owners, reminders and clear next actions. Customer messages require agreed permissions and setup.",
+      "canonical": "https://ayudagrow.com/follow-up",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/reactivation",
+      "title": "AyudaGrow | Customer Reactivation",
+      "description": "Explore relevant ways to reconnect with eligible past customers and older enquiries while respecting permissions, preferences and stop conditions.",
+      "canonical": "https://ayudagrow.com/reactivation",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/automation",
+      "title": "AyudaGrow | Workflow Automation",
+      "description": "Explore configured workflow steps that connect customer information, tasks and follow-up. Agree the rules, exceptions and human responsibilities first.",
+      "canonical": "https://ayudagrow.com/automation",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/reporting",
+      "title": "AyudaGrow | Reporting & Forecasting",
+      "description": "Use current CRM and activity data to review pipeline, sources and expected revenue. Forecasts support planning and do not guarantee business results.",
+      "canonical": "https://ayudagrow.com/reporting",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/reputation",
+      "title": "AyudaGrow | Reputation & Google Business Profile",
+      "description": "Explore review workflows and scoped Google Business Profile support. Invite honest feedback and agree profile access, eligibility and service responsibilities.",
+      "canonical": "https://ayudagrow.com/reputation",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/integrations",
+      "title": "AyudaGrow | Integrations & Mobile",
+      "description": "Explore documented connection methods, mobile access and business tools. Confirm account eligibility, permissions and setup before activating an integration.",
+      "canonical": "https://ayudagrow.com/integrations",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/marketing",
+      "title": "AyudaGrow | Marketing Tools",
+      "description": "Connect content and campaigns to customer enquiries and useful follow-up. Publishing, permissions, delivery and advertising scope must be agreed.",
+      "canonical": "https://ayudagrow.com/marketing",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/commerce",
+      "title": "AyudaGrow | Commerce & Payments",
+      "description": "Explore invoices, estimates, payment links and connected order workflows. Provider access, regional availability, fees and responsibilities must be confirmed.",
+      "canonical": "https://ayudagrow.com/commerce",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/learning",
+      "title": "AyudaGrow | Courses, Memberships & Communities",
+      "description": "Explore course, membership and community tools as part of a customer relationship. Content, moderation and access configuration are separately scoped.",
+      "canonical": "https://ayudagrow.com/learning",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/support",
+      "title": "AyudaGrow | Setup, Training & Support",
+      "description": "Learn how AyudaGrow approaches assessment, setup, training and ongoing support. Agree a practical starting point, responsibilities and service scope.",
+      "canonical": "https://ayudagrow.com/support",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/pricing",
+      "title": "AyudaGrow | Engagement & Pricing",
+      "description": "Compare AyudaGrow plans from US$149 per month: shared CRM, inbox, calendars, pipelines and workflows, with separate AI allowances, setup and usage. Private pricing review.",
+      "canonical": "https://ayudagrow.com/pricing",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/privacy",
+      "title": "AyudaGrow | Privacy Review Draft",
+      "description": "Review the draft privacy notice for AyudaGrow’s planned contact-only website, including confirmed contact links and the facts still needed before launch.",
+      "canonical": "https://ayudagrow.com/privacy",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/get-started",
+      "title": "AyudaGrow | Get Started",
+      "description": "Get in touch with AyudaGrow by email at admin@ayudagrow.com or phone on +1 876-480-0413 to discuss your business and a practical next step.",
+      "canonical": "https://ayudagrow.com/get-started",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/contact",
+      "title": "AyudaGrow | Contact AyudaGrow",
+      "description": "Contact AyudaGrow at admin@ayudagrow.com or +1 876-480-0413 to discuss customer enquiries, follow-up and your business workflow.",
+      "canonical": "https://ayudagrow.com/contact",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/growth-assessment",
+      "title": "AyudaGrow | Growth Assessment Guide",
+      "description": "Explore questions about customer enquiries, follow-up and business growth. This is an informational guide, not a working online assessment.",
+      "canonical": "https://ayudagrow.com/growth-assessment",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/learn",
+      "title": "AyudaGrow | What Is CRM?",
+      "description": "Learn what a CRM is and how shared customer records, conversation context, pipeline stages and next actions can support your team’s daily work.",
+      "canonical": "https://ayudagrow.com/learn",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/book-more-appointments",
+      "title": "AyudaGrow | Book More Appointments",
+      "description": "Explore how connected enquiries, booking details and reminders can support an appointment journey. Examples are illustrative and results are not guaranteed.",
+      "canonical": "https://ayudagrow.com/solutions/book-more-appointments",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/convert-more-leads",
+      "title": "AyudaGrow | Convert More Leads",
+      "description": "Explore a clearer path from new enquiry to useful response, qualification and follow-up. Agree ownership and measure the actual customer outcome.",
+      "canonical": "https://ayudagrow.com/solutions/convert-more-leads",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/generate-more-reviews",
+      "title": "AyudaGrow | Generate More Reviews",
+      "description": "Explore appropriate review invitations, honest customer feedback and thoughtful responses. Tools and managed profile services have separate agreed scopes.",
+      "canonical": "https://ayudagrow.com/solutions/generate-more-reviews",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/improve-customer-communication",
+      "title": "AyudaGrow | Improve Customer Communication",
+      "description": "Connect customer conversation context, team ownership and agreed responses across supported channels. Availability depends on the configured setup.",
+      "canonical": "https://ayudagrow.com/solutions/improve-customer-communication",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/improve-sales-follow-up",
+      "title": "AyudaGrow | Improve Sales Follow Up",
+      "description": "Explore clear sales follow-up with owners, due dates, shared context and appropriate reminders. Customer permissions and stop conditions matter.",
+      "canonical": "https://ayudagrow.com/solutions/improve-sales-follow-up",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/manage-sales-opportunities",
+      "title": "AyudaGrow | Manage Sales Opportunities",
+      "description": "Explore sales stages, current opportunity records and meaningful next actions. Use reporting for management visibility without promising sales outcomes.",
+      "canonical": "https://ayudagrow.com/solutions/manage-sales-opportunities",
+      "indexable": false,
+      "launchReviewRequired": false
+    },
+    {
+      "path": "/solutions/reactivate-customers",
+      "title": "AyudaGrow | Reactivate Customers",
+      "description": "Explore relevant follow-up for eligible past customers and paused enquiries. Respect communication preferences and give interested replies a clear owner.",
+      "canonical": "https://ayudagrow.com/solutions/reactivate-customers",
+      "indexable": false,
+      "launchReviewRequired": false
+    }
+  ]
+}

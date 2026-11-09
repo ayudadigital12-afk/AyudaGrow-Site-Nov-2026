@@ -1,0 +1,27 @@
+/* Approved AyudaGrow mascot and chrome star accents. */
+.av-visual{font-family:'Poppins',Arial,Helvetica,sans-serif}
+.av-ai-core{width:208px;height:260px;border-radius:30px;background:linear-gradient(155deg,#1958a5aa,#0b2e62bb);box-shadow:0 12px 35px #00173555}
+.av-ai-core .brand-mascot{width:138px;height:166px;object-fit:contain;margin:0 auto 7px}
+.av-ai-core strong{font-family:'Poppins',Arial,sans-serif;font-size:21px;letter-spacing:-.015em}
+.av-ai-core small{font-size:10px;margin-top:5px}
+.av-transcript-avatar{width:58px;height:66px;background:#edf5ff;border-radius:12px}
+.av-transcript-avatar .brand-mascot{width:48px;height:62px;object-fit:contain}
+.av-time-ai-icon{height:100px;display:block}
+.av-time-ai-icon .brand-mascot{width:90px;height:100px;object-fit:contain;object-position:left bottom}
+.page-hero .wrap{position:relative;padding-right:13%}
+.page-hero .wrap::after{content:'';position:absolute;right:5%;top:0;width:74px;height:84px;background:url('assets/star-primary.png') center/contain no-repeat;pointer-events:none}
+.ai-home .section-head{position:relative;padding-right:65px}
+.ai-home .section-head::after{content:'';position:absolute;right:0;top:0;width:54px;height:62px;background:url('assets/star-secondary.png') center/contain no-repeat;pointer-events:none}
+.cta .wrap{position:relative}.cta .wrap::after{content:'';position:absolute;right:5%;bottom:4px;width:68px;height:76px;background:url('assets/star-primary.png') center/contain no-repeat;pointer-events:none}
+footer>.logo{position:relative}footer>.logo::after{content:'';display:block;width:35px;height:40px;margin-top:18px;background:url('assets/star-secondary.png') center/contain no-repeat}
+@media(max-width:720px){
+ .page-hero .wrap{padding-right:5%}.page-hero .wrap::after{width:35px;height:40px;top:-5px;right:5%}
+ .page-hero .eyebrow{padding-right:40px}
+ .ai-home .section-head{padding-right:0}.ai-home .section-head::after{display:none}
+ .cta .wrap::after{width:40px;height:45px;bottom:0;right:5%}
+ .av-ai-core{width:180px;height:230px}.av-ai-core .brand-mascot{width:122px;height:144px}.av-ai-core strong{font-size:19px}
+}
+/* Footer logo backing follows the image only; the brand star sits on the navy canvas. */
+footer>.logo{background:transparent;padding:0;border-radius:0;align-self:start}
+footer>.logo>img{background:#fff;padding:8px 10px;border-radius:7px}
+footer>.logo::after{pointer-events:none;margin-top:18px;margin-left:8px}
