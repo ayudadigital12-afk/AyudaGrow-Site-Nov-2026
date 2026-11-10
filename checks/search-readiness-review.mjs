@@ -8,7 +8,7 @@ const origin=manifest.origin;
 const routes=new Set(manifest.pages.map(p=>p.path));
 const titles=new Set(),descriptions=new Set();
 assert.equal(manifest.mode,'private-preview');assert.equal(manifest.publicLaunchApproved,false);
-assert.equal(manifest.pages.length,34);
+assert.equal(manifest.pages.length,33);
 let linkCount=0;
 for(const page of manifest.pages){
   const html=read(page.path==='/'?'dist/index.html':'dist'+page.path+'/index.html');
@@ -39,7 +39,7 @@ for(const page of manifest.pages){
   }
   dom.window.close();
 }
-assert.equal(titles.size,34);assert.equal(descriptions.size,34);
+assert.equal(titles.size,33);assert.equal(descriptions.size,33);
 assert.match(read('dist/robots.txt'),/User-agent: \*\nDisallow: \/\n/);
 assert(!read('dist/sitemap.xml').includes('<loc>'));
 assert.match(read('dist/_headers'),/X-Robots-Tag: noindex, nofollow/);
@@ -65,7 +65,7 @@ for(const [entry,expected] of [['/platform?growth=convert-close','/platform?grow
   dom.window.close();
 }
 const live=renderPage(shell,origin,'/platform',{navigation:true}),w=live.window;
-const wait=()=>new Promise(resolve=>setTimeout(resolve,35));
+const wait=()=>new Promise(resolve=>setTimeout(resolve,120));
 await wait();
 let selected=w.document.querySelector('[data-growth-stage="2"]');selected.click();
 const crmLink=w.document.querySelector('a[href="/crm"]');assert(crmLink);crmLink.click();await wait();

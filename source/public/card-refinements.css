@@ -1,0 +1,43 @@
+/* Compact, content-led cards. No fixed heights, clipping or removed copy. */
+#main .explore-card{padding:20px 24px 38px}
+#main .explore-card .eyebrow{margin-bottom:8px}
+#main .explore-card h3{font-size:23px;line-height:1.25;margin:0 0 10px}
+#main .explore-card p{font-size:14px;line-height:1.65;margin:0}
+#main .explore-arrow{right:20px;bottom:12px;font-size:22px}
+#main .feature{padding:20px 24px}
+#main .feature h3{font-size:22px;line-height:1.25;margin:0 0 10px}
+#main .feature p{line-height:1.65;margin-bottom:0}
+#main .gp-loop-tabs button{min-height:78px;padding:14px 16px}
+#main .gp-loop-tabs button>span{margin-bottom:6px}
+#main .gp-loop-tabs button>i{bottom:14px}
+#main .gp-loop-detail{padding:26px;gap:28px;min-height:0}
+#main .gp-loop-detail h3{font-size:27px;margin-bottom:12px}
+#main .gp-exception-card{padding:22px 24px;min-height:0}
+#main .gp-exception-card h3{font-size:24px}
+#main .channel-capabilities article,#main .plan-card,#main .learning-steps article,#main .rp-response-grid article,#main .rf-deals article,#main .rf-decisions article{padding:22px 24px}
+#main .channel-capabilities h3,#main .plan-card h3,#main .learning-steps h3,#main .rp-response-grid h3,#main .rf-deals h3,#main .rf-decisions h3{font-size:22px;line-height:1.3;margin-bottom:10px}
+#main .channel-capabilities article>p:last-child,#main .learning-steps article>p:last-child,#main .rp-response-grid article>p:last-child{margin-bottom:0}
+#main .plan-card li{margin-bottom:8px}
+#main .rf-decisions .rf-signal{padding:14px;margin:14px 0}
+#main .rf-pipeline article{padding:18px 20px}
+#main .rf-pipeline article>span{margin-bottom:12px}
+#main .knowledge-stack article{padding:20px 22px 20px 56px}
+#main .knowledge-stack article>span{left:18px;top:22px}
+#main .ch-app-card{padding:20px}
+#main .ch-app-card>img{margin-bottom:12px}
+#main .ch-app-card>p{min-height:0}
+@media(max-width:900px){#main .gp-loop-tabs button{padding:13px 11px}}
+@media(max-width:720px){
+ #main .explore-card{padding:18px 20px 36px}
+ #main .explore-card h3,#main .feature h3{font-size:21px}
+ #main .feature,#main .channel-capabilities article,#main .plan-card,#main .learning-steps article,#main .rp-response-grid article,#main .rf-deals article,#main .rf-decisions article,#main .gp-exception-card{padding:20px}
+ #main .gp-loop-tabs button{min-height:52px;padding:12px 16px}
+ #main .gp-loop-tabs button>span{margin-bottom:0}
+ #main .gp-loop-detail{padding:20px;gap:22px}
+ #main .gp-loop-detail h3{font-size:24px}
+}
+
+/* Approved recurring retail prices; usage and terms remain explicit below. */
+#main .plan-card .plan-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:16px 0 20px;color:var(--navy)}
+#main .plan-price strong{font-size:clamp(30px,3vw,38px);line-height:1.15;letter-spacing:-.025em}
+#main .plan-price span{font-size:14px;font-weight:500;color:#52637c}

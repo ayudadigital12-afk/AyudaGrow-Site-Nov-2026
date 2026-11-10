@@ -1,0 +1,17 @@
+{
+  "status": "proposal-not-activated",
+  "collectionEnabled": false,
+  "analyticsProperty": null,
+  "searchConsoleProperty": null,
+  "candidateEvents": [
+    {"name": "contact_email_click", "meaning": "Visitor opens an email link; not a confirmed enquiry submission."},
+    {"name": "contact_phone_click", "meaning": "Visitor opens a phone link; not a completed call."},
+    {"name": "plan_discussion_click", "meaning": "Visitor opens contact information from a plan; not a purchase."}
+  ],
+  "requiresBeforeActivation": [
+    "Approve the analytics tool, exact property/stream and collection scope.",
+    "Verify applicable privacy and consent requirements before collection.",
+    "Verify Search Console ownership and the effective Search generative AI inclusion setting.",
+    "Define reporting owners and distinguish contact-link intent from completed conversions."
+  ]
+}

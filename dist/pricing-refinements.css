@@ -57,7 +57,7 @@
 #main .pricing-shared-notes{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:25px;padding:0 1px}
 #main .pricing-shared-notes strong{font-size:12px}
 #main .pricing-shared-notes p{font-size:11px;line-height:1.75;margin:6px 0 0}
-#main .pricing-review-note{border-top:1px solid #d1dce5;padding-top:15px;margin-top:20px!important}
+#main .pricing-activation-note{border-top:1px solid #d1dce5;padding-top:15px;margin-top:20px!important}
 #main .pricing-comparison{margin-top:24px;border:1px solid #cbd9e3;border-radius:10px;background:white;overflow:hidden}
 #main .pricing-comparison>summary{font-size:13px;padding:18px 20px}
 #main .pricing-comparison-body{padding:0 20px 20px}
@@ -122,3 +122,7 @@
 @media(max-width:620px){#main .pricing-platform-features{grid-template-columns:1fr}}
 /* Keep plan details comfortable on portrait tablets. */
 @media(min-width:761px) and (max-width:900px){#main .pricing-page .plan-grid{grid-template-columns:1fr}#main .pricing-page .plan-card,#main .pricing-page .plan-card.plan-growth{display:grid;grid-template-columns:1fr 1fr;gap:18px 26px;padding:26px}#main .pricing-page .plan-title{min-height:0;grid-row:span 2}#main .pricing-page .plan-card .pricing-usage{min-height:105px}#main .pricing-page .plan-card ul{margin:0}#main .pricing-page .plan-card .button{margin:0}#main .pricing-page .plan-card .plan-note{margin:0;min-height:0;align-self:center}#main .pricing-page .plan-card .plan-intro{font-size:13px}}
+
+/* Align allowance panels and actions across the three desktop cards. */
+#main .plan-table .comparison-group th{background:#e7eff8;color:#153e70;font-weight:600;width:auto}
+@media(min-width:901px){#main .pricing-page .plan-grid{row-gap:0}#main .pricing-page .plan-card{display:grid;grid-template-rows:subgrid;grid-row:span 5;row-gap:0}#main .pricing-page .plan-title{min-height:0}#main .pricing-page .plan-card ul{grid-row:2}#main .pricing-page .pricing-usage{grid-row:3;margin-bottom:18px}#main .pricing-page .plan-card .button{grid-row:4;margin-top:0}#main .pricing-page .plan-card .plan-note{grid-row:5}}

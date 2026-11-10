@@ -1,0 +1,15 @@
+{
+  "mode": "staging",
+  "canonicalOrigin": "https://ayudagrow.com",
+  "publicLaunchApproved": false,
+  "approvals": {
+    "privacy": false,
+    "commercialTerms": false,
+    "hostingAndRollback": false,
+    "legacyBookingAndLogin": false,
+    "canonicalHost": false,
+    "productionIndexing": false,
+    "mobilePerformance": false,
+    "measurementPlan": false
+  }
+}

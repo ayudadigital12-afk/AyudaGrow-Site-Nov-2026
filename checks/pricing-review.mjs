@@ -23,7 +23,7 @@ for(const s of ['Unlimited contacts, companies, notes and tasks','Same supported
 assert(!/free trial|founder eligibility|supplier cost|40% markup|shared monetary allowance|US\$197/i.test(text));
 assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
 assert.equal(d.querySelectorAll('.plan-table thead th[scope="col"]').length,4);
-assert.equal(d.querySelectorAll('.plan-table tbody th[scope="row"]').length,7);
+assert.equal(d.querySelectorAll('.plan-table tbody th[scope="row"]').length,8);
 assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));
 assert(d.querySelector('img[src$="whatsapp-business-official.png"][alt="WhatsApp Business"]'));
 assert.equal(d.querySelectorAll('.pricing-start-steps li').length,4);

@@ -50,3 +50,5 @@
 .av-knowledge-bubbles li>span:last-child{min-width:0;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:1000px){.av-knowledge-bubbles{grid-template-columns:repeat(3,minmax(0,1fr));max-width:640px}}
 @media(max-width:620px){.av-knowledge-bubbles{grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px}.av-knowledge-bubbles li{flex-direction:column;gap:6px;min-height:84px;padding:10px 8px;font-size:11px}}
+/* Pausing an entrance sequence must not hide interactive service tiles. */
+body.paused .ag-assembling .ag-piece{animation:none!important;transform:none!important;opacity:1!important}

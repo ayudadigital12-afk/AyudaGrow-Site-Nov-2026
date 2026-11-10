@@ -21,7 +21,7 @@ for(const label of ['CRM','(Customer Database)','Social Connections','Google Rev
 assert(hero.includes('Choose the services you need.')&&hero.includes('Bring them together to grow.'));
 assert(hero.includes('depend on your plan and agreed setup'));
 assert(hero.includes('What is AyudaGrow?')&&!hero.includes('What is Ayuda Grow?'));
-assert(hero.includes('assets/logo.webp')&&hero.includes('assets/mascot-laptop.png')&&hero.includes('assets/star-primary.png'));
+assert(hero.includes('assets/logo.webp')&&hero.includes('assets/mascot-laptop.webp')&&hero.includes('assets/star-primary.webp'));
 assert(!hero.toLowerCase().includes('plus more'));
 assert(hero.includes('Explore All Capabilities'));
 for(const title of ['Danielle - Sale by Appointment','Rasheed - Sale by Consultation','Who We Serve'])assert(who.includes(title));
@@ -59,8 +59,9 @@ for(const name of ['marcus','aisha'])assert(readFileSync(new URL('../dist/assets
 assert(lowerPaths.includes('Aisha · Dental practice owner'));
 assert(lowerPaths.includes('These are illustrative business situations, not client stories.'));
 assert(app.includes("crop('aisha','375 20 360 510'"));
-assert(readFileSync(new URL('../dist/assets/aisha.png',import.meta.url)).length>100000);
+assert(readFileSync(new URL('../dist/assets/aisha-20261110.webp',import.meta.url)).length>100000);
 console.log('Business example checks passed: 12 grouped examples, administrative healthcare scope, approved Aisha placement and illustration disclosure.');
 assert(read('dist/brand.css').includes('footer>.logo{background:transparent;padding:0;border-radius:0;align-self:start}'));
 assert(read('dist/brand.css').includes('footer>.logo>img{background:#fff;padding:8px 10px;border-radius:7px}'));
 console.log('Footer backing check passed: white is restricted to logo image; star remains separate on navy.');
+assert.match(read('dist/homepage.css'),/body\.paused \.ag-assembling \.ag-piece\{animation:none!important;transform:none!important;opacity:1!important\}/,'Paused entrance leaves all service tiles visible and usable');

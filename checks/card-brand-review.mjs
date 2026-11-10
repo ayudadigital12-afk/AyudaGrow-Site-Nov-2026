@@ -5,7 +5,7 @@ const css=read('card-refinements.css'),brand=read('brand-growth.css'),index=read
 for(const name of ['explore-card','feature','gp-loop-tabs','gp-exception-card','channel-capabilities','plan-card','learning-steps','rp-response-grid','rf-deals','rf-decisions','rf-pipeline','knowledge-stack'])assert(css.includes(name),name);
 assert(!/(?:^|[;{])\s*height\s*:|text-overflow|line-clamp|overflow\s*:\s*hidden/.test(css));
 assert(css.includes('min-height:78px'));assert(css.includes('min-height:52px'));assert(css.includes('min-height:0'));
-for(const material of ['acrylic','aluminium','embossed'])for(const shape of ['ring','sweep']){const name=`brand-growth-${shape}-${material}.webp`;assert(existsSync(new URL('../dist/assets/'+name,import.meta.url)));assert(brand.includes(name));}
+for(const material of ['acrylic','aluminium','embossed'])for(const shape of ['ring','sweep']){const name=`brand-growth-${shape}-${material}-optimized.webp`;assert(existsSync(new URL('../dist/assets/'+name,import.meta.url)));assert(brand.includes(name));}
 assert(brand.includes('padding-right:calc(5% + 128px)'));assert(brand.includes('position:static'));
 assert(index.indexOf('card-refinements.css')>index.indexOf('subpage-theme.css'));
 assert(index.indexOf('brand-growth.css')>index.indexOf('card-refinements.css'));

@@ -17,7 +17,7 @@ assert.equal((html.match(/name="ag-capability-detail"/g)||[]).length,13);
 assert.equal((html.match(/name="ag-outcome-detail"/g)||[]).length,7);
 for(const c of catalogue){assert(html.includes(c.copy));assert(html.includes(c.cost));c.tools.forEach(t=>assert(html.includes(t)));assert(html.includes(`data-capability="${c.id}"`));}
 for(const o of outcomes){assert(html.includes(o[1]));assert(html.includes(o[2]));o[3].forEach(t=>assert(html.includes(t)));assert(html.includes(`href="#/solutions/${o[0]}"`));}
-assert(html.includes('assets/mascot-laptop.png'));
+assert(html.includes('assets/mascot-laptop.webp'));
 assert(html.includes('Availability, setup and charges depend on your plan and agreed scope.'));
 assert(!html.includes('plus more'));
 for(const route of ['crm','lead-capture','inbox','appointments','consultative-sales','automation','marketing','reputation','commerce','learning','reporting','ai','integrations'])assert(html.includes(`href="#/${route}"`));

@@ -1,0 +1,206 @@
+[
+  {
+    "old": "aisha.png",
+    "new": "aisha.webp",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "old_bytes": 3110148,
+    "new_bytes": 356462
+  },
+  {
+    "old": "brand-growth-ring-acrylic.webp",
+    "new": "brand-growth-ring-acrylic-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 1221752,
+    "new_bytes": 385606
+  },
+  {
+    "old": "brand-growth-ring-aluminium.webp",
+    "new": "brand-growth-ring-aluminium-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 949848,
+    "new_bytes": 254676
+  },
+  {
+    "old": "brand-growth-ring-embossed.webp",
+    "new": "brand-growth-ring-embossed-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 883926,
+    "new_bytes": 239524
+  },
+  {
+    "old": "brand-growth-sweep-acrylic.webp",
+    "new": "brand-growth-sweep-acrylic-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 813268,
+    "new_bytes": 230456
+  },
+  {
+    "old": "brand-growth-sweep-aluminium.webp",
+    "new": "brand-growth-sweep-aluminium-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 665192,
+    "new_bytes": 176666
+  },
+  {
+    "old": "brand-growth-sweep-embossed.webp",
+    "new": "brand-growth-sweep-embossed-optimized.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 528148,
+    "new_bytes": 146100
+  },
+  {
+    "old": "brand-mark.png",
+    "new": "brand-mark.webp",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "old_bytes": 1438694,
+    "new_bytes": 467374
+  },
+  {
+    "old": "danielle.png",
+    "new": "danielle.webp",
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "old_bytes": 2750683,
+    "new_bytes": 376076
+  },
+  {
+    "old": "elena.png",
+    "new": "elena.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "old_bytes": 2824216,
+    "new_bytes": 392240
+  },
+  {
+    "old": "logo-white.png",
+    "new": "logo-white.webp",
+    "dimensions": [
+      2048,
+      684
+    ],
+    "old_bytes": 423233,
+    "new_bytes": 251616
+  },
+  {
+    "old": "marcus.png",
+    "new": "marcus.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "old_bytes": 2732850,
+    "new_bytes": 370786
+  },
+  {
+    "old": "mascot-laptop.png",
+    "new": "mascot-laptop.webp",
+    "dimensions": [
+      1049,
+      1500
+    ],
+    "old_bytes": 1155131,
+    "new_bytes": 178480
+  },
+  {
+    "old": "mascot-phone.png",
+    "new": "mascot-phone.webp",
+    "dimensions": [
+      983,
+      1600
+    ],
+    "old_bytes": 1272241,
+    "new_bytes": 229362
+  },
+  {
+    "old": "mascot-wave.png",
+    "new": "mascot-wave.webp",
+    "dimensions": [
+      1132,
+      1390
+    ],
+    "old_bytes": 1181936,
+    "new_bytes": 218552
+  },
+  {
+    "old": "rasheed.png",
+    "new": "rasheed.webp",
+    "dimensions": [
+      1122,
+      1402
+    ],
+    "old_bytes": 3020556,
+    "new_bytes": 362650
+  },
+  {
+    "old": "star-primary.png",
+    "new": "star-primary.webp",
+    "dimensions": [
+      1182,
+      1330
+    ],
+    "old_bytes": 602361,
+    "new_bytes": 100302
+  },
+  {
+    "old": "star-secondary.png",
+    "new": "star-secondary.webp",
+    "dimensions": [
+      1182,
+      1330
+    ],
+    "old_bytes": 655376,
+    "new_bytes": 106346
+  },
+  {
+    "old": "fonts/Poppins-400.ttf",
+    "new": "fonts/Poppins-400.woff2",
+    "old_bytes": 154628,
+    "new_bytes": 9920
+  },
+  {
+    "old": "fonts/Poppins-500.ttf",
+    "new": "fonts/Poppins-500.woff2",
+    "old_bytes": 152860,
+    "new_bytes": 9716
+  },
+  {
+    "old": "fonts/Poppins-600.ttf",
+    "new": "fonts/Poppins-600.woff2",
+    "old_bytes": 151516,
+    "new_bytes": 10032
+  },
+  {
+    "old": "fonts/Poppins-700.ttf",
+    "new": "fonts/Poppins-700.woff2",
+    "old_bytes": 150292,
+    "new_bytes": 9748
+  }
+]

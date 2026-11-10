@@ -1,16 +1,16 @@
 /* User-supplied growth marks complement the existing wordmark, mascot and stars. */
 .page-hero .wrap{padding-right:calc(5% + 128px)}
-.page-hero .wrap::after{width:112px;height:112px;background-image:url('assets/brand-growth-ring-acrylic.webp')}
-#main[data-theme-route="platform"] .page-hero .wrap::after,#main[data-theme-route="crm"] .page-hero .wrap::after,#main[data-theme-route="integrations"] .page-hero .wrap::after{background-image:url('assets/brand-growth-ring-aluminium.webp')}
-#main[data-theme-route="support"] .page-hero .wrap::after,#main[data-theme-route="get-started"] .page-hero .wrap::after{background-image:url('assets/brand-growth-sweep-aluminium.webp')}
-#main[data-theme-route="growth-assessment"] .page-hero .wrap::after{background-image:url('assets/brand-growth-sweep-acrylic.webp')}
+.page-hero .wrap::after{width:112px;height:112px;background-image:url('assets/brand-growth-ring-acrylic-optimized.webp')}
+#main[data-theme-route="platform"] .page-hero .wrap::after,#main[data-theme-route="crm"] .page-hero .wrap::after,#main[data-theme-route="integrations"] .page-hero .wrap::after{background-image:url('assets/brand-growth-ring-aluminium-optimized.webp')}
+#main[data-theme-route="support"] .page-hero .wrap::after,#main[data-theme-route="get-started"] .page-hero .wrap::after{background-image:url('assets/brand-growth-sweep-aluminium-optimized.webp')}
+#main[data-theme-route="growth-assessment"] .page-hero .wrap::after{background-image:url('assets/brand-growth-sweep-acrylic-optimized.webp')}
 .gp-loop-foot img{width:64px;height:64px;object-fit:contain}
-.home-workspace-section .how-intro::after{content:'';display:block;width:112px;height:112px;margin-top:24px;background:url('assets/brand-growth-sweep-embossed.webp') center/contain no-repeat;pointer-events:none}
+.home-workspace-section .how-intro::after{content:'';display:block;width:112px;height:112px;margin-top:24px;background:url('assets/brand-growth-sweep-embossed-optimized.webp') center/contain no-repeat;pointer-events:none}
 .cta .wrap{padding-right:170px}
-.cta .wrap::after{width:112px;height:112px;right:4%;bottom:40px;background-image:url('assets/brand-growth-ring-embossed.webp')}
-footer>.logo::after{width:76px;height:76px;background-image:url('assets/brand-growth-sweep-aluminium.webp')}
+.cta .wrap::after{width:112px;height:112px;right:4%;bottom:40px;background-image:url('assets/brand-growth-ring-embossed-optimized.webp')}
+footer>.logo::after{width:76px;height:76px;background-image:url('assets/brand-growth-sweep-aluminium-optimized.webp')}
 .rf-hero .eyebrow{display:flex;align-items:center;gap:12px}
-.rf-hero .eyebrow::before{content:'';flex:0 0 54px;height:54px;background:url('assets/brand-growth-sweep-acrylic.webp') center/contain no-repeat;pointer-events:none}
+.rf-hero .eyebrow::before{content:'';flex:0 0 54px;height:54px;background:url('assets/brand-growth-sweep-acrylic-optimized.webp') center/contain no-repeat;pointer-events:none}
 @media(max-width:720px){
  .page-hero .wrap{padding-right:5%}
  .page-hero .wrap::after{width:48px;height:48px}

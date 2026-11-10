@@ -7,7 +7,10 @@
     "start": "node scripts/serve.mjs",
     "dev": "node scripts/serve.mjs",
     "test": "node scripts/run-checks.mjs",
-    "check:search": "node checks/search-readiness-review.mjs"
+    "check:search": "node checks/search-readiness-review.mjs",
+    "check:white-label": "node checks/white-label-readiness.mjs",
+    "check:production": "node scripts/check-production-readiness.mjs",
+    "check:http": "node scripts/check-http-readiness.mjs"
   },
   "devDependencies": {
     "jsdom": "27.4.0"

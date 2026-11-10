@@ -1,0 +1,13 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {apacheStagingRules} from './apache-rules.mjs';
+const manifest=JSON.parse(readFileSync(new URL('../dist/route-manifest.json',import.meta.url)));
+const aliases=Object.fromEntries(readFileSync(new URL('../dist/_redirects',import.meta.url),'utf8').trim().split('\n').filter(l=>!l.split(' ')[0].endsWith('/')).map(l=>{const [a,b]=l.split(' ');return [a.slice(1),b.slice(1)]}));
+let rules=apacheStagingRules(manifest.pages.map(p=>p.path),aliases);
+rules=rules.replace('RewriteEngine On','<IfModule mod_passenger.c>\n  PassengerEnabled off\n</IfModule>\nRewriteEngine On\n# Hide build-directory URLs from visitors.\nRewriteCond %{THE_REQUEST} [[:space:]]/+dist(?:/|[[:space:]?]) [NC]\nRewriteRule ^dist(?:/(.*))?$ /$1 [R=301,L]');
+rules=rules.replace(/(RewriteRule \S+ )([^ \n]+)( \[END\])/g,'$1dist/$2$3');
+rules=rules.replace('RewriteCond %{REQUEST_FILENAME} !-f\nRewriteRule ^ - [R=404,L]', 'RewriteRule ^(?:\\.|source(?:/|$)|scripts(?:/|$)|checks(?:/|$)|node_modules(?:/|$)|dist(?:/|$)|deploy(?:/|$)) - [R=404,L]\nRewriteCond %{DOCUMENT_ROOT}/dist/$1 -f\nRewriteRule ^(.+)$ dist/$1 [END]\nRewriteRule ^ - [R=404,L]');
+rules=rules.replaceAll(' dist/', ' release-20261110/').replaceAll('/dist/$1','/release-20261110/$1').replace('dist(?:/|$)|deploy','dist(?:/|$)|release-20261110(?:/|$)|deploy');
+rules=rules.replace('ErrorDocument 404 /404.html','ErrorDocument 404 /release-20261110/404.html').replace('RewriteEngine On','RewriteEngine On\nRewriteRule ^release-20261110/404\\.html$ - [END]');
+mkdirSync(new URL('../deploy/',import.meta.url),{recursive:true});
+writeFileSync(new URL('../deploy/hostinger-staging-root.htaccess',import.meta.url),rules);
+console.log('Generated Hostinger staging root configuration.');

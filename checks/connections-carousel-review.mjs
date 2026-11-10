@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import {JSDOM} from 'jsdom';
 import {readFileSync,writeFileSync} from 'node:fs';
 const root=new URL('../',import.meta.url),read=f=>readFileSync(new URL(f,root),'utf8');
 const source=read('dist/integration-carousel.js');
 function harness({reduced=false,paused=false}={}){
  const pending=new Map(),observers=[],listeners={},mediaListeners={},body={classList:{contains:()=>paused}};let id=0;
  const el=()=>({events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;}});
- const viewport=Object.assign(el(),{scrollLeft:0,clientWidth:1040,scrollTo(options){this.scrollLeft=options.left;this.lastScroll=options;}}),track={children:Array.from({length:70},(_,i)=>({offsetLeft:i*208}))},carousel=el(),pause=el(),prev=el(),next=el(),count=el(),status=el();
+ const viewport=Object.assign(el(),{scrollLeft:0,clientWidth:1040,scrollTo(options){this.scrollLeft=options.left;this.lastScroll=options;}}),track={children:Array.from({length:68},(_,i)=>({offsetLeft:i*208}))},carousel=el(),pause=el(),prev=el(),next=el(),count=el(),status=el();
  const map={'.ch-apps':carousel,'.ch-app-viewport':viewport,'.ch-app-track':track,'[data-app-pause]':pause,'[data-app-prev]':prev,'[data-app-next]':next,'[data-app-count]':count,'[data-app-status]':status};
  const mount={isConnected:true,querySelector:s=>map[s],innerHTML:''};
  const media={matches:reduced,addEventListener:(k,f)=>mediaListeners[k]=f,removeEventListener:k=>delete mediaListeners[k]};
@@ -16,25 +17,42 @@ function harness({reduced=false,paused=false}={}){
  const advance=t=>{const entries=[...pending];pending.clear();entries.forEach(([,f])=>f(t));};
  return{c,mount,viewport,track,carousel,pause,prev,next,count,status,media,pending,observers,listeners,advance,setPaused:p=>{paused=p;observers[0].cb();}};
 }
-const h=harness(),apps=vm.runInContext('connectedApps',h.c);assert.equal(apps.length,35);
-const expected=['Google Calendar','Google','Facebook','LinkedIn','TikTok Messaging','TikTok Lead Ads','WhatsApp','Instagram','Payments & Checkout','Google Lead Ads','Xero','QuickBooks','Wave','Slack','Clio','Canva','Google Business Profile','WooCommerce','Shopify','Printful','Printify','Google Merchant Center','Shippo','ShipStation','ClickUp','Notion','Airtable','Google Contacts','Asana','Basecamp','Typeform','Jotform','Meta Ads','ChatGPT','Claude'];
+const h=harness(),apps=vm.runInContext('connectedApps',h.c);assert.equal(apps.length,34);
+const expected=['Google Calendar','Google','Facebook','LinkedIn','TikTok Messaging','TikTok Lead Ads','WhatsApp Business','Instagram','Google Ads','Xero','QuickBooks','Wave','Slack','Clio','Canva','Google Business Profile','WooCommerce','Shopify','Printful','Printify','Google Merchant Center','Shippo','ShipStation','ClickUp','Notion','Airtable','Google Contacts','Asana','Basecamp','Typeform','Jotform','Meta Ads','ChatGPT','Claude'];
 assert.deepEqual([...apps.map(x=>x[0])],expected);
-assert.equal((h.mount.innerHTML.match(/aria-roledescription="slide"/g)||[]).length,35);
-assert.equal((h.mount.innerHTML.match(/aria-hidden="true" inert/g)||[]).length,35);
-assert.equal((h.mount.innerHTML.match(/<a class="ch-app-source"/g)||[]).length,35);
+assert.equal((h.mount.innerHTML.match(/aria-roledescription="slide"/g)||[]).length,34);
+assert.equal((h.mount.innerHTML.match(/aria-hidden="true" inert/g)||[]).length,34);
+const doc=new JSDOM(h.mount.innerHTML).window.document;
+const cards=[...doc.querySelectorAll('.ch-app-card')];assert.equal(cards.length,68);
+for(const [index,card] of cards.entries()){
+ const copy=card.cloneNode(true);copy.querySelector('.ch-app-logo')?.remove();
+ assert.equal(copy.textContent.trim(),expected[index%34], 'Card must contain only its company/app name beside the logo');
+ assert.equal(card.querySelectorAll('.ch-app-logo').length,1);
+ const logo=card.querySelector('.ch-app-logo img');assert(logo,'Use verified asset, not a hand-drawn approximation');
+ assert.equal(card.querySelectorAll('.ch-app-logo svg').length,0);
+ assert.equal(logo.getAttribute('alt'),'');assert(logo.getAttribute('src').startsWith('/assets/integrations/'));
+ assert(Number(logo.getAttribute('width'))>0&&Number(logo.getAttribute('height'))>0);
+ assert.equal(logo.getAttribute('loading'),'lazy');assert.equal(logo.getAttribute('decoding'),'async');
+ assert.equal(card.querySelectorAll('a,p,button,.ch-app-type,.ch-app-source,details').length,0,'No descriptions, setup links or cost guidance in cards');
+}
+assert.equal(doc.querySelectorAll('.ch-apps details,.ch-apps a').length,0);
+assert(!/setup|cost|MCP|platform connection catalogue/i.test(doc.querySelector('.ch-apps').textContent));
+assert(apps.every(app=>app.length===2),'Retired card descriptions are removed from runtime data');
 assert(!h.mount.innerHTML.includes('undefined'));assert(!h.mount.innerHTML.includes('Payment method is missing'));
-const ids=[...h.mount.innerHTML.matchAll(/id="([^"]+)"/g)].map(x=>x[1]);assert.equal(new Set(ids).size,ids.length,'Unique inline-SVG IDs, including duplicate TikTok tiles');
+const ids=[...h.mount.innerHTML.matchAll(/id="([^"]+)"/g)].map(x=>x[1]);assert.equal(new Set(ids).size,ids.length,'Unique carousel IDs');
+assert.match(cards[6].querySelector('img').getAttribute('src'),/whatsapp-business-official/);
+assert(!source.includes('connectionLogoPaths'),'Retired hand-drawn path catalogue is not shipped');
 h.observers[1].cb([{isIntersecting:true}]);h.advance(100);h.advance(150);assert(h.viewport.scrollLeft>0,'Auto-scroll starts when visible');
 h.pause.events.click();assert.equal(h.pending.size,0);assert.equal(h.pause.attrs['aria-pressed'],'true');
 h.pause.events.click();assert.equal(h.pause.attrs['aria-pressed'],'false');assert.equal(h.pending.size,1);
 h.carousel.events.pointerenter({pointerType:'mouse'});assert.equal(h.pending.size,0);h.carousel.events.pointerleave();assert.equal(h.pending.size,1);
 h.carousel.events.focusin({target:h.viewport});assert.equal(h.pending.size,0,'Focus stops motion');
 h.next.events.click();assert.equal(h.viewport.scrollLeft,1040,'Next advances a viewport of tiles');assert.equal(h.viewport.lastScroll.behavior,'smooth');
-h.viewport.events.keydown({key:'End',preventDefault(){}});assert.equal(h.viewport.scrollLeft,34*208);h.viewport.events.keydown({key:'Home',preventDefault(){}});assert.equal(h.viewport.scrollLeft,0);
-h.prev.events.click();assert.equal(h.viewport.scrollLeft,30*208,'Previous wraps by viewport');
+h.viewport.events.keydown({key:'End',preventDefault(){}});assert.equal(h.viewport.scrollLeft,33*208);h.viewport.events.keydown({key:'Home',preventDefault(){}});assert.equal(h.viewport.scrollLeft,0);
+h.prev.events.click();assert.equal(h.viewport.scrollLeft,29*208,'Previous wraps by viewport');
 h.setPaused(true);assert.equal(h.pause.disabled,true);h.next.events.click();assert.equal(h.viewport.lastScroll.behavior,'auto');
 h.setPaused(false);assert.equal(h.pause.disabled,false);
 const r=harness({reduced:true});r.observers[1].cb([{isIntersecting:true}]);assert.equal(r.pending.size,0);assert.equal(r.pause.disabled,true);r.next.events.click();assert.equal(r.viewport.lastScroll.behavior,'auto');
 const old=h.observers.slice();h.c.wireExpanded();assert(old.every(o=>o.disconnected),'Observers cleaned up across navigation/rerender');
-const css=read('dist/connections-home.css');for(const s of ['overflow-x:auto','prefers-reduced-motion','body.paused','@media(max-width:720px)','.ch-path p,.ch-tools p{min-height:0}'])assert(css.includes(s));
-console.log('PASS: 35 reference/qualified tiles, 35 inert duplicates, unique SVG IDs, no screenshot account data, visible auto-scroll, hover/focus/manual pause, next/previous, Home/End, global pause, reduced motion, route cleanup and responsive CSS.');
+const css=read('dist/connections-home.css');assert(css.includes('width:164px')&&css.includes('width:148px'));assert(!/ch-app-source|ch-app-type|min-height:19[68]px|min-height:23[78]px/.test(css),'No old tall cards or retired styles');for(const s of ['overflow-x:auto','prefers-reduced-motion','body.paused','@media(max-width:720px)','.ch-path p,.ch-tools p{min-height:0}'])assert(css.includes(s));
+console.log('PASS: 34 compact logo-and-name-only tiles, 34 inert duplicates, verified logo asset references, no screenshot account data, visible auto-scroll, hover/focus/manual pause, next/previous, Home/End, global pause, reduced motion, route cleanup and responsive CSS.');

@@ -10,42 +10,76 @@
     'who-its-for':'use-cases', 'who-its-for/b2b':'consultative-sales',
     'who-its-for/b2c':'appointments', 'how-it-works':'support', 'free-trial':'get-started'
   };
+  const titles = {
+  "home": "CRM and AI Automation for Caribbean Businesses | AyudaGrow",
+  "platform": "AI and CRM Platform for Business Growth | AyudaGrow",
+  "solutions": "CRM and Automation Solutions for Business Growth | AyudaGrow",
+  "inbox": "Unified Inbox for Customer Conversations | AyudaGrow",
+  "ai": "Business AI Assistants with Human Handoff | AyudaGrow",
+  "crm": "CRM & Sales Pipeline for Clearer Follow-Up | AyudaGrow",
+  "appointments": "Appointment Booking and Follow-Up Workflows | AyudaGrow",
+  "consultative-sales": "Consultative Sales and Quote Follow-Up | AyudaGrow",
+  "use-cases": "CRM and AI Use Cases for Business Teams | AyudaGrow",
+  "lead-capture": "Lead Capture for Enquiries and Follow-Up | AyudaGrow",
+  "follow-up": "Sales Follow-Up and Reminders for Teams | AyudaGrow",
+  "reactivation": "Customer Reactivation and Useful Follow-Up | AyudaGrow",
+  "automation": "Workflow Automation for Customer Follow-Up | AyudaGrow",
+  "reporting": "Reporting & Forecasting for Business Planning | AyudaGrow",
+  "reputation": "Reputation and Google Business Profile Care | AyudaGrow",
+  "integrations": "Business Integrations and Mobile Workflows | AyudaGrow",
+  "marketing": "Marketing Tools for Campaigns and Enquiries | AyudaGrow",
+  "commerce": "Commerce and Payment Workflows for Your Business | AyudaGrow",
+  "learning": "Courses and Communities for Your Customers | AyudaGrow",
+  "support": "CRM Setup, Training and Support for Teams | AyudaGrow",
+  "pricing": "AI and CRM Plans from US$149 per Month | AyudaGrow",
+  "privacy": "Privacy Information and Website Contact Details | AyudaGrow",
+  "get-started": "Get Started with CRM, AI and Business Automation | AyudaGrow",
+  "contact": "Contact Our CRM, AI and Business Automation Team | AyudaGrow",
+  "growth-assessment": "Business Growth Assessment and Follow-Up Guide | AyudaGrow",
+  "learn": "What Is CRM? A Practical Business Guide | AyudaGrow",
+  "solutions/book-more-appointments": "Book More Appointments with Connected Follow-Up | AyudaGrow",
+  "solutions/convert-more-leads": "Convert More Leads with Clearer Follow-Up | AyudaGrow",
+  "solutions/generate-more-reviews": "Generate More Reviews with Honest Feedback | AyudaGrow",
+  "solutions/improve-customer-communication": "Improve Customer Communication and Context | AyudaGrow",
+  "solutions/improve-sales-follow-up": "Improve Sales Follow-Up with Clear Owners | AyudaGrow",
+  "solutions/manage-sales-opportunities": "Manage Sales Opportunities in a CRM Pipeline | AyudaGrow",
+  "solutions/reactivate-customers": "Reactivate Customers with Relevant Follow-Up | AyudaGrow"
+};
   const descriptions = {
-    home:'Explore AyudaGrow’s AI, CRM, automation, setup and training approach for connected customer journeys in Jamaica and the Caribbean.',
-    platform:'Connect conversations, customer records, follow-up and reporting. Explore AyudaGrow’s illustrative AI-centered growth platform and agreed setup process.',
-    solutions:'Explore how AyudaGrow connects customer enquiries, follow-up, appointments, sales opportunities and reviews through an agreed workflow.',
-    inbox:'Bring supported customer conversations into a shared inbox with context, ownership and human handoff. Channel availability and setup must be confirmed.',
-    ai:'Explore an AI assistant grounded in approved business knowledge, configured actions and human handoff. Capabilities depend on the agreed setup.',
-    'ai-concepts':'Private creative review of three illustrative treatments for AyudaGrow’s AI assistant. These are design concepts, not published customer services.',
-    crm:'Connect customer records, opportunity stages, responsibilities and next actions. Explore CRM views for sales teams, managers and business owners.',
-    appointments:'Explore connected appointment enquiries, scheduling, changes and follow-up. Illustrative workflows require agreed calendar and channel configuration.',
-    'consultative-sales':'Connect enquiries, discovery, quotations and follow-up for consultative sales. People lead advice, negotiation and customer commitments.',
-    'use-cases':'Explore illustrative appointment-driven and consultative business journeys. AyudaGrow adapts connected workflows around how a business sells and serves.',
-    'lead-capture':'Connect forms, campaigns and supported enquiries to a customer record, source and responsible owner. Configure permissions and follow-up around your process.',
-    'follow-up':'Organise quotation, enquiry and appointment follow-up with owners, reminders and clear next actions. Customer messages require agreed permissions and setup.',
-    reactivation:'Explore relevant ways to reconnect with eligible past customers and older enquiries while respecting permissions, preferences and stop conditions.',
-    automation:'Explore configured workflow steps that connect customer information, tasks and follow-up. Agree the rules, exceptions and human responsibilities first.',
-    reporting:'Use current CRM and activity data to review pipeline, sources and expected revenue. Forecasts support planning and do not guarantee business results.',
-    reputation:'Explore review workflows and scoped Google Business Profile support. Invite honest feedback and agree profile access, eligibility and service responsibilities.',
-    integrations:'Explore documented connection methods, mobile access and business tools. Confirm account eligibility, permissions and setup before activating an integration.',
-    marketing:'Connect content and campaigns to customer enquiries and useful follow-up. Publishing, permissions, delivery and advertising scope must be agreed.',
-    commerce:'Explore invoices, estimates, payment links and connected order workflows. Provider access, regional availability, fees and responsibilities must be confirmed.',
-    learning:'Explore course, membership and community tools as part of a customer relationship. Content, moderation and access configuration are separately scoped.',
-    support:'Learn how AyudaGrow approaches assessment, setup, training and ongoing support. Agree a practical starting point, responsibilities and service scope.',
-    pricing:'Compare AyudaGrow plans from US$149 per month: shared CRM, inbox, calendars, pipelines and workflows, with separate AI allowances, setup and usage. Private pricing review.',
-    privacy:'Review the draft privacy notice for AyudaGrow’s planned contact-only website, including confirmed contact links and the facts still needed before launch.',
-    'get-started':'Get in touch with AyudaGrow by email at admin@ayudagrow.com or phone on +1 876-480-0413 to discuss your business and a practical next step.',
-    contact:'Contact AyudaGrow at admin@ayudagrow.com or +1 876-480-0413 to discuss customer enquiries, follow-up and your business workflow.',
-    'growth-assessment':'Explore questions about customer enquiries, follow-up and business growth. This is an informational guide, not a working online assessment.',
-    learn:'Learn what a CRM is and how shared customer records, conversation context, pipeline stages and next actions can support your team’s daily work.',
-    'solutions/book-more-appointments':'Explore how connected enquiries, booking details and reminders can support an appointment journey. Examples are illustrative and results are not guaranteed.',
-    'solutions/convert-more-leads':'Explore a clearer path from new enquiry to useful response, qualification and follow-up. Agree ownership and measure the actual customer outcome.',
-    'solutions/generate-more-reviews':'Explore appropriate review invitations, honest customer feedback and thoughtful responses. Tools and managed profile services have separate agreed scopes.',
-    'solutions/improve-customer-communication':'Connect customer conversation context, team ownership and agreed responses across supported channels. Availability depends on the configured setup.',
-    'solutions/improve-sales-follow-up':'Explore clear sales follow-up with owners, due dates, shared context and appropriate reminders. Customer permissions and stop conditions matter.',
-    'solutions/manage-sales-opportunities':'Explore sales stages, current opportunity records and meaningful next actions. Use reporting for management visibility without promising sales outcomes.',
-    'solutions/reactivate-customers':'Explore relevant follow-up for eligible past customers and paused enquiries. Respect communication preferences and give interested replies a clear owner.'
-  };
+  "home": "Explore CRM, AI and automation for your Caribbean business. Connect enquiries and follow-up with practical AyudaGrow setup, training and ongoing support.",
+  "platform": "See how AI, CRM, conversations and workflows connect in one platform. Explore AyudaGrow’s approach to setup, customer context and practical team support.",
+  "solutions": "Find tools for customer enquiries, follow-up, appointments and sales. Explore AyudaGrow capabilities and agree the workflow your business needs to grow.",
+  "inbox": "Bring supported customer conversations into a shared inbox. Explore channel setup, team ownership and human handoff with AyudaGrow’s connected platform.",
+  "ai": "Explore an AI assistant grounded in your approved business knowledge. Agree supported channels, useful tasks and human handoff with AyudaGrow before setup.",
+  "crm": "Keep customer records, sales stages and next actions connected. Explore AyudaGrow CRM views that help sales teams and managers work with shared context.",
+  "appointments": "Connect appointment enquiries, calendar rules and follow-up. See illustrative AyudaGrow workflows and discuss the setup your team and customers need.",
+  "consultative-sales": "Keep enquiries, discovery, quotations and follow-up connected. Explore AyudaGrow workflows for consultative sales while your team leads the relationship.",
+  "use-cases": "Explore appointment-driven and consultative business journeys. See how AyudaGrow can adapt CRM, AI and follow-up around the way your business sells.",
+  "lead-capture": "Connect forms, campaigns and supported enquiries to a customer record. Explore how AyudaGrow helps organise sources, owners and the next useful action.",
+  "follow-up": "Keep quotations, enquiries and appointments moving with clear owners and reminders. Explore AyudaGrow follow-up workflows shaped around your process.",
+  "reactivation": "Find relevant ways to reconnect with eligible past customers and older enquiries. Explore AyudaGrow workflows that respect preferences and permissions.",
+  "automation": "Connect repeatable tasks, customer information and follow-up with agreed rules. Explore practical AyudaGrow automation while keeping people responsible.",
+  "reporting": "Review pipeline, sources and expected revenue using current CRM data. Explore AyudaGrow reporting examples, forecasting limits and practical setup needs.",
+  "reputation": "Explore honest review workflows and Google Business Profile support. Agree access, eligibility and managed-service scope with AyudaGrow before starting.",
+  "integrations": "Explore ways to connect business tools and mobile workflows. Discuss supported actions, account permissions and practical integration setup with AyudaGrow.",
+  "marketing": "Connect content and campaigns to customer enquiries and follow-up. Explore AyudaGrow marketing tools, with publishing and delivery scope agreed first.",
+  "commerce": "Explore invoices, estimates, payment links and connected orders. Agree available tools, regional access and service responsibilities with AyudaGrow first.",
+  "learning": "Explore course, membership and community tools within your customer journey. Discuss content, moderation and access configuration with AyudaGrow’s team.",
+  "support": "Turn a useful business priority into a practical setup. Learn how AyudaGrow approaches assessment, configuration, team training and ongoing support.",
+  "pricing": "Compare AyudaGrow plans at US$149, US$249 and US$349 per month. Review shared tools, AI allowances, setup and customer usage terms before choosing a plan.",
+  "privacy": "Read confirmed information about AyudaGrow’s contact-only website and browser session storage. A complete privacy notice still needs to be finalised.",
+  "get-started": "Discuss your business, customer enquiries and follow-up with AyudaGrow. Use the confirmed email and phone links to agree a practical next step together.",
+  "contact": "Contact AyudaGrow about customer enquiries, sales follow-up and your business workflow. Email or call the team to discuss where practical support can help.",
+  "growth-assessment": "Use six questions to review enquiries, follow-up and business growth. Prepare for an AyudaGrow conversation with this guide, not an online assessment.",
+  "learn": "Learn how CRM connects customer records, conversation history and next actions. Explore practical examples and a clear starting point for your business.",
+  "solutions/book-more-appointments": "Explore how enquiries, booking details and reminders can support the appointment journey. Review illustrative AyudaGrow workflows and agree your setup.",
+  "solutions/convert-more-leads": "Give new enquiries a useful response, a clear owner and a next step. Explore AyudaGrow workflows for qualification and follow-up without promised results.",
+  "solutions/generate-more-reviews": "Make appropriate review invitations part of customer follow-up. Explore AyudaGrow tools and separately scoped support for honest feedback and reputation.",
+  "solutions/improve-customer-communication": "Keep conversation history and team ownership connected across supported channels. Explore AyudaGrow workflows for useful replies and clear human handoff.",
+  "solutions/improve-sales-follow-up": "Give sales follow-up a clear owner, due date and shared context. Explore AyudaGrow reminders that respect customer permissions and agreed stop conditions.",
+  "solutions/manage-sales-opportunities": "Organise sales stages, opportunity records and meaningful next actions. Explore AyudaGrow CRM workflows and reporting for clearer management visibility.",
+  "solutions/reactivate-customers": "Reconnect with eligible past customers and paused enquiries for a useful reason. Explore AyudaGrow follow-up that respects preferences and clear ownership."
+};
   function read(url = new URL(location.href)) {
     const legacy = url.hash.startsWith('#/');
     const raw = legacy ? url.hash.slice(1) : url.pathname + url.search;
@@ -79,11 +113,12 @@
   }
   function apply(currentKey, title) {
     const missing=currentKey === 'not-found';
-    const description=missing?'The requested AyudaGrow preview page was not found. Explore the platform, solutions or homepage.':descriptions[currentKey];
+    const description=missing?'The requested AyudaGrow page was not found. Explore the platform, solutions or homepage.':descriptions[currentKey];
     const canonical=origin + (currentKey==='home'?'/':'/'+currentKey);
+    title=titles[currentKey]||title;
     document.title=title;
     setMeta('meta[name="robots"]',{name:'robots',content:'noindex,nofollow'});
-    setMeta('meta[name="description"]',{name:'description',content:description || 'Private AyudaGrow website preview. Content and service scope remain subject to review.'});
+    setMeta('meta[name="description"]',{name:'description',content:description || 'Explore AyudaGrow’s AI, automation and practical support. Capabilities and service scope depend on the agreed setup.'});
     const image=origin+'/assets/logo.webp';
     for(const [property,content] of Object.entries({'og:type':'website','og:site_name':'AyudaGrow','og:title':title,'og:description':description,'og:image':image,'og:image:alt':'AyudaGrow logo','og:locale':'en_US'}))setMeta('meta[property="'+property+'"]',{property,content:content||''});
     for(const [name,content] of Object.entries({'twitter:card':'summary','twitter:title':title,'twitter:description':description,'twitter:image':image,'twitter:image:alt':'AyudaGrow logo'}))setMeta('meta[name="'+name+'"]',{name,content:content||''});
@@ -92,7 +127,7 @@
     else {
       setMeta('link[rel="canonical"]',{rel:'canonical',href:canonical});
       setMeta('meta[property="og:url"]',{property:'og:url',content:canonical});
-      const label=title.replace(/^AyudaGrow \| /,'');
+      const label=title.replace(/^AyudaGrow \| /,'').replace(/ \| AyudaGrow$/,'');
       const graph=[
         {'@type':'Organization','@id':origin+'/#organization',name:'AyudaGrow',url:origin+'/',logo:image},
         {'@type':'WebSite','@id':origin+'/#website',name:'AyudaGrow',url:origin+'/',publisher:{'@id':origin+'/#organization'}},
@@ -108,10 +143,11 @@
       // Deliberately no ratings, prices, postal address, contacts, legal name or guaranteed availability.
       const script=document.createElement('script');script.id='ayuda-structured-data';script.type='application/ld+json';script.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph});document.head.append(script);
     }
+    window.AyudaResources?.apply();
     cleanLinks();
   }
-  function notFound(){return '<section class="page-hero"><div class="wrap"><span class="eyebrow">Page not found</span><h1>That page is not here.</h1><p>The address may have changed, or this page may not be part of the private preview.</p><div class="actions"><a class="button" href="/">Go to Home</a><a class="textlink" href="/platform">Explore the platform →</a></div></div></section>';}
-  window.AyudaSearch={origin,aliases,descriptions,read,key,route,normalizeLocation,cleanLinks,apply,notFound};
+  function notFound(){return '<section class="page-hero"><div class="wrap"><span class="eyebrow">Page not found</span><h1>That page is not here.</h1><p>The address may have changed, or the page may no longer be available.</p><div class="actions"><a class="button" href="/">Go to Home</a><a class="textlink" href="/platform">Explore the platform →</a></div></div></section>';}
+  window.AyudaSearch={origin,aliases,titles,descriptions,read,key,route,normalizeLocation,cleanLinks,apply,notFound};
   normalizeLocation();
   // New controls can insert legacy links. Make their native open-in-new-tab targets clean too.
   new MutationObserver(records=>{if(records.some(record=>record.type==='childList'||record.attributeName==='href'))cleanLinks();}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['href']});
