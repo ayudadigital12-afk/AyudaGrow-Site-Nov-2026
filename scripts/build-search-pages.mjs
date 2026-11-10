@@ -13,6 +13,7 @@ const oldManifest=join(dist,'route-manifest.json');
 if(existsSync(oldManifest))for(const item of JSON.parse(readFileSync(oldManifest,'utf8')).pages){if(item.path!=='/')rmSync(join(dist,item.path.slice(1)),{recursive:true,force:true});}
 function save(path,dom){
   const document=dom.window.document;
+  if(path==='/') document.querySelector('.reviewbar > span:first-child')?.remove();
   const main=document.querySelector('main');
   if(main.querySelectorAll('h1').length!==1||main.textContent.trim().length<40)throw new Error('Invalid rendered page: '+path);
   document.documentElement.dataset.renderedRoute=path;
