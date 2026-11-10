@@ -113,9 +113,8 @@ function inspect(d,path,canonical,{error=false}={}){
     for(const [,ref] of css.matchAll(/url\(\s*["']?([^\s"')]+)["']?\s*\)/gi))asset(ref,d.baseURI);
   }
   for(const el of d.querySelectorAll('[srcset]'))for(const candidate of el.getAttribute('srcset').split(','))asset(candidate.trim().split(/\s+/)[0],d.baseURI);
-  assert.equal(d.querySelectorAll('#motion').length,1,'Persistent motion button missing/duplicated');
-  const motion=d.querySelector('#motion');assert.equal(motion.tagName,'BUTTON');assert(!motion.closest('main'),'Motion control must survive route replacement');
-  assert(['false','true'].includes(motion.getAttribute('aria-pressed')));assert.match(motion.textContent,/^(Pause|Resume|Reduced) motion$/);
+  assert.equal(d.querySelectorAll('#motion').length,0,'Header motion button must be removed');
+  
 }
 
 // Mutate independent in-memory documents: the gate must reject plausible regressions
@@ -133,7 +132,7 @@ check('mutation rejection',()=>{
     d=>{d.querySelector('link[rel="canonical"]').href=origin+'/crm';},
     d=>{d.querySelector('meta[property="og:title"]').content='Stale title';},
     d=>{const el=d.querySelector('script[type="application/ld+json"]'),v=JSON.parse(el.textContent);v['@graph'][0].offers={price:'149'};el.textContent=JSON.stringify(v);},
-    d=>{d.querySelector('#motion').remove();}
+    d=>{const button=d.createElement('button');button.id='motion';d.body.append(button);}
   ];
   for(const [i,mutate] of mutations.entries()){
     const dom=new JSDOM(read('dist/index.html'),{url:origin+'/'});
@@ -206,7 +205,7 @@ try{
   live=renderWithMotion(read('dist/index.html'),false);const w=live.window;await wait();
   check('runtime aliases',()=>assert.deepEqual(JSON.parse(JSON.stringify(w.AyudaSearch.aliases)),aliases));
   const button=w.document.querySelector('#motion');
-  check('pause motion',()=>{button.click();assert(w.document.body.classList.contains('paused'));assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(button.textContent,'Resume motion');});
+  check('header motion button removed',()=>assert.equal(button,null));
   // Match the deterministic reduced-motion SSR snapshot while traversing routes.
   live.setReduced(true);
   // Navigate every route through the actual delegated anchor click handler, not a renderer call.
@@ -215,8 +214,8 @@ try{
     check(path+' SPA',()=>{assert.equal(w.location.pathname,path);inspect(w.document,path,path);assert.equal(textMain(w.document),staticText.get(path),'SPA content drift');assert.equal(w.document.querySelector('#motion'),button);assert(w.document.body.classList.contains('paused'));});
   }
   live.setReduced(false);
-  check('resume motion',()=>{button.click();assert(!w.document.body.classList.contains('paused'));assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(button.textContent,'Pause motion');});
-  check('device reduced motion preference',()=>{live.setReduced(true);assert(w.document.body.classList.contains('paused'));assert.equal(button.getAttribute('aria-pressed'),'true');assert(button.disabled);assert.equal(button.textContent,'Reduced motion');button.click();assert(w.document.body.classList.contains('paused'));live.setReduced(false);assert(!button.disabled);assert(!w.document.body.classList.contains('paused'));});
+  check('ordinary motion',()=>assert(!w.document.body.classList.contains('paused')));
+  check('device reduced motion preference',()=>{live.setReduced(true);assert(w.document.body.classList.contains('paused'));live.setReduced(false);assert(!w.document.body.classList.contains('paused'));});
   w.history.pushState(null,'','/ai-concepts');w.dispatchEvent(new w.PopStateEvent('popstate'));await wait();
   check('removed route is 404',()=>{assert.match(w.document.querySelector('h1').textContent,/That page is not here/);assert(!w.document.querySelector('link[rel="canonical"]'));});
 }catch(e){failures.push('SPA runtime: '+e.stack);}finally{live?.window.close();decoder.window.close();}
