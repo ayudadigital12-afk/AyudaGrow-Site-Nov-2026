@@ -326,27 +326,28 @@ wireExpanded=function(){
  carouselPriorWiring();
  const mount=document.getElementById('ch-app-carousel');
  if(!mount)return;
- mount.innerHTML=`<section class="ch-apps" aria-roledescription="carousel" aria-label="Business tool connection examples"><div class="ch-apps-head"><div><span class="eyebrow">Connections that fit your workflow</span><h3>Bring familiar tools into the picture.</h3></div><div class="ch-apps-controls"><button class="ch-app-pause" type="button" data-app-pause aria-controls="ch-app-cards" aria-pressed="false"><span aria-hidden="true">Ⅱ</span> Pause carousel</button><button type="button" data-app-prev aria-label="Previous connection examples" aria-controls="ch-app-cards">←</button><button type="button" data-app-next aria-label="Next connection examples" aria-controls="ch-app-cards">→</button></div></div><div class="ch-app-viewport" id="ch-app-cards" tabindex="0" aria-label="Scroll through ${connectedApps.length} connection examples" aria-describedby="ch-app-help"><div class="ch-app-track">${appCarouselCards()}${appCarouselCards(true)}</div></div><div class="ch-apps-footer"><p id="ch-app-help">Scroll, swipe or use the arrows to explore.</p><span class="ch-app-progress" data-app-count aria-live="off">1 of ${connectedApps.length}</span><span class="ch-app-sr" data-app-status aria-live="polite"></span></div><p class="micro">Connection examples, not a claim that every app is enabled in your account. Logos identify the services; they do not imply endorsement.</p></section>`;
+ mount.innerHTML=`<section class="ch-apps" aria-roledescription="carousel" aria-label="Business tool connection examples"><div class="ch-apps-head"><div><span class="eyebrow">Connections that fit your workflow</span><h3>Bring familiar tools into the picture.</h3></div><div class="ch-apps-controls"><button class="ch-app-pause" type="button" data-app-pause aria-controls="ch-app-cards" aria-pressed="false"><span aria-hidden="true">?</span> Pause carousel</button><button type="button" data-app-prev aria-label="Previous connection examples" aria-controls="ch-app-cards"></button><button type="button" data-app-next aria-label="Next connection examples" aria-controls="ch-app-cards"></button></div></div><div class="ch-app-viewport" id="ch-app-cards" tabindex="0" aria-label="Scroll through ${connectedApps.length} connection examples" aria-describedby="ch-app-help"><div class="ch-app-track">${appCarouselCards()}${appCarouselCards(true)}</div></div><div class="ch-apps-footer"><p id="ch-app-help">Scroll, swipe or use the arrows to explore.</p><span class="ch-app-progress" data-app-count aria-live="off">1 of ${connectedApps.length}</span><span class="ch-app-sr" data-app-status aria-live="polite"></span></div><p class="micro">Connection examples, not a claim that every app is enabled in your account. Logos identify the services; they do not imply endorsement.</p></section>`;
  const carousel=mount.querySelector('.ch-apps'),viewport=mount.querySelector('.ch-app-viewport'),track=mount.querySelector('.ch-app-track');
  const pause=mount.querySelector('[data-app-pause]'),count=mount.querySelector('[data-app-count]'),status=mount.querySelector('[data-app-status]');
  const media=matchMedia('(prefers-reduced-motion: reduce)');
- let userPaused=false,hovered=false,inView=false,frame=0,lastTime=0,position=0,destroyed=false;
+ let userPaused=false,hovered=false,inView=false,frame=0,lastTime=0,position=0,destroyed=false,focused=false,resumeTimer=0,interacting=false;
  const globalPaused=()=>document.body.classList.contains('paused');
  const distance=()=>track.children[connectedApps.length].offsetLeft-track.children[0].offsetLeft;
  const step=()=>track.children[1].offsetLeft-track.children[0].offsetLeft;
- const active=()=>!destroyed&&inView&&!userPaused&&!hovered&&!media.matches&&!globalPaused()&&!document.hidden;
- const updateButton=()=>{const locked=media.matches||globalPaused();pause.disabled=locked;pause.setAttribute('aria-pressed',String(locked||userPaused));pause.innerHTML=locked?'<span aria-hidden="true">Ⅱ</span> Motion paused':userPaused?'<span aria-hidden="true">▷</span> Resume carousel':'<span aria-hidden="true">Ⅱ</span> Pause carousel';};
+ const active=()=>!destroyed&&inView&&!userPaused&&!hovered&&!focused&&!interacting&&!media.matches&&!globalPaused()&&!document.hidden;
+ const updateButton=()=>{const locked=media.matches||globalPaused();pause.disabled=locked;pause.setAttribute('aria-pressed',String(locked||userPaused));pause.innerHTML=locked?'<span aria-hidden="true">?</span> Motion paused':userPaused?'<span aria-hidden="true">?</span> Resume carousel':'<span aria-hidden="true">?</span> Pause carousel';};
  const updateCount=()=>{const width=step();if(!width)return;const n=(Math.round(viewport.scrollLeft/width)%connectedApps.length)+1;count.textContent=`${n} of ${connectedApps.length}`;};
  const tick=time=>{frame=0;if(!mount.isConnected){cleanup();return;}if(!active()){lastTime=0;return;}if(lastTime){position+=Math.min(time-lastTime,60)*.026;const loop=distance();if(loop&&position>=loop)position-=loop;viewport.scrollLeft=position;updateCount();}lastTime=time;frame=requestAnimationFrame(tick);};
  const schedule=()=>{updateButton();if(active()&&!frame){position=viewport.scrollLeft;lastTime=0;frame=requestAnimationFrame(tick);}else if(!active()&&frame){cancelAnimationFrame(frame);frame=0;lastTime=0;}};
- const stop=()=>{userPaused=true;schedule();};
+ const stop=()=>{interacting=true;clearTimeout(resumeTimer);schedule();resumeTimer=setTimeout(()=>{interacting=false;schedule();},6000);};
  const show=(n)=>{stop();const target=((n%connectedApps.length)+connectedApps.length)%connectedApps.length;viewport.scrollTo({left:target*step(),behavior:media.matches||globalPaused()?'auto':'smooth'});status.textContent=`${connectedApps[target][0]}, ${target+1} of ${connectedApps.length}`;};
- pause.addEventListener('click',()=>{userPaused=!userPaused;schedule();});
+ pause.addEventListener('click',()=>{userPaused=!userPaused;interacting=false;clearTimeout(resumeTimer);schedule();});
  mount.querySelector('[data-app-prev]').addEventListener('click',()=>show(Math.round(viewport.scrollLeft/step())-Math.max(1,Math.floor(viewport.clientWidth/step()))));
  mount.querySelector('[data-app-next]').addEventListener('click',()=>show(Math.round(viewport.scrollLeft/step())+Math.max(1,Math.floor(viewport.clientWidth/step()))));
  carousel.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch'){hovered=true;schedule();}});
  carousel.addEventListener('pointerleave',()=>{hovered=false;schedule();});
- carousel.addEventListener('focusin',e=>{if(e.target!==pause)stop();});
+ carousel.addEventListener('focusin',e=>{focused=e.target!==pause;schedule();});
+ carousel.addEventListener('focusout',e=>{if(!carousel.contains(e.relatedTarget)){focused=false;schedule();}});
  viewport.addEventListener('pointerdown',stop,{passive:true});
  viewport.addEventListener('wheel',stop,{passive:true});
  viewport.addEventListener('scroll',updateCount,{passive:true});
@@ -356,7 +357,7 @@ wireExpanded=function(){
  const observer=new MutationObserver(schedule);observer.observe(document.body,{attributes:true,attributeFilter:['class']});
  const intersection=new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedule();},{threshold:.2});intersection.observe(viewport);
  const resize=new ResizeObserver(()=>{position=viewport.scrollLeft;updateCount();});resize.observe(viewport);
- function cleanup(){destroyed=true;cancelAnimationFrame(frame);observer.disconnect();intersection.disconnect();resize.disconnect();media.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);}
+ function cleanup(){destroyed=true;clearTimeout(resumeTimer);cancelAnimationFrame(frame);observer.disconnect();intersection.disconnect();resize.disconnect();media.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);}
  connectionCarouselCleanup=cleanup;
  updateButton();
 };

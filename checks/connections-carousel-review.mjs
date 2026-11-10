@@ -5,17 +5,18 @@ import {readFileSync,writeFileSync} from 'node:fs';
 const root=new URL('../',import.meta.url),read=f=>readFileSync(new URL(f,root),'utf8');
 const source=read('dist/integration-carousel.js');
 function harness({reduced=false,paused=false}={}){
- const pending=new Map(),observers=[],listeners={},mediaListeners={},body={classList:{contains:()=>paused}};let id=0;
- const el=()=>({events:{},attrs:{},addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;}});
+ const pending=new Map(),timers=new Map(),observers=[],listeners={},mediaListeners={},body={classList:{contains:()=>paused}};let id=0;
+ const el=()=>({events:{},attrs:{},contains:()=>false,addEventListener(k,fn){this.events[k]=fn;},setAttribute(k,v){this.attrs[k]=v;}});
  const viewport=Object.assign(el(),{scrollLeft:0,clientWidth:1040,scrollTo(options){this.scrollLeft=options.left;this.lastScroll=options;}}),track={children:Array.from({length:68},(_,i)=>({offsetLeft:i*208}))},carousel=el(),pause=el(),prev=el(),next=el(),count=el(),status=el();
  const map={'.ch-apps':carousel,'.ch-app-viewport':viewport,'.ch-app-track':track,'[data-app-pause]':pause,'[data-app-prev]':prev,'[data-app-next]':next,'[data-app-count]':count,'[data-app-status]':status};
  const mount={isConnected:true,querySelector:s=>map[s],innerHTML:''};
  const media={matches:reduced,addEventListener:(k,f)=>mediaListeners[k]=f,removeEventListener:k=>delete mediaListeners[k]};
  const Observer=class{constructor(cb){this.cb=cb;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}};
  const c={wireExpanded:()=>{},render:()=>{},document:{getElementById:()=>mount,body,hidden:false,addEventListener:(k,f)=>listeners[k]=f,removeEventListener:k=>delete listeners[k]},matchMedia:()=>media,MutationObserver:Observer,IntersectionObserver:Observer,ResizeObserver:Observer,requestAnimationFrame:fn=>{pending.set(++id,fn);return id;},cancelAnimationFrame:i=>pending.delete(i)};
+ c.setTimeout=fn=>{timers.set(++id,fn);return id;};c.clearTimeout=i=>timers.delete(i);
  vm.createContext(c);vm.runInContext(source,c);c.wireExpanded();
  const advance=t=>{const entries=[...pending];pending.clear();entries.forEach(([,f])=>f(t));};
- return{c,mount,viewport,track,carousel,pause,prev,next,count,status,media,pending,observers,listeners,advance,setPaused:p=>{paused=p;observers[0].cb();}};
+ return{c,mount,viewport,track,carousel,pause,prev,next,count,status,media,pending,observers,listeners,advance,resume:()=>{const callbacks=[...timers.values()];timers.clear();callbacks.forEach(fn=>fn());},setPaused:p=>{paused=p;observers[0].cb();}};
 }
 const h=harness(),apps=vm.runInContext('connectedApps',h.c);assert.equal(apps.length,34);
 const expected=['Google Calendar','Google','Facebook','LinkedIn','TikTok Messaging','TikTok Lead Ads','WhatsApp Business','Instagram','Google Ads','Xero','QuickBooks','Wave','Slack','Clio','Canva','Google Business Profile','WooCommerce','Shopify','Printful','Printify','Google Merchant Center','Shippo','ShipStation','ClickUp','Notion','Airtable','Google Contacts','Asana','Basecamp','Typeform','Jotform','Meta Ads','ChatGPT','Claude'];
@@ -52,6 +53,9 @@ h.viewport.events.keydown({key:'End',preventDefault(){}});assert.equal(h.viewpor
 h.prev.events.click();assert.equal(h.viewport.scrollLeft,29*208,'Previous wraps by viewport');
 h.setPaused(true);assert.equal(h.pause.disabled,true);h.next.events.click();assert.equal(h.viewport.lastScroll.behavior,'auto');
 h.setPaused(false);assert.equal(h.pause.disabled,false);
+h.carousel.events.focusout({relatedTarget:null});h.resume();assert.equal(h.pending.size,1,'Auto-scroll resumes after interaction and focus leave');
+h.pause.events.click();h.viewport.events.wheel();h.resume();assert.equal(h.pending.size,0,'Explicit pause survives the interaction timeout');
+h.pause.events.click();assert.equal(h.pending.size,1,'Explicit resume restores auto-scroll');
 const r=harness({reduced:true});r.observers[1].cb([{isIntersecting:true}]);assert.equal(r.pending.size,0);assert.equal(r.pause.disabled,true);r.next.events.click();assert.equal(r.viewport.lastScroll.behavior,'auto');
 const old=h.observers.slice();h.c.wireExpanded();assert(old.every(o=>o.disconnected),'Observers cleaned up across navigation/rerender');
 const css=read('dist/connections-home.css');assert(css.includes('width:164px')&&css.includes('width:148px'));assert(!/ch-app-source|ch-app-type|min-height:19[68]px|min-height:23[78]px/.test(css),'No old tall cards or retired styles');for(const s of ['overflow-x:auto','prefers-reduced-motion','body.paused','@media(max-width:720px)','.ch-path p,.ch-tools p{min-height:0}'])assert(css.includes(s));

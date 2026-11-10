@@ -1,0 +1,43 @@
+/* Compact first screen and calm, accessible motion. */
+@media(min-width:721px){
+ body>header{padding-top:12px;padding-bottom:12px;min-height:76px}
+ .hero .wrap{padding-top:14px;padding-bottom:22px;align-items:start;gap:36px;max-width:1160px}
+ .hero .wrap>div:first-child{padding-top:6px}
+ .hero h1{font-size:clamp(42px,4.4vw,64px);margin-bottom:18px}
+ .hero .actions{margin-top:20px}
+ .ag-offering{padding:14px 16px 12px;border-radius:18px}
+ .ag-offering-heading{padding-bottom:10px}
+ .ag-puzzle-brand{margin-bottom:8px}
+ .ag-puzzle-brand>img{width:88px;height:30px}
+ .ag-offering h2{font-size:24px;margin-bottom:5px}
+ .ag-puzzle-star{top:32px}
+ .ag-puzzle{margin-bottom:12px}
+ .ag-piece{aspect-ratio:180/92}
+ .ag-piece strong{font-size:11px}
+ .ag-piece-icon{width:20px;height:20px;margin-bottom:4px}
+ .ag-piece-robot{width:42px;height:40px;margin:-3px auto 0}
+ .ag-service-context{min-height:80px;padding:10px 12px}
+ .hero .ag-service-context p{margin-top:5px}
+ .ag-puzzle-bottom{padding-top:9px}
+ .hero .ag-puzzle-bottom p{display:none}
+}
+.ch-app-card{min-height:98px;padding:12px;flex-basis:150px;width:150px;border-radius:12px}
+.ch-app-brand{gap:8px}
+.ch-app-logo{width:28px;height:28px}
+.ch-app-card h4{font-size:14px;line-height:1.3}
+.cta:has(.cta-marks){position:relative;isolation:isolate;overflow:hidden}
+.cta-marks{position:absolute;inset:0;pointer-events:none;z-index:-1}
+.cta-marks span{position:absolute;width:84px;height:84px;background:center/contain no-repeat;opacity:.26;animation:review-brand-drift 15s ease-in-out infinite alternate}
+.cta-marks span:nth-child(1){left:65%;top:12%;background-image:url('assets/brand-growth-ring-acrylic-optimized.webp')}
+.cta-marks span:nth-child(2){left:83%;top:55%;width:100px;height:100px;background-image:url('assets/brand-growth-sweep-aluminium-optimized.webp');animation-delay:-6s;animation-duration:19s}
+.cta-marks span:nth-child(3){left:46%;top:65%;width:52px;height:52px;background-image:url('assets/star-primary.webp');animation-delay:-10s;animation-duration:22s}
+@keyframes review-brand-drift{from{transform:translate(-22px,14px) rotate(-8deg)}to{transform:translate(38px,-24px) rotate(12deg)}}
+.cta:not(:has(.cta-marks)){padding:24px 0;background:#e7f0fa;color:var(--navy)}
+.cta:not(:has(.cta-marks)) .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-right:5%}
+.cta:not(:has(.cta-marks)) h2{font-size:22px;margin:0}
+.cta:not(:has(.cta-marks)) .wrap::after{display:none}
+.cta:not(:has(.cta-marks)) .textlink{color:var(--navy);margin:0}
+body.paused .cta-marks span{animation-play-state:paused}
+@media(max-width:720px){.ch-app-card{min-height:96px;flex-basis:140px;width:140px}.cta:not(:has(.cta-marks)) .wrap{align-items:flex-start;flex-direction:column;gap:8px}.cta-marks span{opacity:.16;width:60px;height:60px}}
+@media(prefers-reduced-motion:reduce){.cta-marks span{animation:none!important}}
+
