@@ -20,12 +20,12 @@ function save(path,dom){
   const document=dom.window.document;
   const main=document.querySelector('main');
   if(main.querySelectorAll('h1').length!==1||main.textContent.trim().length<40)throw new Error('Invalid rendered page: '+path);
-  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';el.setAttribute(attr,el.getAttribute(attr)+'?v=20261110');});
+  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';el.setAttribute(attr,el.getAttribute(attr)+(el.getAttribute(attr)==='expanded.js'?'?v=20261110-chat':'?v=20261110'));});
   document.documentElement.dataset.renderedRoute=path;
   document.documentElement.dataset.privatePreview='true';
   const destination=path==='/'?join(dist,'index.html'):path==='/404.html'?join(dist,'404.html'):join(dist,path.slice(1),'index.html');
   mkdirSync(join(destination,'..'),{recursive:true});
-  writeFileSync(destination,dom.serialize());
+  writeFileSync(destination,dom.serialize().replace('</body>',"<script defer src=\"https://widgets.leadconnectorhq.com/loader.js\" data-resources-url=\"https://widgets.leadconnectorhq.com/chat-widget/loader.js\" data-widget-id=\"6adbe6959f0ad5b6ad0a7a22\"></script>"+'</body>'));
   dom.window.close();
 }
 const manifest={mode:'private-preview',origin,indexing:'noindex,nofollow',publicLaunchApproved:false,pages:[]};

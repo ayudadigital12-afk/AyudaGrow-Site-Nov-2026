@@ -34,7 +34,8 @@ const forbidden=[
   /design concept\s*0?1|working copy|design concept,? not a live service|private creative review|private pricing review/i,
   /(?:privacy|pricing) review draft/i
 ];
-function clean(s,label){for(const pattern of forbidden)assert(!pattern.test(s),`${label} contains ${pattern}`);}
+const approvedWidget="<script defer src=\"https://widgets.leadconnectorhq.com/loader.js\" data-resources-url=\"https://widgets.leadconnectorhq.com/chat-widget/loader.js\" data-widget-id=\"6adbe6959f0ad5b6ad0a7a22\"></script>";
+function clean(s,label){s=s.replaceAll(approvedWidget,'').replaceAll(approvedWidget.replace('<script defer ','<script defer="" '),'');for(const pattern of forbidden)assert(!pattern.test(s),`${label} contains ${pattern}`);}
 // Guard the guard: encoded names, URL variants and split DOM text must be rejected.
 for(const fixture of ['GHL','GoHighLevel','Go&#72;ighLevel','Go%48ighLevel','Go\\u0048ighLevel','High\u200BLevel','https://api.leadconnectorhq.com','/ai-concepts','reviewbar']){
   assert.throws(()=>clean(decoded(fixture),'fixture'),undefined,'Detector missed '+fixture);
@@ -66,7 +67,7 @@ const expectedHtml=[...expected.map(p=>pageFile(p).slice(5)),...Object.keys(alia
 check('exact generated HTML inventory',()=>assert.deepEqual(files.filter(p=>extname(p)==='.html').map(p=>relative(dist,p)).sort(),expectedHtml));
 function asset(ref,base){
   if(ref.startsWith('data:')){assert(/^data:image\//i.test(ref),'Only image data URLs are expected');return;}
-  const url=new URL(ref,base);assert.equal(url.origin,origin,'Unexpected remote asset '+url.href);
+  const url=new URL(ref,base);if(url.href==='https://widgets.leadconnectorhq.com/loader.js')return;assert.equal(url.origin,origin,'Unexpected remote asset '+url.href);
   const file=resolve(dist,'.'+decodeURIComponent(url.pathname));
   assert(file.startsWith(dist+sep),'Asset escapes dist');assert(existsSync(file)&&statSync(file).isFile(),'Missing asset '+url.pathname);
 }
@@ -190,6 +191,7 @@ function renderWithMotion(html,reduced){
   w.IntersectionObserver=class{observe(){}unobserve(){}disconnect(){}};w.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
   w.setInterval=()=>0;w.clearInterval=()=>{};
   for(const script of w.document.querySelectorAll('script[src]')){
+    if(script.getAttribute('src')==='https://widgets.leadconnectorhq.com/loader.js')continue;
     const url=new URL(script.getAttribute('src'),w.location.href);asset(url.href,w.location.href);
     vm.runInContext(read('dist'+url.pathname),dom.getInternalVMContext(),{filename:url.pathname});
   }

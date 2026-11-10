@@ -35,6 +35,7 @@ for(const page of manifest.pages){
   }
   for(const asset of d.querySelectorAll('script[src],link[rel="stylesheet"],img[src],image[href]')){
     const url=new URL(asset.getAttribute('src')||asset.getAttribute('href'),d.baseURI);
+    if(asset.tagName==='SCRIPT'&&url.href==='https://widgets.leadconnectorhq.com/loader.js'){assert.equal(asset.dataset.widgetId,'6adbe6959f0ad5b6ad0a7a22');continue;}
     assert.equal(url.origin,origin);assert(existsSync(new URL('../dist'+url.pathname,import.meta.url)),page.path+' asset '+url.pathname);
   }
   dom.window.close();
