@@ -1,0 +1,118 @@
+# STAGING ONLY: retain noindex. Do not deploy this configuration to the production domain.
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+DirectorySlash Off
+ErrorDocument 404 /dist/404.html
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  <FilesMatch "\.(?:html|xml|txt|json)$">
+    Header set Cache-Control "no-cache, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(?:css|js|webp|png|jpg|svg|woff2)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  # A year of caching is safe only for genuinely content-fingerprinted filenames.
+  <FilesMatch "\.[a-f0-9]{12}\.(?:css|js|webp|png|jpg|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json application/xml text/xml image/svg+xml
+</IfModule>
+<IfModule mod_passenger.c>
+  PassengerEnabled off
+</IfModule>
+RewriteEngine On
+RewriteRule ^dist/404\.html$ - [END]
+# Hide build-directory URLs from visitors.
+RewriteCond %{THE_REQUEST} [[:space:]]/+dist(?:/|[[:space:]?]) [NC]
+RewriteRule ^dist(?:/(.*))?$ /$1 [R=301,L]
+# Production canonical-host enforcement must be added after the host choice is approved.
+# Resolve legacy and slash/index variants directly to an HTTPS final path; preserve the query.
+RewriteRule ^platform/unified-conversations(?:/|/index\.html)?$ https://%{HTTP_HOST}/inbox [R=301,L]
+RewriteRule ^platform/follow-up-automation(?:/|/index\.html)?$ https://%{HTTP_HOST}/follow-up [R=301,L]
+RewriteRule ^platform/customer-reactivation(?:/|/index\.html)?$ https://%{HTTP_HOST}/reactivation [R=301,L]
+RewriteRule ^platform/crm-sales-pipeline(?:/|/index\.html)?$ https://%{HTTP_HOST}/crm [R=301,L]
+RewriteRule ^platform/lead-capture(?:/|/index\.html)?$ https://%{HTTP_HOST}/lead-capture [R=301,L]
+RewriteRule ^platform/appointments(?:/|/index\.html)?$ https://%{HTTP_HOST}/appointments [R=301,L]
+RewriteRule ^platform/reputation-reviews(?:/|/index\.html)?$ https://%{HTTP_HOST}/reputation [R=301,L]
+RewriteRule ^platform/reporting-forecasting(?:/|/index\.html)?$ https://%{HTTP_HOST}/reporting [R=301,L]
+RewriteRule ^who-its-for(?:/|/index\.html)?$ https://%{HTTP_HOST}/use-cases [R=301,L]
+RewriteRule ^who-its-for/b2b(?:/|/index\.html)?$ https://%{HTTP_HOST}/consultative-sales [R=301,L]
+RewriteRule ^who-its-for/b2c(?:/|/index\.html)?$ https://%{HTTP_HOST}/appointments [R=301,L]
+RewriteRule ^how-it-works(?:/|/index\.html)?$ https://%{HTTP_HOST}/support [R=301,L]
+RewriteRule ^free-trial(?:/|/index\.html)?$ https://%{HTTP_HOST}/get-started [R=301,L]
+RewriteRule ^index\.html$ https://%{HTTP_HOST}/ [R=301,L]
+RewriteRule ^platform(?:/|/index\.html)$ https://%{HTTP_HOST}/platform [R=301,L]
+RewriteRule ^solutions(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions [R=301,L]
+RewriteRule ^inbox(?:/|/index\.html)$ https://%{HTTP_HOST}/inbox [R=301,L]
+RewriteRule ^ai(?:/|/index\.html)$ https://%{HTTP_HOST}/ai [R=301,L]
+RewriteRule ^crm(?:/|/index\.html)$ https://%{HTTP_HOST}/crm [R=301,L]
+RewriteRule ^appointments(?:/|/index\.html)$ https://%{HTTP_HOST}/appointments [R=301,L]
+RewriteRule ^consultative-sales(?:/|/index\.html)$ https://%{HTTP_HOST}/consultative-sales [R=301,L]
+RewriteRule ^use-cases(?:/|/index\.html)$ https://%{HTTP_HOST}/use-cases [R=301,L]
+RewriteRule ^lead-capture(?:/|/index\.html)$ https://%{HTTP_HOST}/lead-capture [R=301,L]
+RewriteRule ^follow-up(?:/|/index\.html)$ https://%{HTTP_HOST}/follow-up [R=301,L]
+RewriteRule ^reactivation(?:/|/index\.html)$ https://%{HTTP_HOST}/reactivation [R=301,L]
+RewriteRule ^automation(?:/|/index\.html)$ https://%{HTTP_HOST}/automation [R=301,L]
+RewriteRule ^reporting(?:/|/index\.html)$ https://%{HTTP_HOST}/reporting [R=301,L]
+RewriteRule ^reputation(?:/|/index\.html)$ https://%{HTTP_HOST}/reputation [R=301,L]
+RewriteRule ^integrations(?:/|/index\.html)$ https://%{HTTP_HOST}/integrations [R=301,L]
+RewriteRule ^marketing(?:/|/index\.html)$ https://%{HTTP_HOST}/marketing [R=301,L]
+RewriteRule ^commerce(?:/|/index\.html)$ https://%{HTTP_HOST}/commerce [R=301,L]
+RewriteRule ^learning(?:/|/index\.html)$ https://%{HTTP_HOST}/learning [R=301,L]
+RewriteRule ^support(?:/|/index\.html)$ https://%{HTTP_HOST}/support [R=301,L]
+RewriteRule ^pricing(?:/|/index\.html)$ https://%{HTTP_HOST}/pricing [R=301,L]
+RewriteRule ^privacy(?:/|/index\.html)$ https://%{HTTP_HOST}/privacy [R=301,L]
+RewriteRule ^get-started(?:/|/index\.html)$ https://%{HTTP_HOST}/get-started [R=301,L]
+RewriteRule ^contact(?:/|/index\.html)$ https://%{HTTP_HOST}/contact [R=301,L]
+RewriteRule ^growth-assessment(?:/|/index\.html)$ https://%{HTTP_HOST}/growth-assessment [R=301,L]
+RewriteRule ^learn(?:/|/index\.html)$ https://%{HTTP_HOST}/learn [R=301,L]
+RewriteRule ^solutions/book-more-appointments(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/book-more-appointments [R=301,L]
+RewriteRule ^solutions/convert-more-leads(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/convert-more-leads [R=301,L]
+RewriteRule ^solutions/generate-more-reviews(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/generate-more-reviews [R=301,L]
+RewriteRule ^solutions/improve-customer-communication(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/improve-customer-communication [R=301,L]
+RewriteRule ^solutions/improve-sales-follow-up(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/improve-sales-follow-up [R=301,L]
+RewriteRule ^solutions/manage-sales-opportunities(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/manage-sales-opportunities [R=301,L]
+RewriteRule ^solutions/reactivate-customers(?:/|/index\.html)$ https://%{HTTP_HOST}/solutions/reactivate-customers [R=301,L]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# Do not expose host configuration or the fallback-host rule files.
+RewriteRule ^(?:\.htaccess|_(?:headers|redirects))$ - [R=404,L]
+RewriteRule ^platform$ dist/platform/index.html [END]
+RewriteRule ^solutions$ dist/solutions/index.html [END]
+RewriteRule ^inbox$ dist/inbox/index.html [END]
+RewriteRule ^ai$ dist/ai/index.html [END]
+RewriteRule ^crm$ dist/crm/index.html [END]
+RewriteRule ^appointments$ dist/appointments/index.html [END]
+RewriteRule ^consultative-sales$ dist/consultative-sales/index.html [END]
+RewriteRule ^use-cases$ dist/use-cases/index.html [END]
+RewriteRule ^lead-capture$ dist/lead-capture/index.html [END]
+RewriteRule ^follow-up$ dist/follow-up/index.html [END]
+RewriteRule ^reactivation$ dist/reactivation/index.html [END]
+RewriteRule ^automation$ dist/automation/index.html [END]
+RewriteRule ^reporting$ dist/reporting/index.html [END]
+RewriteRule ^reputation$ dist/reputation/index.html [END]
+RewriteRule ^integrations$ dist/integrations/index.html [END]
+RewriteRule ^marketing$ dist/marketing/index.html [END]
+RewriteRule ^commerce$ dist/commerce/index.html [END]
+RewriteRule ^learning$ dist/learning/index.html [END]
+RewriteRule ^support$ dist/support/index.html [END]
+RewriteRule ^pricing$ dist/pricing/index.html [END]
+RewriteRule ^privacy$ dist/privacy/index.html [END]
+RewriteRule ^get-started$ dist/get-started/index.html [END]
+RewriteRule ^contact$ dist/contact/index.html [END]
+RewriteRule ^growth-assessment$ dist/growth-assessment/index.html [END]
+RewriteRule ^learn$ dist/learn/index.html [END]
+RewriteRule ^solutions/book-more-appointments$ dist/solutions/book-more-appointments/index.html [END]
+RewriteRule ^solutions/convert-more-leads$ dist/solutions/convert-more-leads/index.html [END]
+RewriteRule ^solutions/generate-more-reviews$ dist/solutions/generate-more-reviews/index.html [END]
+RewriteRule ^solutions/improve-customer-communication$ dist/solutions/improve-customer-communication/index.html [END]
+RewriteRule ^solutions/improve-sales-follow-up$ dist/solutions/improve-sales-follow-up/index.html [END]
+RewriteRule ^solutions/manage-sales-opportunities$ dist/solutions/manage-sales-opportunities/index.html [END]
+RewriteRule ^solutions/reactivate-customers$ dist/solutions/reactivate-customers/index.html [END]
+RewriteRule ^$ dist/index.html [END]
+RewriteRule ^(?:\.|source(?:/|$)|scripts(?:/|$)|checks(?:/|$)|node_modules(?:/|$)|dist(?:/|$)|deploy(?:/|$)) - [R=404,L]
+RewriteCond %{DOCUMENT_ROOT}/dist/$1 -f
+RewriteRule ^(.+)$ dist/$1 [END]
+RewriteRule ^ - [R=404,L]
