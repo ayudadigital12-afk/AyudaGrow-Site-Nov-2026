@@ -27,12 +27,12 @@ for(const {path} of manifest.pages){
 }
 console.log('PASS: all '+manifest.pages.length+' canonical staging URLs return 200 and match the tested noindex HTML byte for byte.');
 const home=local('index.html').toString();
-const assetPaths=[...home.matchAll(/(?:src|href)="([^"?]+(?:\.js|\.css))(?:\?[^"]*)?"/g)].map(m=>m[1]).filter(p=>!p.startsWith('https:'));
+const assetPaths=[...home.matchAll(/(?:src|href)="([^"]+\.(?:js|css)(?:\?[^"]*)?)"/g)].map(m=>m[1]).filter(p=>!p.startsWith('https:'));
 for(const path of new Set(assetPaths)){
  const r=await get('/'+path.replace(/^\//,''));assert.equal(r.status,200,path);
- assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(local(path.replace(/^\//,''))),'Exact asset: '+path);
+ assert.equal(hash(Buffer.from(await r.arrayBuffer())),hash(local(path.split('?')[0].replace(/^\//,''))),'Exact asset: '+path);
 }
-console.log('PASS: '+new Set(assetPaths).size+' served JavaScript and CSS assets match the tested build.');
+console.log('PASS: '+new Set(assetPaths).size+' versioned JavaScript and CSS assets match the tested build byte for byte.');
 const redirects=local('_redirects').toString().trim().split('\n').map(l=>l.trim().split(/\s+/));
 for(const [from,to] of redirects){const r=await get(from);assert.equal(r.status,301,from);const target=new URL(r.headers.get('location'),origin);assert.equal(target.origin,origin);assert.equal(target.pathname,to);}
 console.log('PASS: '+redirects.length+' legacy URL forms redirect to clean staging destinations.');
