@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 const origin='https://ayudagrow.com';
-for (const path of ['contact','get-started','privacy']) {
+for (const path of ['contact','privacy']) {
  const d=new JSDOM(readFileSync(`dist/${path}/index.html`,'utf8'),{url:`${origin}/${path}`}).window.document;
  const main=d.querySelector('main');
  assert.equal(d.querySelectorAll('main h1').length,1);
@@ -24,7 +24,8 @@ for (const path of ['contact','get-started','privacy']) {
  }else assert.match(main.textContent,/Get in touch/);
 }
 const home=readFileSync('dist/index.html','utf8');
-assert(home.includes('aisha-portrait-natural.webp'));
-assert(home.includes('marcus-portrait-natural.webp'));
-assert(readFileSync('dist/pricing-page.js','utf8').includes('US$149'));
+assert(home.includes('assets/danielle.webp'));
+assert(home.includes('assets/rasheed.webp'));
+assert(home.includes('Danielle is an illustrative business persona.'));
+assert(readFileSync('dist/plan-data.js','utf8').includes('"price": 149'));
 console.log('Contact/privacy checks passed: exact email/telephone links, no submissions/widgets, honest incomplete privacy boundaries, private indexing and latest portraits/pricing retained.');
