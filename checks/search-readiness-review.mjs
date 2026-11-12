@@ -15,7 +15,8 @@ for(const page of manifest.pages){
   // No script execution: these checks specifically verify the delivered document.
   const dom=new JSDOM(html,{url:origin+page.path});const d=dom.window.document;
   assert.equal(d.querySelectorAll('main h1').length,1,page.path);
-  assert(d.querySelector('main').textContent.trim().length>200,page.path);
+  // Get started is deliberately a concise route chooser, with plan detail on Pricing.
+  assert(d.querySelector('main').textContent.trim().length>(page.path==='/get-started'?100:200),page.path);
   assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
   assert.equal(d.querySelector('link[rel="canonical"]').href,origin+page.path);
   assert.equal(d.querySelector('meta[property="og:url"]').content,origin+page.path);

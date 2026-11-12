@@ -1,0 +1,41 @@
+name: Conversion review
+on:
+  push:
+    branches: [codex/homepage-four-tier-draft-20261112]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: node scripts/offline-build.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: staging-build
+          path: dist/
+          include-hidden-files: true
+          retention-days: 7
+      - run: node --import ./scripts/offline-guard.mjs scripts/verify-conversion.mjs
+      - run: node --import ./scripts/offline-guard.mjs checks/conversion-review.mjs
+      - run: node checks/browser-conversion-review.mjs
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: conversion-review
+          path: |
+            qa/*.png
+            qa/*.json
+            qa/*.log
+            qa/*.html
+          retention-days: 7

@@ -20,7 +20,7 @@ function save(path,dom){
   const document=dom.window.document;
   const main=document.querySelector('main');
   if(main.querySelectorAll('h1').length!==1||main.textContent.trim().length<40)throw new Error('Invalid rendered page: '+path);
-  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';el.setAttribute(attr,el.getAttribute(attr)+(el.getAttribute(attr)==='expanded.js'?'?v=20261110-repair':'?v=20261110-repair'));});
+  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';el.setAttribute(attr,el.getAttribute(attr)+(el.getAttribute(attr)==='expanded.js'?'?v=20261112-conversion':'?v=20261112-conversion'));});
   document.documentElement.dataset.renderedRoute=path;
   document.documentElement.dataset.privatePreview='true';
   const destination=path==='/'?join(dist,'index.html'):path==='/404.html'?join(dist,'404.html'):join(dist,path.slice(1),'index.html');

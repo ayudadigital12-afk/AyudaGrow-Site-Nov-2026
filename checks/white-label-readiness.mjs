@@ -94,7 +94,10 @@ function inspect(d,path,canonical,{error=false}={}){
   for(const a of d.querySelectorAll('a[href],area[href]')){
     const raw=a.getAttribute('href'),url=new URL(raw,d.baseURI);
     assert(!raw.startsWith('#/'),'Legacy hash link '+raw);
-    if(['mailto:','tel:','sms:'].includes(url.protocol))assert(approvedContacts.has(raw),'Unapproved contact '+raw);
+    if(['mailto:','tel:','sms:'].includes(url.protocol)){
+      assert(approvedContacts.has(raw.split('?')[0]),'Unapproved contact '+raw);
+      if(url.search)assert(url.protocol==='mailto:'&&[...url.searchParams.keys()].every(k=>['subject','body'].includes(k)),'Unexpected contact parameters');
+    }
     else{
       assert(['https:','http:'].includes(url.protocol),'Unsafe link '+raw);
       if(url.origin===origin){
