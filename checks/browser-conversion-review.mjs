@@ -34,4 +34,8 @@ try{
  assert.equal(errors.length,0,'No browser runtime errors');
  for(const r of results){assert(r.bodyWidth<=r.viewport+1,r.name+' has horizontal page overflow');assert.equal(r.brokenImages.length,0,r.name+' has broken images');if(r.path==='/'){assert.equal(r.interactions.puzzleHover,12);assert.equal(r.interactions.problemKeyboard,'2');assert.equal(r.interactions.growthStages,5);assert.equal(r.interactions.apps,34);}if(r.name==='home-desktop')assert(r.context.bottom<=r.height,'Puzzle description should fit above the fold');if(r.name==='pricing-desktop')assert(Math.max(...r.cards.map(c=>c.usageTop))-Math.min(...r.cards.map(c=>c.usageTop))<=1,'Pricing usage panels align');}
  await command('Browser.close');
+}catch(error){
+ console.error('Browser exceptions:',JSON.stringify(errors));
+ if(sock?.readyState===1){try{const state=await command('Runtime.evaluate',{expression:'JSON.stringify({url:location.href,title:document.title,text:document.body.innerText.slice(0,1500),scripts:[...document.scripts].map(s=>s.src)})',returnByValue:true});console.error('Browser state:',state.result.value);writeFileSync(root+'/qa/failure.html',(await command('Runtime.evaluate',{expression:'document.documentElement.outerHTML',returnByValue:true})).result.value);const s=await command('Page.captureScreenshot',{format:'png'});writeFileSync(root+'/qa/failure.png',Buffer.from(s.data,'base64'));}catch{}}
+ throw error;
 }finally{sock?.close();chrome.kill();server.kill();}

@@ -18,6 +18,12 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: node scripts/offline-build.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: staging-build
+          path: dist/
+          include-hidden-files: true
+          retention-days: 7
       - run: node --import ./scripts/offline-guard.mjs scripts/verify-conversion.mjs
       - run: node --import ./scripts/offline-guard.mjs checks/conversion-review.mjs
       - run: node checks/browser-conversion-review.mjs
@@ -31,4 +37,5 @@ jobs:
             qa/*.png
             qa/*.json
             qa/*.log
+            qa/*.html
           retention-days: 7
