@@ -25,6 +25,10 @@ try{
    await evaluate('document.fonts.ready.then(()=>true)');
    const data=await evaluate(`(()=>{const f=document.querySelector('iframe'),r=f.getBoundingClientRect(),s=document.querySelector('.ag-purchase-summary').getBoundingClientRect(),c=document.querySelector('.ag-purchase-form-card').getBoundingClientRect();return {title:document.title,bodyWidth:document.documentElement.scrollWidth,viewport:innerWidth,src:f.src,frameHeight:r.height,frameWidth:r.width,frameVisible:getComputedStyle(f).visibility!=='hidden'&&r.height>100,initialized:f.getAttribute('data-iframe-resizer-initialized'),loaderCount:document.querySelectorAll('script[src^="https://grow.ayudagrow.com/js/form_embed.js"]').length,columns:s.right<=c.left+1,stacked:s.bottom<=c.top+1,h1:document.querySelector('h1').textContent}})()`);
    assert(data.bodyWidth<=width+1,plan+' page overflow');assert(data.src.includes(id));assert.equal(data.loaderCount,1);assert(width<600?data.stacked:data.columns);
+   // Offscreen cross-origin frames may be blank in a full-page screenshot until painted.
+   await evaluate('document.querySelector("iframe").scrollIntoView({block:"center",behavior:"instant"})');await delay(900);
+   const formShot=await command('Page.captureScreenshot',{format:'png'});writeFileSync(`qa/signup-form-${plan}-${width}.png`,Buffer.from(formShot.data,'base64'));
+   await evaluate('window.scrollTo({top:0,behavior:"instant"})');await delay(250);
    const metrics=await command('Page.getLayoutMetrics');const shot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.min(metrics.cssContentSize.height,2200),scale:1}});writeFileSync(`qa/signup-${plan}-${width}.png`,Buffer.from(shot.data,'base64'));results.push({plan,width,...data});
   }
  }
@@ -41,7 +45,12 @@ try{
   external.push({plan,type:'stripe',...(await evaluate('({url:location.href,title:document.title,text:document.body.innerText.slice(0,7000)})'))});
   const shot=await command('Page.captureScreenshot',{format:'png'});writeFileSync('qa/stripe-'+plan+'.png',Buffer.from(shot.data,'base64'));
  }
- console.log(JSON.stringify({results,external},null,2));
+ console.log(JSON.stringify({results,external:external.map(x=>({...x,text:x.text.slice(0,350)}))},null,2));
+ for(const [plan,amount] of Object.entries({essentials:99,core:149,build:249,scale:349})){
+  const checkout=external.find(x=>x.plan===plan&&x.type==='stripe');assert(checkout.text.includes('$'+amount+'.00'),plan+' Stripe amount');assert.match(checkout.text,/month/);
+  const form=external.find(x=>x.plan===plan&&x.type==='form');for(const label of ['First Name','Last Name','Phone','Account email','Business Name','Continue to payment'])assert(form.text.includes(label),plan+' field '+label);
+ }
+ assert.match(external.find(x=>x.plan==='essentials'&&x.type==='stripe').text,/7 days free/);
  for(const r of results){assert(r.frameVisible,r.plan+' visible form at '+r.width);assert.equal(r.initialized,'true',r.plan+' embed initialised');}
 }finally{
  writeFileSync('qa/signup-browser-results.json',JSON.stringify({results,external},null,2));sock?.close();chrome.kill();server.kill();

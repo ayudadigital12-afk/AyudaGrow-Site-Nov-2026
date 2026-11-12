@@ -19,6 +19,8 @@ Use the approved final matrix referenced in PRICING-SOURCE.md. The new layout br
 
 ## Payment and provisioning boundaries
 
+Read-only Chrome inspection of all four live Stripe destinations confirmed Essentials: 7 days free then $99/month with payment details requested; Core: $149/month; Build: $249/month; Scale: $349/month. The embedded forms initialized and resized at 1440px and 390px. No contact or payment was submitted. Form configuration marks the five data fields required; their validation is implemented by the hosted form, not native HTML required attributes.
+
 Reading redirect settings is not an end-to-end payment test. Confirm monthly prices, Essentials seven-day trial/card requirement, subscription renewal terms, after-payment destination, matching of signup contact to payment customer, failure/cancellation retries, webhook validation and idempotent account/user provisioning before production. Form submission alone must never be treated as successful payment or an activated subaccount. The same-email instruction helps matching but does not replace a verified backend link.
 
 The supplied forms collect contact information. Account creation can require further business country, timezone and owner-access details, according to the provisioning implementation. The page makes no automatic provisioning guarantee. No workflow, Stripe configuration, production hostname, DNS or analytics was changed.
