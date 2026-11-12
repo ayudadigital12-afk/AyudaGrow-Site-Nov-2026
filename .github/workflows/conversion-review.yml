@@ -1,7 +1,7 @@
 name: Conversion review
 on:
   push:
-    branches: [codex/homepage-four-tier-draft-20261112]
+    branches: [codex/homepage-four-tier-draft-20261112, codex/restore-pricing-navigation-20261112]
 permissions:
   contents: read
 jobs:

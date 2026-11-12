@@ -32,7 +32,7 @@ try{
   }
   if(test.path==='/pricing'){
     const initialMetrics=await command('Page.getLayoutMetrics');const initialShot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width:test.width,height:Math.min(initialMetrics.cssContentSize.height,11000),scale:1}});writeFileSync(root+'/qa/'+test.name+'-initial.png',Buffer.from(initialShot.data,'base64'));
-    data.pricing=await evaluate('(()=>{const initialGroups=[...document.querySelectorAll("[data-feature-group]")].map(g=>g.querySelectorAll("[data-feature-id]:not([hidden])").length);const exits=[...document.querySelectorAll("a[href]")].filter(a=>{const u=new URL(a.href);return a.getClientRects().length&&!a.href.startsWith("mailto:")&&!(u.origin===location.origin&&u.pathname===location.pathname&&u.hash);});const cells=[...document.querySelectorAll(".plan-table td")].filter(n=>n.getClientRects().length);return {initialGroups,exits:exits.map(a=>a.href),cellPadding:parseFloat(getComputedStyle(cells[0]).paddingTop)}})()');
+    data.pricing=await evaluate('(()=>{const initialGroups=[...document.querySelectorAll("[data-feature-group]")].map(g=>g.querySelectorAll("[data-feature-id]:not([hidden])").length);const exits=[...document.querySelectorAll("main a[href]")].filter(a=>{const u=new URL(a.href);return a.getClientRects().length&&!a.href.startsWith("mailto:")&&!(u.origin===location.origin&&u.pathname===location.pathname&&u.hash);});const cells=[...document.querySelectorAll(".plan-table td")].filter(n=>n.getClientRects().length);return {initialGroups,exits:exits.map(a=>a.href),cellPadding:parseFloat(getComputedStyle(cells[0]).paddingTop)}})()');
     assert(data.pricing.initialGroups.every(n=>n<=4));assert.equal(data.pricing.exits.length,0);assert(data.pricing.cellPadding<=8);
     await evaluate('document.querySelector("[data-billing=annual]").click();document.querySelector("[data-select-plan=build]").click()');
     const annual=await evaluate('({prices:[...document.querySelectorAll(".plan-price strong")].map(n=>n.textContent),email:decodeURIComponent(document.querySelector("[data-signup-email]").href),path:location.pathname})');
@@ -45,11 +45,32 @@ try{
     assert.equal(await evaluate('document.querySelector("[data-group-toggle]").getAttribute("aria-expanded")'),'true');
     await command('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await command('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
     assert.equal(await evaluate('document.querySelector("[data-group-toggle]").getAttribute("aria-expanded")'),'false');
-    await evaluate('document.querySelector("[data-open-privacy]").click()');assert.equal(await evaluate('document.querySelector("#ag-pricing-privacy").open'),true);
+    data.pricing.navigation=await evaluate('(()=>{const visible=s=>{const e=document.querySelector(s);return !!e&&getComputedStyle(e).display!=="none"&&e.getClientRects().length>0;};return {logo:document.querySelector("header .logo").getAttribute("href"),footer:visible("body>footer"),nav:visible("#nav"),menu:visible("#menu"),privacy:document.querySelector("footer a[href$=privacy]")?.getAttribute("href"),headerLinks:document.querySelectorAll("header a[href]").length,footerLinks:document.querySelectorAll("footer a[href]").length}})()');
+    assert.equal(data.pricing.navigation.logo,'/');assert(data.pricing.navigation.footer);assert.equal(data.pricing.navigation.privacy,'/privacy');
+    const navButton=await evaluate('(()=>{const a=document.querySelector("header nav a.button"),s=getComputedStyle(a);return {text:a.textContent,color:s.color,background:s.backgroundColor};})()');
+    assert.match(navButton.text,/View plans/);assert.notEqual(navButton.color,navButton.background,'Active navigation button remains readable');
+    data.pricing.navigation.buttonContrast=navButton;
+    assert(data.pricing.navigation.headerLinks>=8);assert(data.pricing.navigation.footerLinks>=20);
+    if(test.width<600){
+      assert(data.pricing.navigation.menu);await evaluate('document.querySelector("#menu").click()');
+      assert.equal(await evaluate('document.querySelector("#menu").getAttribute("aria-expanded")'),'true');
+      assert.equal(await evaluate('document.querySelector("#nav").getClientRects().length>0'),true);
+      await evaluate('document.querySelector("#menu").click()');
+      assert.equal(await evaluate('document.querySelector("#menu").getAttribute("aria-expanded")'),'false');
+    }else assert(data.pricing.navigation.nav);
+    await evaluate('document.querySelector("#business-toggle").click()');assert.equal(await evaluate('document.querySelector("#business-toggle").getAttribute("aria-expanded")'),'true');
+    await evaluate('document.querySelector("#business-toggle").click()');
+    // Follow real global navigation and return, preserving the pricing controls.
+    await evaluate('document.querySelector("footer a[href$=privacy]").click()');
+    for(let attempt=0;attempt<100;attempt++){if(await evaluate('location.pathname==="/privacy" && !!document.querySelector("main h1")'))break;await delay(100);}
+    assert.equal(await evaluate('location.pathname'),'/privacy');
+    await command('Page.navigate',{url:destination});
+    for(let attempt=0;attempt<100;attempt++){if(await evaluate('location.pathname==="/pricing" && document.readyState==="complete" && !!document.querySelector("[data-select-plan=build]")'))break;await delay(100);}
+    assert.equal(await evaluate('location.pathname'),'/pricing');
     assert.equal(await evaluate('document.querySelectorAll("main h1").length'),1);
-    await evaluate('document.querySelector("[data-close-privacy]").click();document.querySelector("[data-select-plan=build]").click();document.activeElement?.blur()');
+    await evaluate('document.querySelector("[data-select-plan=build]").click();document.activeElement?.blur()');
     const remaining=await evaluate('[...document.querySelectorAll("main a[href]")].filter(a=>a.getClientRects().length&&!a.href.startsWith("mailto:")).map(a=>a.href)');assert.deepEqual(remaining,[]);
-    data.pricing.annualSignup=true;data.pricing.trial=true;data.pricing.demo=true;data.pricing.keyboard=true;data.pricing.privacy=true;
+    data.pricing.annualSignup=true;data.pricing.trial=true;data.pricing.demo=true;data.pricing.keyboard=true;data.pricing.footerPrivacy=true;
   }
 
   await evaluate('(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=700){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,80));}window.scrollTo(0,0);await new Promise(r=>setTimeout(r,200));})()');

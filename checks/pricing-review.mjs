@@ -12,7 +12,14 @@ assert.equal(cards[2].querySelector('.ag-plan-kicker').textContent,'Most popular
 assert.match(cards[2].textContent,/1,000 AI responses/);assert.match(cards[3].textContent,/Voice AI on web chat and WhatsApp calls/);
 assert.match(cards[0].textContent,/Card required.*US\$99\/month unless cancelled/);
 assert.equal(d.querySelectorAll('main a[href]').length,0,'No browse-away links in initial pricing content');
-assert(d.body.classList.contains('ag-pricing-focus'));assert.equal(d.querySelector('header .logo').hasAttribute('href'),false);
+assert.equal(d.querySelector('header .logo').getAttribute('href'),'/');
+const platform=new JSDOM(readFileSync('dist/platform/index.html','utf8')).window.document;
+const links=(doc,scope)=>[...doc.querySelectorAll(scope+' a[href]')].map(a=>[a.textContent,a.getAttribute('href')]);
+assert.deepEqual(links(d,'header'),links(platform,'header'),'Pricing retains the shared navigation destinations');
+assert.deepEqual(links(d,'footer'),links(platform,'footer'),'Pricing retains the full shared footer');
+assert.equal(d.querySelectorAll('.ag-pricing-nav,.ag-pricing-footer,#ag-pricing-privacy').length,0);
+assert(d.querySelector('footer a[href="/privacy"]'));
+platform.defaultView.close();
 assert.equal(d.querySelector('.pricing-campaign'),null);
 assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));
 assert.equal(d.querySelectorAll('.plan-table thead th').length,5);
@@ -47,5 +54,5 @@ for(const group of doc.querySelectorAll('[data-feature-group]')){
  b.click();assert(extras.every(x=>!x.hidden));b.click();assert(extras.every(x=>x.hidden));
 }
 dom.window.close();
-console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; trial reset; on-page plan and demo requests; no browsing exits; honest checkout status.');
+console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; trial reset; on-page plan and demo requests; shared menu and footer; no content browse-away CTA; honest checkout status.');
 
