@@ -23,21 +23,8 @@ d.querySelector('[data-problem="0"]').focus();d.activeElement.dispatchEvent(new 
 for(const b of d.querySelectorAll('[data-growth-stage]')){b.click();assert.equal(b.getAttribute('aria-pressed'),'true');}
 assert.equal(d.querySelectorAll('.ch-app-card:not([aria-hidden="true"])').length,34);
 assert.equal(d.querySelector('#motion'),null);home.window.close();
-const pricing=new JSDOM(read('dist/pricing/index.html')).window.document,cards=[...pricing.querySelectorAll('.plan-card')];
-assert.equal(cards.length,4);
-for(const [i,name,price] of [[0,'Essentials',99],[1,'Core',149],[2,'Build',249],[3,'Scale',349]]){assert.equal(cards[i].querySelector('h3').textContent,name);assert.equal(cards[i].querySelector('.plan-price strong').textContent,'US$'+price);const href=cards[i].querySelector('a.button').getAttribute('href');assert(href.includes('plan='));const page=renderPage(shell,'https://staging2.ayudagrow.com',href);const dd=page.window.document;assert.equal(dd.querySelector('main h1').textContent,name);const email=dd.querySelector('a[href^="mailto:"]').href;assert(decodeURIComponent(email).includes(name));assert.match(dd.querySelector('main').textContent,/No account is created or payment taken/);page.window.close();}
-assert.match(cards[2].textContent,/1,000 chatbot responses \/ month\+ 100 Voice AI minutes/);
-assert.match(cards[3].textContent,/1,000 managed agent runs/);
-const rows=[...pricing.querySelectorAll('.plan-table tbody tr')];
-const values=label=>[...rows.find(r=>r.querySelector('th').textContent===label).querySelectorAll('td')].map(x=>x.textContent);
-assert.deepEqual(values('Calendars and online booking'),['3 calendars','10 calendars','Unlimited','Unlimited']);
-assert.deepEqual(values('Team members'),['Up to 5 users','Unlimited','Unlimited','Unlimited']);
-assert.deepEqual(values('Sales pipelines'),['3 pipelines','Unlimited','Unlimited','Unlimited']);
-assert.deepEqual(values('Managed agent runs per month'),['None','None','100 runs','1,000 runs']);
-assert.deepEqual(values('Email campaigns and templates'),['Not included','Included','Included','Included']);
-assert.deepEqual(values('Guided setup, first month'),['2 hours','3 hours','5 hours','5 hours']);
+const pricing=new JSDOM(read('dist/pricing/index.html')).window.document;
 assert.match(pricing.title,/US\$99/);assert.match(pricing.querySelector('meta[name="description"]').content,/US\$99/);
-assert(!/Google Business messaging|GoHighLevel|HighLevel|LeadConnector|supplier cost|\$107|\$60|\$30|14-day|21-day/.test(pricing.querySelector('main').textContent));
+assert(!/GoHighLevel|HighLevel|LeadConnector|supplier cost|14-day|21-day/.test(pricing.querySelector('main').textContent));
 assert.equal(pricing.querySelectorAll('form,input,iframe').length,0);
-const demo=renderPage(shell,'https://staging2.ayudagrow.com','/contact?intent=demo');assert.match(demo.window.document.querySelector('h1').textContent,/demo/);demo.window.close();
-console.log('PASS: 33 noindex routes with Pricing navigation and chatbot; correct homepage order; 12 interactive puzzle pieces; 3 problem selectors and keyboard; 5 Growth Loop stages; 34 app cards; four plans and retained plan enquiries; authoritative allowances, limits, setup hours and updated metadata.');
+console.log('PASS: 33 noindex routes with Pricing navigation and chatbot; homepage interactions and retained sections; current pricing metadata and no supplier disclosures.');

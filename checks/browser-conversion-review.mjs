@@ -30,6 +30,27 @@ try{
   if(test.path==='/'){
    data.interactions=await evaluate(`(()=>{const pieces=[...document.querySelectorAll('[data-ag-piece]')];let ok=0;pieces.forEach(b=>{b.dispatchEvent(new PointerEvent('pointerover',{bubbles:true,pointerType:'mouse'}));if(document.querySelector('[data-ag-context-title]').textContent===b.querySelector('strong').textContent)ok++});document.querySelector('[data-problem="1"]').click();const follow=document.querySelector('#ag-problem-panel').textContent;document.querySelector('[data-problem="1"]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));const keyboard=document.activeElement.dataset.problem;let growth=0;document.querySelectorAll('[data-growth-stage]').forEach(b=>{b.click();if(b.getAttribute('aria-pressed')==='true')growth++});return {puzzleHover:ok,problemClick:follow.includes('A quote sent'),problemKeyboard:keyboard,growthStages:growth,apps:document.querySelectorAll('.ch-app-card:not([aria-hidden="true"])').length}})()`);
   }
+  if(test.path==='/pricing'){
+    data.pricing=await evaluate('(()=>{const initialGroups=[...document.querySelectorAll("[data-feature-group]")].map(g=>g.querySelectorAll("[data-feature-id]:not([hidden])").length);const exits=[...document.querySelectorAll("a[href]")].filter(a=>a.getClientRects().length&& !a.getAttribute("href").startsWith("#")&&!a.getAttribute("href").startsWith("mailto:"));const cells=[...document.querySelectorAll(".plan-table td")].filter(n=>n.getClientRects().length);return {initialGroups,exits:exits.map(a=>a.href),cellPadding:parseFloat(getComputedStyle(cells[0]).paddingTop)}})()');
+    assert(data.pricing.initialGroups.every(n=>n<=4));assert.equal(data.pricing.exits.length,0);assert(data.pricing.cellPadding<=8);
+    await evaluate('document.querySelector("[data-billing=annual]").click();document.querySelector("[data-select-plan=build]").click()');
+    const annual=await evaluate('({prices:[...document.querySelectorAll(".plan-price strong")].map(n=>n.textContent),email:decodeURIComponent(document.querySelector("[data-signup-email]").href),path:location.pathname})');
+    assert.deepEqual(annual.prices,['US$990','US$1,490','US$2,490','US$3,490']);assert(annual.email.includes('Build (annual)'));assert.equal(annual.path,'/pricing');
+    await evaluate('document.querySelector("[data-select-trial]").click()');
+    assert.equal(await evaluate('document.querySelector("[data-billing=monthly]").getAttribute("aria-pressed")'),'true');
+    await evaluate('document.querySelector("[data-select-demo]").click()');
+    assert((await evaluate('decodeURIComponent(document.querySelector("[data-signup-email]").href)')).includes('demo request'));
+    await evaluate('document.querySelector("[data-group-toggle]").focus()');await command('Input.dispatchKeyEvent',{type:'keyDown',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});await command('Input.dispatchKeyEvent',{type:'keyUp',key:'Enter',code:'Enter',windowsVirtualKeyCode:13});
+    assert.equal(await evaluate('document.querySelector("[data-group-toggle]").getAttribute("aria-expanded")'),'true');
+    await command('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});await command('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
+    assert.equal(await evaluate('document.querySelector("[data-group-toggle]").getAttribute("aria-expanded")'),'false');
+    await evaluate('document.querySelector("[data-open-privacy]").click()');assert.equal(await evaluate('document.querySelector("#ag-pricing-privacy").open'),true);
+    assert.equal(await evaluate('document.querySelectorAll("main h1").length'),1);
+    await evaluate('document.querySelector("[data-close-privacy]").click();document.querySelector("[data-select-plan=build]").click();document.activeElement?.blur()');
+    const remaining=await evaluate('[...document.querySelectorAll("main a[href]")].filter(a=>a.getClientRects().length&&!a.href.startsWith("mailto:")).map(a=>a.href)');assert.deepEqual(remaining,[]);
+    data.pricing.annualSignup=true;data.pricing.trial=true;data.pricing.demo=true;data.pricing.keyboard=true;data.pricing.privacy=true;
+  }
+
   await evaluate('(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=700){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,80));}window.scrollTo(0,0);await new Promise(r=>setTimeout(r,200));})()');
   await evaluate('Promise.all([...document.images].map(img=>{img.loading="eager";return img.decode().catch(()=>{});})).then(()=>{document.activeElement?.blur();return true;})');
   data.brokenImages=await evaluate('[...document.images].filter(img=>!img.complete||!img.naturalWidth).map(img=>img.src)');

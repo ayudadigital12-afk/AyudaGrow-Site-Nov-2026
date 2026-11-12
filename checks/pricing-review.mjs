@@ -1,16 +1,51 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
-const d=new JSDOM(readFileSync('dist/pricing/index.html','utf8')).window.document;
+import {renderPage} from '../scripts/render-page.mjs';
+const html=readFileSync('dist/pricing/index.html','utf8'),d=new JSDOM(html).window.document;
 const cards=[...d.querySelectorAll('.plan-card')];
 assert.deepEqual(cards.map(c=>c.querySelector('.plan-price strong').textContent),['US$99','US$149','US$249','US$349']);
 assert.deepEqual(cards.map(c=>c.querySelector('h3').textContent),['Essentials','Core','Build','Scale']);
-cards.forEach(c=>assert(c.querySelector('a.button').getAttribute('href').includes('/get-started?plan=')));
+cards.forEach(c=>assert(c.querySelector('button[data-select-plan]')));
 assert.equal(cards.filter(c=>c.textContent.includes('7-day free trial')).length,1);
+assert.equal(cards[2].querySelector('.ag-plan-kicker').textContent,'Most popular');
+assert.match(cards[2].textContent,/1,000 AI responses/);assert.match(cards[3].textContent,/Voice AI on web chat and WhatsApp calls/);
+assert.match(cards[0].textContent,/Card required.*US\$99\/month unless cancelled/);
+assert.equal(d.querySelectorAll('main a[href]').length,0,'No browse-away links in initial pricing content');
+assert(d.body.classList.contains('ag-pricing-focus'));assert.equal(d.querySelector('header .logo').hasAttribute('href'),false);
+assert.equal(d.querySelector('.pricing-campaign'),null);
 assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));
 assert.equal(d.querySelectorAll('.plan-table thead th').length,5);
 assert.equal(d.querySelectorAll('main form,main input').length,0);
-assert.equal(d.querySelectorAll('.pricing-start-steps li').length,4);
 assert.match(d.querySelector('.pricing-whatsapp').textContent,/US\$19/);
 assert.match(d.querySelector('main').textContent,/Online checkout is not available yet/);
-console.log('PASS: four retail plans, Essentials-only trial, plan-specific destinations, accessible comparison, WhatsApp add-on and honest checkout status.');
+const groups=[...d.querySelectorAll('[data-feature-group]')];assert.equal(groups.length,6);
+groups.forEach(g=>assert.equal(g.querySelectorAll('[data-feature-id]:not([hidden])').length,Math.min(4,g.querySelectorAll('[data-feature-id]').length)));
+const texts=d.querySelector('main').textContent;
+assert(!/100 Voice AI minutes|managed agent runs|2x usage|5x usage|Google Business messaging|Phone line Voice AI|SMS and voice calling/.test(texts));
+const row=id=>[...d.querySelector('[data-feature-id="'+id+'"]').querySelectorAll('td')].map(n=>n.textContent);
+assert.deepEqual(row('voice-ai-minutes-included-per-month'),['None','None','None','Unlimited (fair use)']);
+assert.deepEqual(row('online-store'),['Not included','Not included','Not included','Included']);
+assert.deepEqual(row('guided-setup-first-month'),['2 hours','3 hours','5 hours','5 hours']);
+assert.deepEqual(row('custom-reports'),['Not included','Not included','Included','Included']);
+const dom=renderPage(readFileSync('source/shell.html','utf8'),'https://staging2.ayudagrow.com','/pricing'),w=dom.window,doc=w.document;
+const features=w.AyudaPlans.features;
+assert.equal(doc.querySelectorAll('[data-feature-id]').length,features.length,'Every approved public feature is represented once');
+assert.equal(new Set([...doc.querySelectorAll('[data-feature-id]')].map(n=>n.dataset.featureId)).size,features.length);
+for(const f of features)assert.deepEqual([...doc.querySelector('[data-feature-id="'+f.id+'"]').querySelectorAll('td')].map(x=>x.textContent),Array.from(f.values));
+doc.querySelector('[data-billing="annual"]').click();
+assert.deepEqual([...doc.querySelectorAll('.plan-price strong')].map(x=>x.textContent),['US$990','US$1,490','US$2,490','US$3,490']);
+for(const p of w.AyudaPlans.plans){const url=w.location.href;doc.querySelector('[data-select-plan="'+p.id+'"]').click();assert.equal(w.location.href,url);const mail=decodeURIComponent(doc.querySelector('[data-signup-email]').href);assert(mail.includes(p.name));assert(mail.includes('annual'));assert(mail.includes(p.annualPrice.toLocaleString('en-US')));}
+doc.querySelector('[data-select-trial]').click();assert.equal(doc.querySelector('[data-billing="monthly"]').getAttribute('aria-pressed'),'true');assert.match(decodeURIComponent(doc.querySelector('[data-signup-email]').href),/7-day trial/);assert.match(doc.querySelector('.ag-signup-intro').textContent,/US\$99\/month/);
+doc.querySelector('[data-select-demo]').click();assert.match(decodeURIComponent(doc.querySelector('[data-signup-email]').href),/demo request/);
+for(const group of doc.querySelectorAll('[data-feature-group]')){
+ const b=group.querySelector('[data-group-toggle]');if(!b)continue;const extras=[...group.querySelectorAll('[data-extra-feature]')];
+ assert(extras.every(x=>x.hidden));group.dispatchEvent(Object.assign(new w.Event('pointerenter'),{pointerType:'touch'}));assert(extras.every(x=>x.hidden));
+ group.dispatchEvent(Object.assign(new w.Event('pointerenter'),{pointerType:'mouse'}));assert(extras.every(x=>!x.hidden));b.click();
+ group.dispatchEvent(new w.Event('pointerleave'));assert(extras.every(x=>!x.hidden),'Click pins expansion after hover');
+ b.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));assert(extras.every(x=>x.hidden));assert.equal(doc.activeElement,b);
+ b.click();assert(extras.every(x=>!x.hidden));b.click();assert(extras.every(x=>x.hidden));
+}
+dom.window.close();
+console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; trial reset; on-page plan and demo requests; no browsing exits; honest checkout status.');
+
