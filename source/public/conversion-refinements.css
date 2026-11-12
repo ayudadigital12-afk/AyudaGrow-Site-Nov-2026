@@ -188,3 +188,93 @@ body>header nav{gap:17px;font-size:12px}
  #main:has(.ag-sales-hero) .av-knowledge-bubbles li{min-height:58px;flex-direction:row;padding:8px 6px;font-size:10px}
  #main:has(.ag-sales-hero) .av-ai-chapter-copy>strong{font-size:22px}
 }
+
+/* Focused pricing journey and compact category comparison. */
+.ag-pricing-nav,.ag-pricing-footer{display:none}
+body.ag-pricing-focus>header>#nav,body.ag-pricing-focus>header>#menu,body.ag-pricing-focus>footer{display:none!important}
+body.ag-pricing-focus>header{min-height:74px}
+body.ag-pricing-focus>header .logo{cursor:default}
+body.ag-pricing-focus .ag-pricing-nav{display:flex;align-items:center;gap:20px}
+.ag-pricing-nav button,.ag-pricing-footer button{border:0;background:none;color:inherit;font:600 12px Poppins,sans-serif;padding:10px 0;cursor:pointer}
+.ag-pricing-nav button{color:#dcecff}.ag-pricing-nav button:first-child{color:#a3f0c5}
+body.ag-pricing-focus .ag-pricing-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px max(4%,calc((100vw - 1240px)/2));background:#071c3e;color:#dcecff;font-size:12px}
+.ag-pricing-focused button:focus-visible,.ag-pricing-nav button:focus-visible,.ag-pricing-footer button:focus-visible{outline:3px solid #1f79ef;outline-offset:3px}
+#main .ag-pricing-focused .page-hero{padding:24px 0 20px}
+#main .ag-pricing-focused .page-hero h1{font-size:clamp(29px,3.7vw,46px);margin:9px 0 12px}
+#main .ag-pricing-focused .page-hero p{max-width:900px;font-size:15px;line-height:1.6}
+.ag-billing-options{display:inline-flex;padding:4px;border:1px solid #5f7c9b;background:#0b2b55;border-radius:11px;gap:4px;margin-top:17px}
+.ag-billing-options button{min-height:42px;padding:9px 16px;border:0;border-radius:8px;color:#e0ebff;background:transparent;font:600 13px Poppins,sans-serif;cursor:pointer}
+.ag-billing-options button[aria-pressed=true]{background:#a1efc4;color:#092b4b}
+.ag-billing-options span{font-size:10px;margin-left:8px}
+#main .ag-pricing-focused .page-hero .ag-currency-note{font-size:11px;margin-top:10px}
+#main .ag-pricing-focused .section{padding:24px 0}
+#main .ag-pricing-focused .plan-card{padding:18px 16px}
+#main .ag-pricing-focused .plan-card h3{margin-top:10px}
+#main .ag-pricing-focused .ag-plan-purpose{min-height:53px;margin:10px 0;font-size:12px;line-height:1.5}
+#main .ag-pricing-focused .ag-plan-billing{min-height:32px;line-height:1.45;margin:7px 0 12px}
+#main .ag-pricing-focused .plan-card ul{min-height:115px;margin-bottom:12px}
+#main .ag-pricing-focused .plan-card li{line-height:1.45;margin-bottom:7px}
+#main .ag-pricing-focused .ag-plan-setup{margin-bottom:12px;min-height:34px;line-height:1.45}
+#main .ag-pricing-focused .pricing-usage{min-height:111px;margin-bottom:10px;padding:12px}
+#main .ag-pricing-focused .pricing-usage p{line-height:1.5}
+#main .ag-pricing-focused .ag-plan-addon{font-size:10px;min-height:30px;margin:0 0 8px;line-height:1.5}
+#main .ag-pricing-focused .plan-card .button{min-height:44px;cursor:pointer;border:0;font-family:Poppins,sans-serif}
+.ag-card-trial{min-height:99px;padding-top:9px}
+.ag-trial-link{border:0;padding:5px 0;background:none;color:#0751aa;font:600 11px Poppins,sans-serif;text-align:left;text-decoration:underline;cursor:pointer;min-height:32px}
+.ag-trial-terms{display:block;font-size:9px;line-height:1.5;color:#425d76}
+#main .ag-pricing-focused .ag-checkout-note{margin-top:12px;font-size:11px}
+#main .ag-pricing-focused .ag-all-plans{padding:12px 16px;margin-top:12px}
+#main .ag-pricing-focused .ag-all-plans p{font-size:12px}
+.ag-sales-option{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px;font-size:13px}
+.ag-pricing-focused .textlink{font-family:Poppins,sans-serif;border:0;background:none;cursor:pointer;font-size:13px}
+#main .ag-pricing-focused .section-head{margin-bottom:16px;gap:24px}
+#main .ag-pricing-focused h2{font-size:clamp(24px,2.5vw,32px);line-height:1.25;max-width:none}
+#main .ag-pricing-focused .section-head>p{font-size:13px;line-height:1.6}
+#main .ag-pricing-focused .plan-table{min-width:820px;font-size:12px;border-collapse:collapse}
+#main .ag-pricing-focused .plan-table th,#main .ag-pricing-focused .plan-table td{padding:7px 10px;line-height:1.4}
+#main .ag-pricing-focused .plan-table th:first-child{width:26%}
+#main .ag-pricing-focused .plan-table thead th{padding:11px 10px}
+#main .ag-pricing-focused .plan-table thead small{margin-top:4px}
+#main .ag-pricing-focused .plan-table caption{padding:9px 10px;font-size:11px}
+#main .ag-pricing-focused tr[hidden]{display:none!important}
+#main .ag-pricing-focused .ag-comparison-group th{padding:0}
+.ag-comparison-group button,.ag-category-name{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 10px;color:#0c315b;font:600 12px Poppins,sans-serif;background:#dce9f8;border:0;text-align:left}
+.ag-comparison-group button{cursor:pointer;min-height:44px}
+.ag-comparison-group small{font-size:10px;font-weight:500;color:#125b9c}
+.ag-signup-choice{background:#e5f4ed}
+.ag-signup-choice>.wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.ag-signup-intro>p{font-size:13px;line-height:1.6;margin-top:12px}
+.ag-secondary-actions{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:12px 20px}
+.ag-secondary-actions button,.ag-signup-choice .button{font-family:Poppins,sans-serif;border:0;font-size:13px;cursor:pointer}
+#main .ag-pricing-focused .pricing-whatsapp{display:flex;align-items:center;gap:12px;font-size:12px;line-height:1.6;margin:0 0 16px}
+.pricing-whatsapp img{flex-shrink:0;object-fit:contain}
+#main .ag-pricing-focused .pricing-terms{margin:8px 0}
+#main .ag-pricing-focused .pricing-terms summary{font-size:13px;padding:12px 14px;min-height:44px}
+#main .ag-pricing-focused .pricing-terms>p{font-size:12px;padding:0 14px 14px;line-height:1.65}
+#ag-pricing-privacy{width:min(760px,92vw);max-height:85vh;overflow:auto;padding:22px;border:1px solid #b9cfe6;border-radius:14px;background:white;color:#0b2c53}
+#ag-pricing-privacy::backdrop{background:#031832b8}
+#ag-pricing-privacy .page-hero{background:transparent;color:#0b2c53;padding:15px 0}
+#ag-pricing-privacy .page-hero:after{display:none}
+#ag-pricing-privacy .wrap{width:100%}
+#ag-pricing-privacy .section{padding:15px 0}
+#ag-pricing-privacy p,#ag-pricing-privacy li{font-size:13px;line-height:1.65}
+#ag-pricing-privacy h2{font-size:25px}#ag-pricing-privacy h3{font-size:19px}
+.ag-dialog-close{display:block;margin-left:auto;background:#0c3262;border:0;border-radius:7px;padding:10px 14px;color:white;font:600 12px Poppins,sans-serif;cursor:pointer}
+@media(max-width:720px){
+ body.ag-pricing-focus>header{flex-wrap:wrap;gap:10px;padding-top:10px;padding-bottom:10px}
+ body.ag-pricing-focus>header .logo{flex-basis:128px;width:128px}
+ body.ag-pricing-focus .ag-pricing-nav{width:100%;justify-content:space-between;gap:8px}
+ .ag-pricing-nav button{font-size:11px;min-height:40px}
+ body.ag-pricing-focus .ag-pricing-footer{display:block;font-size:11px}.ag-pricing-footer button{margin-top:8px}
+ #main .ag-pricing-focused .page-hero h1{font-size:31px}
+ #main .ag-pricing-focused .plan-card{padding:20px}
+ #main .ag-pricing-focused .ag-plan-purpose,#main .ag-pricing-focused .plan-card ul,#main .ag-pricing-focused .ag-plan-setup,#main .ag-pricing-focused .ag-plan-billing{min-height:0}
+ .ag-card-trial{min-height:0}.ag-card-trial:empty{display:none}
+ .ag-trial-terms{font-size:10px}.ag-trial-link{font-size:12px;min-height:40px}
+ .ag-sales-option{display:block;text-align:center}.ag-sales-option>span{display:block;margin-bottom:4px}
+ .ag-signup-choice>.wrap{grid-template-columns:1fr;gap:16px}
+ #main .ag-pricing-focused .section-head{display:block}#main .ag-pricing-focused .section-head>p{margin-top:9px}
+ #main .ag-pricing-focused .plan-table th:first-child{width:26%}
+ .ag-comparison-group button,.ag-category-name{justify-content:flex-start;gap:20px}
+}
+

@@ -1,0 +1,736 @@
+{
+  "Features Matrix": [
+    [
+      "AyudaGrow Pricing and Features Matrix",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Full features matrix for all four plans. Use this as the single source of truth for the pricing page and website development.",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Section",
+      "Feature",
+      "Client-facing description",
+      "Essentials $99/mo",
+      "Core $149/mo",
+      "Build $249/mo",
+      "Scale $349/mo",
+      "Developer notes"
+    ],
+    [
+      "PRICING",
+      "Monthly price (USD)",
+      "What the client pays each month",
+      "$99",
+      "$149",
+      "$249",
+      "$349",
+      "Display as primary price on each plan card"
+    ],
+    [
+      "PRICING",
+      "Annual price (USD)",
+      "Pay annually and save two months",
+      "$990/yr",
+      "$1,490/yr",
+      "$2,490/yr",
+      "$3,490/yr",
+      "10 months for 12. Show as secondary price with savings callout."
+    ],
+    [
+      "PRICING",
+      "Who it is for",
+      "One-line positioning on the pricing card",
+      "Owners who need their leads, bookings and follow-up in one place",
+      "Teams who want AI help writing and building",
+      "Businesses who want AI answering customers",
+      "High-volume businesses with no AI ceiling",
+      "Use as the subtitle under each plan name on the pricing card"
+    ],
+    [
+      "PRICING",
+      "Free trial",
+      "Try before you commit",
+      "7 days\n(card required)",
+      "None",
+      "None",
+      "None",
+      "Trial on Essentials only. Card must be on file at signup or the account locks at conversion. Auto-converts to Essentials at $99 unless cancelled."
+    ],
+    [
+      "PRICING",
+      "Guided setup (first month)",
+      "One-to-one setup time included",
+      "2 hours",
+      "3 hours",
+      "5 hours",
+      "5 hours",
+      "Internal: Essentials setup is light and self-serve. Hours do not roll over."
+    ],
+    [
+      "CRM",
+      "Contacts and companies",
+      "Hold every customer record in one place",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      "No cap. Lead with this against HubSpot and Zoho."
+    ],
+    [
+      "CRM",
+      "Custom fields, tags, notes and tasks",
+      "Keep the detail that follow-up depends on",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      null
+    ],
+    [
+      "CRM",
+      "Smart lists and segments",
+      "Pull up the customers who need action today",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "CRM",
+      "Sales pipelines",
+      "See every opportunity and what stage it is at",
+      "3 pipelines",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      "Cap on Essentials is a commercial choice only. Zero cost difference to AyudaGrow."
+    ],
+    [
+      "CRM",
+      "Calendars and online booking",
+      "Let customers book without phoning",
+      "3 calendars",
+      "10 calendars",
+      "Unlimited",
+      "Unlimited",
+      null
+    ],
+    [
+      "CRM",
+      "Booking pages, reminders, reschedule and cancel links",
+      "Cut no-shows and manual appointment admin",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      "Feature is free. Message delivery is charged separately at usage rates."
+    ],
+    [
+      "CRM",
+      "Workflow automation",
+      "Automate the follow-up nobody has time for",
+      "Included\n(standard actions)",
+      "Included\n(standard actions)",
+      "Included\n(standard actions)",
+      "Included\n(standard actions)",
+      "Standard actions free. Premium actions (webhooks, Sheets, Slack) charged at $0.01 per execution after 100 lifetime free per account."
+    ],
+    [
+      "CRM",
+      "Forms, surveys and QR codes",
+      "Capture enquiries and customer detail",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "CRM",
+      "Unified inbox",
+      "See every customer conversation in one thread",
+      "Email, web chat, Facebook and Instagram DM, Google Business messaging",
+      "Adds WhatsApp messaging",
+      "Adds WhatsApp messaging",
+      "Adds WhatsApp messaging",
+      "WhatsApp is included from Core upward. On Essentials it is an optional add-on at $19/month."
+    ],
+    [
+      "CRM",
+      "Team members",
+      "Give staff their own login",
+      "Up to 5 users",
+      "Unlimited",
+      "Unlimited",
+      "Unlimited",
+      null
+    ],
+    [
+      "CRM",
+      "Mobile app",
+      "Run the business from a phone",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "PAYMENTS",
+      "Quotes, estimates, proposals and e-signature",
+      "Send the paperwork and get it signed",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "PAYMENTS",
+      "Invoices, payment links and recurring billing",
+      "Ask for money and get paid without chasing",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      "Client's own payment gateway fees are theirs, not AyudaGrow's."
+    ],
+    [
+      "PAYMENTS",
+      "Online store",
+      "Sell products and take orders online",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only."
+    ],
+    [
+      "SITES",
+      "Funnels, websites and blogs",
+      "Give campaigns somewhere to land",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "SITES",
+      "Webinars",
+      "Host live or recorded online events",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only."
+    ],
+    [
+      "SITES",
+      "Quizzes",
+      "Engage and qualify leads with interactive content",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only."
+    ],
+    [
+      "MARKETING",
+      "Email campaigns and templates",
+      "Send campaigns and scheduled follow-up",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      "Email sending charged at $0.95 per 1,000 emails (at 40% markup). Builder is free."
+    ],
+    [
+      "MARKETING",
+      "Social planner",
+      "Plan and schedule social content",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "MARKETING",
+      "Affiliate manager",
+      "Run a referral programme for your business",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only."
+    ],
+    [
+      "MARKETING",
+      "Countdown timers and trigger links",
+      "Create urgency and track campaign clicks",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "REPUTATION",
+      "Review requests and monitoring",
+      "Build the rating customers judge you on",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      "Delivery of review request messages is charged at usage rates."
+    ],
+    [
+      "REPUTATION",
+      "Reviews AI - automated review replies",
+      "AI drafts replies to your Google and Facebook reviews",
+      "Not included",
+      "Not included",
+      "Included\n(unlimited, fair use)",
+      "Included\n(unlimited, fair use)",
+      "KEY FEATURE for Build and Scale. Strong callout for local Jamaican SMEs on Google Maps. AI reads the review and writes a personalised reply for the owner to approve or send."
+    ],
+    [
+      "REPUTATION",
+      "Google Business Profile optimisation",
+      "Improve your ranking on Google Maps",
+      "Not included",
+      "Not included",
+      "Included",
+      "Included",
+      "Build and Scale. Pairs well with the Reviews AI callout."
+    ],
+    [
+      "REPUTATION",
+      "Video testimonials and review widgets",
+      "Show your best reviews on your website",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "MEMBERSHIPS",
+      "Courses, communities and client portal",
+      "Run learning or membership spaces",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      "Standard client portal is free. Branded mobile portal app is a paid add-on at $49/month (not in any base plan)."
+    ],
+    [
+      "REPORTING",
+      "Dashboards and core reporting",
+      "See what is working without building a spreadsheet",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      "Includes attribution, appointment, pipeline and call reporting."
+    ],
+    [
+      "REPORTING",
+      "Custom reports",
+      "Build your own reports for any data in the system",
+      "Not included",
+      "Not included",
+      "Included",
+      "Included",
+      null
+    ],
+    [
+      "REPORTING",
+      "Google Ads and Facebook Ads reports",
+      "See your ad spend and results in one place",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only. Requires connected ad accounts."
+    ],
+    [
+      "REPORTING",
+      "Local Marketing Audit",
+      "Score your online presence against competitors",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Included",
+      "Scale only. Strong fit for clients who want to track their local SEO and reputation."
+    ],
+    [
+      "AI - TEAM",
+      "Free AI builders (website, funnel, calendar, layout, workflow)",
+      "AI-powered builders inside the platform at no extra cost",
+      "Included",
+      "Included",
+      "Included",
+      "Included",
+      "These AI builders are free for all plans. Sell on Essentials as a differentiator."
+    ],
+    [
+      "AI - TEAM",
+      "Email AI",
+      "Get AI help writing emails and campaigns",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      "Free for sub-accounts on Core and above."
+    ],
+    [
+      "AI - TEAM",
+      "Knowledge base",
+      "Store the answers the business repeats every day",
+      "Not included",
+      "Included",
+      "Included",
+      "Included",
+      "Also the source the customer-facing chatbot draws from on Build and Scale."
+    ],
+    [
+      "AI - TEAM",
+      "Team AI toolkit (AI writing and content tools)",
+      "AI tools your team uses to write, build and create",
+      "Not included",
+      "Standard usage",
+      "2x usage",
+      "5x usage",
+      "Includes Ask AI, AI Studio, Agent Studio and Content AI. Usage multiples apply to the monthly allowance. Paid usage for sub-account users - must be blocked on Essentials."
+    ],
+    [
+      "AI - TEAM",
+      "Content AI",
+      "Unlimited AI content generation inside the builders",
+      "Not included",
+      "Included\n(fair use)",
+      "Included\n(fair use)",
+      "Included\n(fair use)",
+      null
+    ],
+    [
+      "AI - CHATBOT",
+      "Customer-facing AI chatbot",
+      "AI that answers your customers automatically",
+      "Not included",
+      "Not included",
+      "Included",
+      "Included",
+      "KEY DIFFERENTIATOR between Core and Build. The chatbot draws from the knowledge base."
+    ],
+    [
+      "AI - CHATBOT",
+      "Chatbot channels",
+      "Where the AI chatbot talks to your customers",
+      "None",
+      "None",
+      "Web chat, Instagram DMs, Facebook DMs, WhatsApp messaging",
+      "All 4 text channels plus voice on web chat and WhatsApp calls",
+      "Build: 4 text channels. Scale: same 4 text channels plus the two voice channels. See Voice AI section below."
+    ],
+    [
+      "AI - CHATBOT",
+      "Chatbot responses included per month",
+      "How many customer messages the AI can answer",
+      "None",
+      "None",
+      "1,000 responses\n(shared across all 4 channels)",
+      "Unlimited\n(fair use)",
+      "Each AI reply to a customer = 1 response. A back-and-forth exchange of 5 messages = 5 responses. Shared pool across all active channels."
+    ],
+    [
+      "AI - CHATBOT",
+      "Additional chatbot responses",
+      "What happens when the monthly allowance runs out",
+      "N/A",
+      "N/A",
+      "Charged at $0.028 per response\n(client overage preference applies)",
+      "Included in fair use",
+      "Build: client chooses hard stop or pay-as-you-go at signup. Hard stop = bot goes quiet until next month. Pay-as-you-go = bot keeps running, overage billed."
+    ],
+    [
+      "AI - CHATBOT",
+      "What the chatbot does",
+      "The tasks the AI handles automatically",
+      "N/A",
+      "N/A",
+      "Answers FAQs, captures contact info, books appointments, hands off to a human",
+      "Same as Build, plus voice conversations",
+      null
+    ],
+    [
+      "AI - VOICE",
+      "Voice AI on web chat",
+      "Customers can speak with the AI on your website",
+      "Not included",
+      "Not included",
+      "Not included",
+      "SCALE EXCLUSIVE\nVoice AI active on the web chat widget",
+      "KEY SCALE FEATURE. The same knowledge base that drives the text chatbot also powers the voice agent on the web chat widget. Visitors click a button and speak with the AI instead of typing. Uses Voice AI minutes (unlimited on Scale)."
+    ],
+    [
+      "AI - VOICE",
+      "Voice AI on WhatsApp calls",
+      "AI answers voice calls made through WhatsApp",
+      "Not included",
+      "Not included",
+      "Not included",
+      "SCALE EXCLUSIVE\nVoice AI active on WhatsApp calls",
+      "KEY SCALE FEATURE. When a customer makes a WhatsApp voice call, the AI agent answers, holds a conversation and can book appointments or capture information. Confirmed working. Uses Voice AI minutes (unlimited on Scale)."
+    ],
+    [
+      "AI - VOICE",
+      "Voice AI minutes included per month",
+      "How long the voice AI can speak each month",
+      "None",
+      "None",
+      "None",
+      "Unlimited\n(fair use)",
+      "Voice AI minutes cover both the web chat widget voice sessions and WhatsApp voice calls. Phone line Voice AI is a future addition pending Jamaica phone route confirmation."
+    ],
+    [
+      "AI - VOICE",
+      "Phone line Voice AI",
+      "AI answers your business phone line automatically",
+      "Not included",
+      "Not included",
+      "Not included",
+      "Coming soon - pending Jamaica phone route",
+      "Internal note: standard Twilio/LC Phone does not cover Jamaica. This feature will be added to Scale once a compatible phone route is confirmed. Do not advertise until confirmed."
+    ],
+    [
+      "CHANNELS",
+      "WhatsApp business channel",
+      "Message customers where they already are",
+      "Optional add-on\n$19/month",
+      "Included",
+      "Included",
+      "Included",
+      "WhatsApp connection fee ($10/month) is absorbed into Core, Build and Scale. On Essentials the client opts in at $19/month. WhatsApp message costs are charged separately at usage rates on all plans."
+    ],
+    [
+      "CHANNELS",
+      "SMS and voice calling",
+      "Text and call from the platform",
+      "Add-on\n(usage rates)",
+      "Add-on\n(usage rates)",
+      "Add-on\n(usage rates)",
+      "Add-on\n(usage rates)",
+      "Requires a compatible phone number. Jamaica rates to be confirmed. Charged on actual usage with 40% markup."
+    ],
+    [
+      "USAGE",
+      "Email sending",
+      "Cost of sending emails to contacts",
+      "Charged on use",
+      "Charged on use",
+      "Charged on use",
+      "Charged on use",
+      "$0.95 per 1,000 emails (at 40% markup). Applies on all plans. No monthly email cap."
+    ],
+    [
+      "USAGE",
+      "WhatsApp messages",
+      "Cost of WhatsApp messages sent to customers",
+      "Charged on use",
+      "Charged on use",
+      "Charged on use",
+      "Charged on use",
+      "First 1,000 service messages per number per month free. Marketing and utility messages charged per message at usage rates. Jamaica falls under Rest of Latin America rate bucket (to be confirmed in-app)."
+    ],
+    [
+      "USAGE",
+      "Overage preference",
+      "What happens when monthly AI allowances run out",
+      "N/A",
+      "N/A",
+      "Client chooses at signup:\nHard stop or Pay-as-you-go",
+      "Unlimited - no overage",
+      "Build clients choose their overage handling at signup. Hard stop = AI pauses. Pay-as-you-go = AI continues, overage billed at $0.028/response. Scale has no response cap."
+    ],
+    [
+      "SUPPORT",
+      "Basic support",
+      "Everyday help with the platform",
+      "Included\n(1 hr/month, fair use)",
+      "Included\n(1 hr/month, fair use)",
+      "Included\n(1 hr/month, fair use)",
+      "Included\n(1 hr/month, fair use)",
+      "Internal: 30 min of that hour is an internal quality check. Do not advertise the split."
+    ],
+    [
+      "SUPPORT",
+      "Extra support blocks",
+      "Additional hands-on time when you need it",
+      "$250 for 5 hours",
+      "$250 for 5 hours",
+      "$250 for 5 hours",
+      "$250 for 5 hours",
+      "90-day expiry. No rollover. Exact in-scope/out-of-scope terms to be defined."
+    ],
+    [
+      "SUPPORT",
+      "Automation pack installed at signup",
+      "Pre-built workflows ready on day one",
+      "Tier 1 pack",
+      "Tier 2 pack",
+      "Tier 3 pack",
+      "Tier 4 pack",
+      "Internal: snapshots to be built from the C1 workflow audit. Attach to each plan in the SaaS configurator once ready."
+    ]
+  ],
+  "Developer Notes": [
+    [
+      "AyudaGrow Pricing and Features Matrix",
+      null,
+      null,
+      null
+    ],
+    [
+      "Notes and guidance for the website development team. These are not client-facing.",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Topic",
+      "Note",
+      "Status",
+      "Action required"
+    ],
+    [
+      "Plan names",
+      "Use Essentials, Core, Build and Scale only. Never use AI Starter, AI Growth or AI Unlimited - these are the wholesale provider plan names and must not appear on any client-facing page.",
+      "Confirmed",
+      "Replace any old plan names in existing copy"
+    ],
+    [
+      "Voice AI - Scale key feature 1",
+      "Voice AI on web chat widget: visitors to the client website can click a button and speak with the AI agent verbally. The same knowledge base that drives the text chatbot also powers the voice agent. This is a Scale-exclusive feature and should be called out prominently on the pricing page.",
+      "Confirmed by user testing",
+      "Prominent callout on Scale card and feature comparison"
+    ],
+    [
+      "Voice AI - Scale key feature 2",
+      "Voice AI on WhatsApp calls: when a customer makes a WhatsApp voice call to the client business, the AI agent answers and holds a natural voice conversation. This is a Scale-exclusive feature. Confirmed working by the account holder.",
+      "Confirmed by user testing",
+      "Prominent callout on Scale card and feature comparison"
+    ],
+    [
+      "Phone line Voice AI",
+      "Standard phone line Voice AI is not available for Jamaica accounts yet due to phone route limitations. This will be added to Scale once a compatible route is confirmed. Do NOT advertise phone line Voice AI until instructed.",
+      "Blocked - pending phone route",
+      "Add to Scale only once confirmed. Remove Coming Soon note at that point."
+    ],
+    [
+      "Reviews AI",
+      "Reviews AI automatically drafts responses to Google and Facebook reviews. This is a Build and Scale feature and is a strong local selling point for Jamaican SMEs. Recommend a prominent callout on the Build card - it is a key reason to upgrade from Core.",
+      "Confirmed feature",
+      "Prominent callout on Build and Scale. Suggest a demo GIF or screenshot."
+    ],
+    [
+      "Chatbot responses - shared pool",
+      "On Build, 1,000 chatbot responses per month are shared across all four channels (web chat, Instagram DMs, Facebook DMs, WhatsApp text). One AI reply = one response. This should be noted in the pricing page FAQ or tooltip, not hidden.",
+      "Confirmed",
+      "Add tooltip or FAQ note on Build plan card"
+    ],
+    [
+      "Overage preference",
+      "Build clients choose at signup: Hard stop (AI pauses when 1,000 responses are used) or Pay-as-you-go (AI continues, extra responses charged at $0.028 each). This choice is captured in the onboarding form and applied to the account. Website should not need to explain this in detail - it is handled at signup.",
+      "Confirmed",
+      "Onboarding form to include this question - separate briefing to follow"
+    ],
+    [
+      "WhatsApp on Essentials",
+      "WhatsApp is an optional paid add-on on Essentials at $19/month. It is included in Core, Build and Scale. The pricing page should show it as an add-on tile on the Essentials card, not as a crossed-out feature.",
+      "Confirmed",
+      "Show as optional add-on on Essentials, not as unavailable"
+    ],
+    [
+      "Essentials trial",
+      "Essentials has a 7-day free trial. A card must be on file to start the trial. No guided setup hours are provided during the trial - the client uses the Start Here page and video library. Conversion is automatic to $99/month unless cancelled.",
+      "Confirmed",
+      "Show trial badge on Essentials card only"
+    ],
+    [
+      "Annual pricing",
+      "Annual pricing is 10 months for 12 (equivalent to 2 months free). Show annual/monthly toggle on pricing page. Annual prices: $990, $1,490, $2,490, $3,490.",
+      "Confirmed",
+      "Add annual/monthly toggle to pricing page"
+    ],
+    [
+      "Currency",
+      "All prices are in USD. Show an indicative JMD figure where helpful, but state clearly that USD is the billed currency.",
+      "Decision pending",
+      "Confirm JMD display approach with account holder before launch"
+    ],
+    [
+      "Snapshots",
+      "Each plan installs a pre-built automation pack (Tier 1 through Tier 4) at signup. The packs are not yet built. The website can reference them as included automation packs. Do not list specific workflow names until the packs are finalized.",
+      "Build pending",
+      "Update feature copy once Tier 1-4 packs are built and named"
+    ],
+    [
+      "AI spending limits",
+      "Each sub-account has an AI spending limit and block behaviour that must be set before any client signs up. This is an internal setup task, not a client-facing feature. Essentials accounts must have paid AI tools (Ask AI, AI Studio, Content AI) blocked.",
+      "Setup pending",
+      "Internal task - not for website"
+    ],
+    [
+      "Managed agent runs",
+      "Build includes 100 managed AI agent runs per month. Scale includes 1,000. These are not yet explained in client-facing copy. Recommend leaving off the main pricing page until a plain-English explanation is ready.",
+      "Decision pending",
+      "Hold for now. Add to Build/Scale copy when ready."
+    ],
+    [
+      "Team AI toolkit wording",
+      "2x and 5x usage for the team AI toolkit on Build and Scale need plain-English copy before the pricing page goes live. Current wording is internal. Hold the AI toolkit row until copy is approved.",
+      "Copy pending",
+      "Draft plain-English copy for 2x and 5x before launch"
+    ],
+    [
+      "Support block terms",
+      "The $250 / 5-hour support block has agreed price and size. Expiry (90 days), no rollover, and in-scope/out-of-scope terms are still to be formally defined.",
+      "Partially confirmed",
+      "Define full support block terms before publishing on pricing page"
+    ]
+  ]
+}

@@ -43,7 +43,7 @@
     const t=document.createElement('template');t.innerHTML=previousHome();const f=t.content;
     const hero=f.querySelector('.hero');hero.classList.add('ag-sales-hero');
     const copy=hero.querySelector('.wrap>div:first-child');
-    copy.innerHTML=`<span class="eyebrow">Connect. Automate. Grow.</span><h1>Stop leaving money <em>on the table.</em></h1><p>Turn more enquiries into customers. Keep follow-ups moving. Give existing customers a reason to return.</p><div class="actions"><a class="button" href="/pricing">Find your plan <span aria-hidden="true">&#8594;</span></a><a class="textlink" href="/contact?intent=demo">Discuss a demo <span aria-hidden="true">&#8594;</span></a></div><p class="hero-note">Plans from US$99/month. Try Essentials free for 7 days.</p>`;
+    copy.innerHTML=`<span class="eyebrow">Connect. Automate. Grow.</span><h1>Stop leaving money <em>on the table.</em></h1><p>Turn more enquiries into customers. Keep follow-ups moving. Give existing customers a reason to return.</p><div class="actions"><a class="button" href="/pricing">Find your plan <span aria-hidden="true">&#8594;</span></a><a class="textlink" href="/pricing?intent=demo">Discuss a demo <span aria-hidden="true">&#8594;</span></a></div><p class="hero-note">Plans from US$99/month. Try Essentials free for 7 days.</p>`;
     const iconKeys=['people','sales','marketing','inbox',null,'social','calendar','flow','web','star','payment','chart'];
     hero.querySelectorAll('.ag-piece').forEach((p,i)=>{const old=p.querySelector('.ag-piece-icon');if(old)old.outerHTML=art(iconKeys[i]);});
     const who=f.querySelector('.ag-who');

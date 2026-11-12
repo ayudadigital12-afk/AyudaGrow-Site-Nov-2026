@@ -37,8 +37,8 @@ const redirects=local('_redirects').toString().trim().split('\n').map(l=>l.trim(
 for(const [from,to] of redirects){const r=await get(from);assert.equal(r.status,301,from);const target=new URL(r.headers.get('location'),origin);assert.equal(target.origin,origin);assert.equal(target.pathname,to);}
 console.log('PASS: '+redirects.length+' legacy URL forms redirect to clean staging destinations.');
 const missing=await get('/release-check-page-that-does-not-exist');assert.equal(missing.status,404);
-for(const path of ['/source/shell.html','/package.json','/.git/config','/.htaccess']){const r=await get(path,'HEAD');assert([403,404].includes(r.status),'Source protection: '+path+' '+r.status);}
+for(const path of ['/source/shell.html','/package.json','/.git/config','/.htaccess','/docs/pricing-matrix-20261112.json','/docs/PRICING-SOURCE.md']){const r=await get(path,'HEAD');assert([403,404].includes(r.status),'Source protection: '+path+' '+r.status);}
 const robots=await get('/robots.txt');assert.equal(robots.status,200);assert.match(await robots.text(),/Disallow:\s*\//);
 const sitemap=await get('/sitemap.xml');assert.equal(sitemap.status,200);assert(!/<loc>/.test(await sitemap.text()));
-console.log('PASS: genuine 404, four protected source/config paths, robots crawl block and empty staging sitemap.');
+console.log('PASS: genuine 404, six protected source/config paths including private pricing notes, robots crawl block and empty staging sitemap.');
 console.log('Staging verification complete. Production and DNS were not accessed.');
