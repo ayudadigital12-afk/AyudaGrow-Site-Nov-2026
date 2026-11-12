@@ -47,6 +47,9 @@ try{
     assert.equal(await evaluate('document.querySelector("[data-group-toggle]").getAttribute("aria-expanded")'),'false');
     data.pricing.navigation=await evaluate('(()=>{const visible=s=>{const e=document.querySelector(s);return !!e&&getComputedStyle(e).display!=="none"&&e.getClientRects().length>0;};return {logo:document.querySelector("header .logo").getAttribute("href"),footer:visible("body>footer"),nav:visible("#nav"),menu:visible("#menu"),privacy:document.querySelector("footer a[href$=privacy]")?.getAttribute("href"),headerLinks:document.querySelectorAll("header a[href]").length,footerLinks:document.querySelectorAll("footer a[href]").length}})()');
     assert.equal(data.pricing.navigation.logo,'/');assert(data.pricing.navigation.footer);assert.equal(data.pricing.navigation.privacy,'/privacy');
+    const navButton=await evaluate('(()=>{const a=document.querySelector("header nav a.button"),s=getComputedStyle(a);return {text:a.textContent,color:s.color,background:s.backgroundColor};})()');
+    assert.match(navButton.text,/View plans/);assert.notEqual(navButton.color,navButton.background,'Active navigation button remains readable');
+    data.pricing.navigation.buttonContrast=navButton;
     assert(data.pricing.navigation.headerLinks>=8);assert(data.pricing.navigation.footerLinks>=20);
     if(test.width<600){
       assert(data.pricing.navigation.menu);await evaluate('document.querySelector("#menu").click()');
