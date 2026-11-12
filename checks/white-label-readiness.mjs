@@ -78,7 +78,7 @@ function inspect(d,path,canonical,{error=false}={}){
   assert.equal(d.querySelectorAll('h1').length,1,label+' one h1');assert(d.querySelector('main h1'),label+' h1 is in main');
   assert(d.querySelector('main').textContent.trim().length>40);
   assert.equal(d.querySelectorAll('form,object,embed,[action],[formaction],input[type="password"],input[autocomplete^="cc-"]').length,0,label+' no native submission or card fields');
-  const frames=[...d.querySelectorAll('iframe')];assert.equal(frames.length,canonical.startsWith('/signup/')?1:0);frames.forEach(f=>assert(approvedFormAssets.has(f.src),'Only the four approved signup forms may be embedded'));
+  const frames=[...d.querySelectorAll('iframe')];assert.equal(frames.length,canonical?.startsWith('/signup/')?1:0);frames.forEach(f=>assert(approvedFormAssets.has(f.src),'Only the four approved signup forms may be embedded'));
   assert.equal(d.querySelectorAll('meta[name="robots"]').length,1);assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
   if(error){assert.equal(d.querySelectorAll('link[rel="canonical"]').length,0);}
   else{
@@ -162,7 +162,7 @@ for(const page of manifest.pages){
     }finally{staticDom.window.close();hydrated?.window.close();}
   });
 }
-check('unique metadata',()=>{assert.equal(new Set(manifest.pages.map(p=>p.title)).size,33);assert.equal(new Set(manifest.pages.map(p=>p.description)).size,33);});
+check('unique metadata',()=>{assert.equal(new Set(manifest.pages.map(p=>p.title)).size,37);assert.equal(new Set(manifest.pages.map(p=>p.description)).size,37);});
 for(const [from,to] of Object.entries(aliases))check('alias '+from,()=>{
   const html=read('dist/'+from+'/index.html'),dom=new JSDOM(html,{url:origin+'/'+from});
   let live;
@@ -213,8 +213,8 @@ try{
   check('header motion button removed',()=>assert.equal(button,null));
   // Match the deterministic reduced-motion SSR snapshot while traversing routes.
   live.setReduced(true);
-  // Navigate every route through the actual delegated anchor click handler, not a renderer call.
-  for(const path of expected.filter(p=>p!=='/')){
+  // Signup routes deliberately use full document navigation, covered by browser-signup-review.
+  for(const path of expected.filter(p=>p!=='/'&&!p.startsWith('/signup/'))){
     const anchor=w.document.createElement('a');anchor.href=path;anchor.textContent='Regression navigation';w.document.body.append(anchor);anchor.click();anchor.remove();await wait();
     check(path+' SPA',()=>{assert.equal(w.location.pathname,path);inspect(w.document,path,path);assert.equal(textMain(w.document),staticText.get(path),'SPA content drift');assert.equal(w.document.querySelector('#motion'),button);assert(w.document.body.classList.contains('paused'));});
   }
