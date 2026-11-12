@@ -21,10 +21,10 @@ try{
   for(const width of [1440,390]){
    await command('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<600});
    await visit('http://127.0.0.1:4173/signup/'+plan);
-   for(let i=0;i<80;i++){if(await evaluate('!!document.querySelector("iframe[data-iframe-resizer-initialized]")'))break;await delay(250);}
+   for(let i=0;i<120;i++){if(await evaluate('(()=>{const f=document.querySelector("iframe[data-iframe-resizer-initialized]");return !!f&&getComputedStyle(f).visibility!=="hidden"&&f.getBoundingClientRect().height>100})()'))break;await delay(250);}
    await evaluate('document.fonts.ready.then(()=>true)');
    const data=await evaluate(`(()=>{const f=document.querySelector('iframe'),r=f.getBoundingClientRect(),s=document.querySelector('.ag-purchase-summary').getBoundingClientRect(),c=document.querySelector('.ag-purchase-form-card').getBoundingClientRect();return {title:document.title,bodyWidth:document.documentElement.scrollWidth,viewport:innerWidth,src:f.src,frameHeight:r.height,frameWidth:r.width,frameVisible:getComputedStyle(f).visibility!=='hidden'&&r.height>100,initialized:f.getAttribute('data-iframe-resizer-initialized'),loaderCount:document.querySelectorAll('script[src^="https://grow.ayudagrow.com/js/form_embed.js"]').length,columns:s.right<=c.left+1,stacked:s.bottom<=c.top+1,h1:document.querySelector('h1').textContent}})()`);
-   assert(data.bodyWidth<=width+1,plan+' page overflow');assert(data.frameVisible);assert(data.src.includes(id));assert.equal(data.loaderCount,1);assert(width<600?data.stacked:data.columns);
+   assert(data.bodyWidth<=width+1,plan+' page overflow');assert(data.src.includes(id));assert.equal(data.loaderCount,1);assert(width<600?data.stacked:data.columns);
    const metrics=await command('Page.getLayoutMetrics');const shot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.min(metrics.cssContentSize.height,2200),scale:1}});writeFileSync(`qa/signup-${plan}-${width}.png`,Buffer.from(shot.data,'base64'));results.push({plan,width,...data});
   }
  }
@@ -42,6 +42,7 @@ try{
   const shot=await command('Page.captureScreenshot',{format:'png'});writeFileSync('qa/stripe-'+plan+'.png',Buffer.from(shot.data,'base64'));
  }
  console.log(JSON.stringify({results,external},null,2));
+ for(const r of results){assert(r.frameVisible,r.plan+' visible form at '+r.width);assert.equal(r.initialized,'true',r.plan+' embed initialised');}
 }finally{
  writeFileSync('qa/signup-browser-results.json',JSON.stringify({results,external},null,2));sock?.close();chrome.kill();server.kill();
 }
