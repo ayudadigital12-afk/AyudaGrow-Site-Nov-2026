@@ -32,12 +32,12 @@ try{
   }
   if(test.path==='/pricing'){
     const initialMetrics=await command('Page.getLayoutMetrics');const initialShot=await command('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width:test.width,height:Math.min(initialMetrics.cssContentSize.height,11000),scale:1}});writeFileSync(root+'/qa/'+test.name+'-initial.png',Buffer.from(initialShot.data,'base64'));
-    data.pricing=await evaluate('(()=>{const initialGroups=[...document.querySelectorAll("[data-feature-group]")].map(g=>g.querySelectorAll("[data-feature-id]:not([hidden])").length);const exits=[...document.querySelectorAll("main a[href]")].filter(a=>{const u=new URL(a.href);return a.getClientRects().length&&!a.href.startsWith("mailto:")&&!(u.origin===location.origin&&u.pathname===location.pathname&&u.hash);});const cells=[...document.querySelectorAll(".plan-table td")].filter(n=>n.getClientRects().length);return {initialGroups,exits:exits.map(a=>a.href),cellPadding:parseFloat(getComputedStyle(cells[0]).paddingTop)}})()');
+    data.pricing=await evaluate('(()=>{const initialGroups=[...document.querySelectorAll("[data-feature-group]")].map(g=>g.querySelectorAll("[data-feature-id]:not([hidden])").length);const exits=[...document.querySelectorAll("main a[href]")].filter(a=>{const u=new URL(a.href);return a.getClientRects().length&&!a.href.startsWith("mailto:")&&!u.pathname.startsWith("/signup/")&&!(u.origin===location.origin&&u.pathname===location.pathname&&u.hash);});const cells=[...document.querySelectorAll(".plan-table td")].filter(n=>n.getClientRects().length);return {initialGroups,exits:exits.map(a=>a.href),cellPadding:parseFloat(getComputedStyle(cells[0]).paddingTop)}})()');
     assert(data.pricing.initialGroups.every(n=>n<=4));assert.equal(data.pricing.exits.length,0);assert(data.pricing.cellPadding<=8);
     await evaluate('document.querySelector("[data-billing=annual]").click();document.querySelector("[data-select-plan=build]").click()');
     const annual=await evaluate('({prices:[...document.querySelectorAll(".plan-price strong")].map(n=>n.textContent),email:decodeURIComponent(document.querySelector("[data-signup-email]").href),path:location.pathname})');
     assert.deepEqual(annual.prices,['US$990','US$1,490','US$2,490','US$3,490']);assert(annual.email.includes('Build (annual)'));assert.equal(annual.path,'/pricing');
-    await evaluate('document.querySelector("[data-select-trial]").click()');
+    assert.equal(await evaluate('document.querySelector("[data-select-trial]").getAttribute("href")'),'/signup/essentials?intent=trial');await evaluate('document.querySelector("[data-billing=monthly]").click()');
     assert.equal(await evaluate('document.querySelector("[data-billing=monthly]").getAttribute("aria-pressed")'),'true');
     await evaluate('document.querySelector("[data-select-demo]").click()');
     assert((await evaluate('decodeURIComponent(document.querySelector("[data-signup-email]").href)')).includes('demo request'));
@@ -68,8 +68,8 @@ try{
     for(let attempt=0;attempt<100;attempt++){if(await evaluate('location.pathname==="/pricing" && document.readyState==="complete" && !!document.querySelector("[data-select-plan=build]")'))break;await delay(100);}
     assert.equal(await evaluate('location.pathname'),'/pricing');
     assert.equal(await evaluate('document.querySelectorAll("main h1").length'),1);
-    await evaluate('document.querySelector("[data-select-plan=build]").click();document.activeElement?.blur()');
-    const remaining=await evaluate('[...document.querySelectorAll("main a[href]")].filter(a=>a.getClientRects().length&&!a.href.startsWith("mailto:")).map(a=>a.href)');assert.deepEqual(remaining,[]);
+    assert.equal(await evaluate('document.querySelector("[data-select-plan=build]").getAttribute("href")'),'/signup/build');await evaluate('document.activeElement?.blur()');
+    const remaining=await evaluate('[...document.querySelectorAll("main a[href]")].filter(a=>a.getClientRects().length&&!a.href.startsWith("mailto:")&&!new URL(a.href).pathname.startsWith("/signup/")).map(a=>a.href)');assert.deepEqual(remaining,[]);
     data.pricing.annualSignup=true;data.pricing.trial=true;data.pricing.demo=true;data.pricing.keyboard=true;data.pricing.footerPrivacy=true;
   }
 

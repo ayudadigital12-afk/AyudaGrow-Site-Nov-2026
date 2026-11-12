@@ -8,7 +8,7 @@ const origin=manifest.origin;
 const routes=new Set(manifest.pages.map(p=>p.path));
 const titles=new Set(),descriptions=new Set();
 assert.equal(manifest.mode,'private-preview');assert.equal(manifest.publicLaunchApproved,false);
-assert.equal(manifest.pages.length,33);
+assert.equal(manifest.pages.length,37);
 let linkCount=0;
 for(const page of manifest.pages){
   const html=read(page.path==='/'?'dist/index.html':'dist'+page.path+'/index.html');
@@ -37,11 +37,12 @@ for(const page of manifest.pages){
   for(const asset of d.querySelectorAll('script[src],link[rel="stylesheet"],img[src],image[href]')){
     const url=new URL(asset.getAttribute('src')||asset.getAttribute('href'),d.baseURI);
     if(asset.tagName==='SCRIPT'&&url.href==='https://widgets.leadconnectorhq.com/loader.js'){assert.equal(asset.dataset.widgetId,'6adbe6959f0ad5b6ad0a7a22');continue;}
+    if(asset.tagName==='SCRIPT'&&url.href==='https://grow.ayudagrow.com/js/form_embed.js'){assert(page.path.startsWith('/signup/'));continue;}
     assert.equal(url.origin,origin);assert(existsSync(new URL('../dist'+url.pathname,import.meta.url)),page.path+' asset '+url.pathname);
   }
   dom.window.close();
 }
-assert.equal(titles.size,33);assert.equal(descriptions.size,33);
+assert.equal(titles.size,37);assert.equal(descriptions.size,37);
 assert.match(read('dist/robots.txt'),/User-agent: \*\nDisallow: \/\n/);
 assert(!read('dist/sitemap.xml').includes('<loc>'));
 assert.match(read('dist/_headers'),/X-Robots-Tag: noindex, nofollow/);

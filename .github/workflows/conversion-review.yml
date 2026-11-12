@@ -1,7 +1,7 @@
 name: Conversion review
 on:
   push:
-    branches: [codex/homepage-four-tier-draft-20261112, codex/restore-pricing-navigation-20261112]
+    branches: [codex/homepage-four-tier-draft-20261112, codex/restore-pricing-navigation-20261112, codex/plan-signup-pages-20261112]
 permissions:
   contents: read
 jobs:
@@ -27,6 +27,9 @@ jobs:
       - run: node --import ./scripts/offline-guard.mjs scripts/verify-conversion.mjs
       - run: node --import ./scripts/offline-guard.mjs checks/conversion-review.mjs
       - run: node checks/browser-conversion-review.mjs
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+      - run: node checks/browser-signup-review.mjs
         env:
           CHROME_BIN: /usr/bin/google-chrome
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

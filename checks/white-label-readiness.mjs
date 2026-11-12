@@ -42,11 +42,12 @@ for(const fixture of ['GHL','GoHighLevel','Go&#72;ighLevel','Go%48ighLevel','Go\
 }
 clean(decoded('Illustrative conversations. Customer reviews. SIL OPEN FONT LICENSE.'),'allowed fixture');
 const manifest=JSON.parse(read('dist/route-manifest.json')),origin=manifest.origin;
-const expected=['/','/platform','/solutions','/inbox','/ai','/crm','/appointments','/consultative-sales','/use-cases','/lead-capture','/follow-up','/reactivation','/automation','/reporting','/reputation','/integrations','/marketing','/commerce','/learning','/support','/pricing','/privacy','/get-started','/contact','/growth-assessment','/learn','/solutions/book-more-appointments','/solutions/convert-more-leads','/solutions/generate-more-reviews','/solutions/improve-customer-communication','/solutions/improve-sales-follow-up','/solutions/manage-sales-opportunities','/solutions/reactivate-customers'];
+const expected=['/signup/essentials','/signup/core','/signup/build','/signup/scale','/','/platform','/solutions','/inbox','/ai','/crm','/appointments','/consultative-sales','/use-cases','/lead-capture','/follow-up','/reactivation','/automation','/reporting','/reputation','/integrations','/marketing','/commerce','/learning','/support','/pricing','/privacy','/get-started','/contact','/growth-assessment','/learn','/solutions/book-more-appointments','/solutions/convert-more-leads','/solutions/generate-more-reviews','/solutions/improve-customer-communication','/solutions/improve-sales-follow-up','/solutions/manage-sales-opportunities','/solutions/reactivate-customers'];
 const aliases={'platform/unified-conversations':'inbox','platform/follow-up-automation':'follow-up','platform/customer-reactivation':'reactivation','platform/crm-sales-pipeline':'crm','platform/lead-capture':'lead-capture','platform/appointments':'appointments','platform/reputation-reviews':'reputation','platform/reporting-forecasting':'reporting','who-its-for':'use-cases','who-its-for/b2b':'consultative-sales','who-its-for/b2c':'appointments','how-it-works':'support','free-trial':'get-started'};
+const approvedFormAssets=new Set(['https://grow.ayudagrow.com/js/form_embed.js',...['CkmLMXN55hD2X9hCfO4j','65wBICRDMlJ7RTZPK3dG','XidHogjcgDQ48zVVZKSz','abrMomyu1JJgrxPvWYLh'].map(id=>'https://grow.ayudagrow.com/widget/form/'+id)]);
 const routes=new Set(expected),approvedContacts=new Set(['mailto:admin@ayudagrow.com','tel:+18764800413']);
 check('manifest',()=>{
-  assert.equal(origin,'https://ayudagrow.com');assert.equal(manifest.pages.length,33);
+  assert.equal(origin,'https://ayudagrow.com');assert.equal(manifest.pages.length,37);
   assert.deepEqual(manifest.pages.map(p=>p.path).sort(),[...expected].sort());
   assert.equal(manifest.mode,'private-preview');assert.equal(manifest.publicLaunchApproved,false);
   assert.equal(manifest.indexing,'noindex,nofollow');
@@ -67,7 +68,7 @@ const expectedHtml=[...expected.map(p=>pageFile(p).slice(5)),...Object.keys(alia
 check('exact generated HTML inventory',()=>assert.deepEqual(files.filter(p=>extname(p)==='.html').map(p=>relative(dist,p)).sort(),expectedHtml));
 function asset(ref,base){
   if(ref.startsWith('data:')){assert(/^data:image\//i.test(ref),'Only image data URLs are expected');return;}
-  const url=new URL(ref,base);if(url.href==='https://widgets.leadconnectorhq.com/loader.js')return;assert.equal(url.origin,origin,'Unexpected remote asset '+url.href);
+  const url=new URL(ref,base);if(url.href==='https://widgets.leadconnectorhq.com/loader.js'||approvedFormAssets.has(url.href))return;assert.equal(url.origin,origin,'Unexpected remote asset '+url.href);
   const file=resolve(dist,'.'+decodeURIComponent(url.pathname));
   assert(file.startsWith(dist+sep),'Asset escapes dist');assert(existsSync(file)&&statSync(file).isFile(),'Missing asset '+url.pathname);
 }
@@ -76,7 +77,8 @@ function inspect(d,path,canonical,{error=false}={}){
   clean(decoded(d.documentElement.outerHTML),label+' HTML');clean(decoded(d.body.textContent),label+' decoded text');
   assert.equal(d.querySelectorAll('h1').length,1,label+' one h1');assert(d.querySelector('main h1'),label+' h1 is in main');
   assert(d.querySelector('main').textContent.trim().length>40);
-  assert.equal(d.querySelectorAll('form,iframe,object,embed,[action],[formaction],input[type="password"],input[autocomplete^="cc-"]').length,0,label+' no submission/checkout surfaces');
+  assert.equal(d.querySelectorAll('form,object,embed,[action],[formaction],input[type="password"],input[autocomplete^="cc-"]').length,0,label+' no native submission or card fields');
+  const frames=[...d.querySelectorAll('iframe')];assert.equal(frames.length,canonical.startsWith('/signup/')?1:0);frames.forEach(f=>assert(approvedFormAssets.has(f.src),'Only the four approved signup forms may be embedded'));
   assert.equal(d.querySelectorAll('meta[name="robots"]').length,1);assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
   if(error){assert.equal(d.querySelectorAll('link[rel="canonical"]').length,0);}
   else{
@@ -103,7 +105,7 @@ function inspect(d,path,canonical,{error=false}={}){
       if(url.origin===origin){
         assert(routes.has(url.pathname)||(error&&url.hash==='#main'),'Unknown internal route '+raw);
         if(url.hash&&url.pathname===canonical)assert(d.getElementById(decodeURIComponent(url.hash.slice(1))),'Missing fragment '+raw);
-      }else assert.equal(url.hostname,'support.google.com','Unapproved outbound destination '+url.href);
+      }else assert(url.hostname==='support.google.com'||approvedFormAssets.has(url.href),'Unapproved outbound destination '+url.href);
     }
   }
   for(const el of d.querySelectorAll('[src],[poster],link[href],image[href],use[href],image[xlink\\:href],use[xlink\\:href]')){

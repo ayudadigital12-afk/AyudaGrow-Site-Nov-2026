@@ -643,10 +643,10 @@ window.AyudaPlans = {
     }
   ],
   "checkoutUrls": {
-    "essentials": null,
-    "core": null,
-    "build": null,
-    "scale": null
+    "essentials": "/signup/essentials",
+    "core": "/signup/core",
+    "build": "/signup/build",
+    "scale": "/signup/scale"
   },
   "annualCheckoutUrls": {
     "essentials": null,
@@ -654,7 +654,7 @@ window.AyudaPlans = {
     "build": null,
     "scale": null
   },
-  "trialUrl": null,
+  "trialUrl": "/signup/essentials?intent=trial",
   "demoUrl": null
 };
 

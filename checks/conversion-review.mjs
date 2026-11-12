@@ -27,4 +27,4 @@ const pricing=new JSDOM(read('dist/pricing/index.html')).window.document;
 assert.match(pricing.title,/US\$99/);assert.match(pricing.querySelector('meta[name="description"]').content,/US\$99/);
 assert(!/GoHighLevel|HighLevel|LeadConnector|supplier cost|14-day|21-day/.test(pricing.querySelector('main').textContent));
 assert.equal(pricing.querySelectorAll('form,input,iframe').length,0);
-console.log('PASS: 33 noindex routes with Pricing navigation and chatbot; homepage interactions and retained sections; current pricing metadata and no supplier disclosures.');
+console.log('PASS: 37 noindex routes with Pricing navigation and chatbot; homepage interactions and retained sections; current pricing metadata and no supplier disclosures.');
