@@ -28,3 +28,5 @@ The supplied forms collect contact information. Account creation can require fur
 ## Staging and rollback
 
 Keep noindex/nofollow, robots disallow and the empty staging sitemap. Root Apache changes are restricted to four route mappings and their clean-URL normalisation. Preserve source/config protection and actual 404 behavior. Release only the tested build artifact. If needed, restore the source, generated dist and root routing files from baseline commit 9831f906 using a new revert commit; do not force-reset shared history or alter DNS.
+
+Post-deployment verification found that clean routes and slash/index redirects worked, while direct `/dist/<route>` directory aliases returned duplicate HTML. The existing THE_REQUEST-based rule was retained and supplemented with explicit directory-only aliases for canonical routes. These cannot match the internal `dist/<route>/index.html` targets. Recheck deployed routing and source protection after this hosting-rule correction.
