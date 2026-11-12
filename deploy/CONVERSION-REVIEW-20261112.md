@@ -28,15 +28,23 @@ Source of truth: AyudaGrow_Pricing_and_Tier_Breakout_2026-11-11 claude.xlsx, Pla
 
 ## Verification
 
-Passed: offline build of 33 canonical routes, 13 alias fallbacks and a 404; conversion-review (all routes, Pricing navigation, noindex, chatbot, 12 puzzle interactions, 3 problem selectors, keyboard, 5 Growth Loop stages, 34 app logos, 4 plan destinations, primary-sheet allowances and counts, metadata); existing puzzle, carousel, navigation, four-tier pricing and technical checks.
+Full release checks passed on GitHub run 43158999222, source commit 5c9604c3fb0e6f500f1dc9412cebbbc7f07775a9:
 
-The broader run found two outdated test expectations: legacy homepage portraits and a 200-character minimum on the deliberately short Get started route. Assertions were revised for the new design. Reverification of these changes is pending.
+- Offline build: 33 canonical pages, 13 alias fallbacks and a 404.
+- Eight regression suites: homepage, carousel, navigation, pricing, contact/privacy, search readiness, technical readiness, white-label readiness.
+- Conversion review: all routes, plan names/prices/entitlements, plan-specific enquiries, twelve puzzle pieces, three selectors with keyboard, five Growth Loop stages and 34 app logos.
+- Real Chrome: homepage at 1366x768 and 390x844; pricing at 1440x900 and 390x844; Build enquiry at 1366x768. No runtime errors, no horizontal page overflow, no broken images including all lazy-loaded assets. Desktop pricing usage panels align. The puzzle description ends at 732px within the 768px viewport.
+- Desktop and mobile screenshots reviewed. Further tightened AI illustration spacing and removed duplicate setup-step counters. The connected logos render at 25px square.
 
-Automatic approval review interrupted local preview and the broader offline checks due to an unexpected external Visual Studio telemetry request with an unknown payload. An offline network guard was added; the broader check was still blocked. No desktop/mobile browser screenshot or complete release-gate pass is claimed.
+Local Windows verification encountered a locked telemetry setting. Verification was completed instead in GitHub Actions. An initial Linux browser crash was resolved by removing a Windows-oriented testing flag. These are resolved verification environment issues, not remaining website failures.
+
+## Deployment checks
+
+The main-branch workflow checks only staging2. It waits for the matching homepage, verifies exact HTML for all 33 canonical routes and exact JavaScript/CSS bytes, then checks legacy redirects, 404 handling, protected source/config paths, robots and sitemap. Deployment results must be recorded after that workflow completes.
 
 ## Release and rollback
 
-The GitHub review branch contains the source changes only; its tracked dist remains the base version. The updated artifact was built locally, but must be rebuilt and verified before release. This draft must not replace staging until outstanding verification is completed. Recheck main against the base SHA before merging. Preserve all unrelated changes if main has advanced. Deploy source and matching dist together, retaining the existing root .htaccess.
+The release combines the reviewed source with the exact built files downloaded from the successful GitHub run. Recheck main against the base SHA before deployment. Preserve all unrelated changes if main has advanced. Retain the existing root .htaccess. No production or DNS changes are authorized.
 
 After deployment: verify all canonical routes and new assets, served script bytes, hover/focus/tap, selectors, growth stages, carousel controls, desktop/mobile overflow, pricing alignment, parameter retention, 404, protected source paths and noindex.
 
