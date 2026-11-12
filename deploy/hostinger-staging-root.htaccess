@@ -64,6 +64,9 @@ RewriteRule ^dist/solutions/reactivate-customers/?$ https://%{HTTP_HOST}/solutio
 # Hide build-directory URLs from visitors.
 RewriteCond %{THE_REQUEST} [[:space:]]/+dist(?:/|[[:space:]?]) [NC]
 RewriteRule ^dist(?:/(.*))?$ /$1 [R=301,L]
+# Normalise direct build-directory requests at the served-directory level too.
+RewriteCond %{THE_REQUEST} \s/+dist/([^\s?]*) [NC]
+RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L]
 # Production canonical-host enforcement must be added after the host choice is approved.
 # Resolve legacy and slash/index variants directly to an HTTPS final path; preserve the query.
 RewriteRule ^platform/unified-conversations(?:/|/index\.html)?$ https://%{HTTP_HOST}/inbox [R=301,L]

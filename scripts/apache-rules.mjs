@@ -24,6 +24,9 @@ export function apacheStagingRules(routes,aliases){
  '  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json application/xml text/xml image/svg+xml',
  '</IfModule>',
  'RewriteEngine On',
+ '# Normalise direct build-directory requests at the served-directory level too.',
+ 'RewriteCond %{THE_REQUEST} \\s/+dist/([^\\s?]*) [NC]',
+ 'RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L]',
  '# Production canonical-host enforcement must be added after the host choice is approved.',
  '# Resolve legacy and slash/index variants directly to an HTTPS final path; preserve the query.',
  ];
