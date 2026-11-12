@@ -171,3 +171,20 @@ body>header nav{gap:17px;font-size:12px}
  .ag-signup>.wrap{grid-template-columns:1fr;gap:24px}
 }
 @media(prefers-reduced-motion:reduce){.ag-section-mark{animation:none;transform:none}}
+
+/* Keep the retained demonstrations compact without hiding their controls or disclosures. */
+#main .ag-problem-section .section-head>div{width:100%;max-width:none}
+#main .ag-problem-section h2{max-width:none}
+#main:has(.ag-sales-hero) .av-visual{padding:22px}
+#main:has(.ag-sales-hero) .av-ai-stage{min-height:260px;margin-bottom:18px}
+#main:has(.ag-sales-hero) .av-ai-orbit{height:260px}
+#main:has(.ag-sales-hero) .av-ai-chapter-copy{min-height:0;margin-bottom:16px}
+#main:has(.ag-sales-hero) .av-knowledge-channels{padding:16px;margin:16px 0}
+#main .ag-pricing-four .pricing-start-steps li:before{content:none}
+@media(max-width:720px){
+ #main:has(.ag-sales-hero) .av-visual{padding:16px}
+ #main:has(.ag-sales-hero) .av-ai-chapters{display:flex;overflow-x:auto;gap:7px;margin:18px 0;scroll-snap-type:x proximity}
+ #main:has(.ag-sales-hero) .av-ai-chapters button{flex:0 0 105px;scroll-snap-align:start}
+ #main:has(.ag-sales-hero) .av-knowledge-bubbles li{min-height:58px;flex-direction:row;padding:8px 6px;font-size:10px}
+ #main:has(.ag-sales-hero) .av-ai-chapter-copy>strong{font-size:22px}
+}
