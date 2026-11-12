@@ -20,9 +20,11 @@ function save(path,dom){
   const document=dom.window.document;
   const main=document.querySelector('main');
   if(main.querySelectorAll('h1').length!==1||main.textContent.trim().length<40)throw new Error('Invalid rendered page: '+path);
-  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';el.setAttribute(attr,el.getAttribute(attr)+('?v=20261112-pricing-navigation'));});
+  document.querySelectorAll('script[src],link[rel=stylesheet]').forEach(el=>{const attr=el.tagName==='SCRIPT'?'src':'href';if(!el.getAttribute(attr).startsWith('https://'))el.setAttribute(attr,el.getAttribute(attr)+('?v=20261112-plan-signup'));});
   document.documentElement.dataset.renderedRoute=path;
   document.documentElement.dataset.privatePreview='true';
+  document.querySelectorAll('script[src="https://grow.ayudagrow.com/js/form_embed.js"]').forEach(s=>s.remove());
+  if(path.startsWith('/signup/')){const embed=document.createElement('script');embed.defer=true;embed.src='https://grow.ayudagrow.com/js/form_embed.js';document.body.append(embed);}
   const destination=path==='/'?join(dist,'index.html'):path==='/404.html'?join(dist,'404.html'):join(dist,path.slice(1),'index.html');
   mkdirSync(join(destination,'..'),{recursive:true});
   writeFileSync(destination,dom.serialize().replace('</body>',"<script defer src=\"https://widgets.leadconnectorhq.com/loader.js\" data-resources-url=\"https://widgets.leadconnectorhq.com/chat-widget/loader.js\" data-widget-id=\"6adbe6959f0ad5b6ad0a7a22\"></script>"+'</body>'));
@@ -34,7 +36,7 @@ for(const key of routes){
   const dom=renderPage(shell,origin,path);
   if(dom.window.AyudaSearch.key()!==key)throw new Error('Route mismatch: '+key);
   const document=dom.window.document;
-  manifest.pages.push({path,title:document.title,description:document.querySelector('meta[name="description"]').content,canonical:document.querySelector('link[rel="canonical"]').href,indexable:false,launchReviewRequired:['privacy','pricing'].includes(key)});
+  manifest.pages.push({path,title:document.title,description:document.querySelector('meta[name="description"]').content,canonical:document.querySelector('link[rel="canonical"]').href,indexable:false,launchReviewRequired:['privacy','pricing'].includes(key)||key.startsWith('signup/')});
   save(path,dom);
 }
 for(const [from,to] of Object.entries(aliases)){

@@ -11,6 +11,10 @@
     'who-its-for/b2c':'appointments', 'how-it-works':'support', 'free-trial':'get-started'
   };
   const titles = {
+  "signup/essentials": "Start Your Essentials Plan | AyudaGrow",
+  "signup/core": "Start Your Core Plan | AyudaGrow",
+  "signup/build": "Start Your Build Plan | AyudaGrow",
+  "signup/scale": "Start Your Scale Plan | AyudaGrow",
   "home": "CRM and AI Automation for Caribbean Businesses | AyudaGrow",
   "platform": "AI and CRM Platform for Business Growth | AyudaGrow",
   "solutions": "CRM and Automation Solutions for Business Growth | AyudaGrow",
@@ -46,6 +50,10 @@
   "solutions/reactivate-customers": "Reactivate Customers with Relevant Follow-Up | AyudaGrow"
 };
   const descriptions = {
+  "signup/essentials": "Sign up for AyudaGrow Essentials at US$99 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+  "signup/core": "Sign up for AyudaGrow Core at US$149 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+  "signup/build": "Sign up for AyudaGrow Build at US$249 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+  "signup/scale": "Sign up for AyudaGrow Scale at US$349 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
   "home": "Explore CRM, AI and automation for your Caribbean business. Connect enquiries and follow-up with practical AyudaGrow setup, training and ongoing support.",
   "platform": "See how AI, CRM, conversations and workflows connect in one platform. Explore AyudaGrow’s approach to setup, customer context and practical team support.",
   "solutions": "Find tools for customer enquiries, follow-up, appointments and sales. Explore AyudaGrow capabilities and agree the workflow your business needs to grow.",
@@ -67,7 +75,7 @@
   "learning": "Explore course, membership and community tools within your customer journey. Discuss content, moderation and access configuration with AyudaGrow’s team.",
   "support": "Turn a useful business priority into a practical setup. Learn how AyudaGrow approaches assessment, configuration, team training and ongoing support.",
   "pricing": "Compare four AyudaGrow plans at US$99, US$149, US$249 and US$349 per month. Explore the free 7-day Essentials trial, tools, AI allowances and setup.",
-  "privacy": "Read confirmed information about AyudaGrow’s contact-only website and browser session storage. A complete privacy notice still needs to be finalised.",
+  "privacy": "Read confirmed information about AyudaGrow’s signup forms, chat, Stripe checkout and browser session storage. A complete privacy notice still needs to be finalised.",
   "get-started": "Discuss your business, customer enquiries and follow-up with AyudaGrow. Use the confirmed email and phone links to agree a practical next step together.",
   "contact": "Contact AyudaGrow about customer enquiries, sales follow-up and your business workflow. Email or call the team to discuss where practical support can help.",
   "growth-assessment": "Use six questions to review enquiries, follow-up and business growth. Prepare for an AyudaGrow conversation with this guide, not an online assessment.",

@@ -15,7 +15,7 @@ export function renderPage(html, origin, path, {navigation=false}={}) {
   w.IntersectionObserver=class{observe(){} unobserve(){} disconnect(){}};
   w.ResizeObserver=class{observe(){} unobserve(){} disconnect(){}};
   w.setInterval=()=>0;w.clearInterval=()=>{};
-  const scriptNames=[...w.document.querySelectorAll('script[src]')].filter(s=>s.getAttribute("src")!=="https://widgets.leadconnectorhq.com/loader.js").map(s=>s.getAttribute('src').split('?')[0].replace(/^\//,''));
+  const scriptNames=[...w.document.querySelectorAll('script[src]')].filter(s=>!["https://widgets.leadconnectorhq.com/loader.js","https://grow.ayudagrow.com/js/form_embed.js"].includes(s.getAttribute("src"))).map(s=>s.getAttribute('src').split('?')[0].replace(/^\//,''));
   for(const name of scriptNames){if(!navigation&&name==='navigation.js')continue;vm.runInContext(readFileSync(new URL('../dist/'+name,import.meta.url),'utf8'),dom.getInternalVMContext(),{filename:name});}
   w.AyudaSearch.cleanLinks();
   if(errors.length)throw new Error(errors.join('\n'));

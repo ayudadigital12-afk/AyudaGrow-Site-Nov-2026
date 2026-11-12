@@ -5,6 +5,38 @@
   "publicLaunchApproved": false,
   "pages": [
     {
+      "path": "/signup/essentials",
+      "title": "Start Your Essentials Plan | AyudaGrow",
+      "description": "Sign up for AyudaGrow Essentials at US$99 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+      "canonical": "https://ayudagrow.com/signup/essentials",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/signup/core",
+      "title": "Start Your Core Plan | AyudaGrow",
+      "description": "Sign up for AyudaGrow Core at US$149 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+      "canonical": "https://ayudagrow.com/signup/core",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/signup/build",
+      "title": "Start Your Build Plan | AyudaGrow",
+      "description": "Sign up for AyudaGrow Build at US$249 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+      "canonical": "https://ayudagrow.com/signup/build",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
+      "path": "/signup/scale",
+      "title": "Start Your Scale Plan | AyudaGrow",
+      "description": "Sign up for AyudaGrow Scale at US$349 per month. Share your business details, then continue to Stripe to review and complete your subscription.",
+      "canonical": "https://ayudagrow.com/signup/scale",
+      "indexable": false,
+      "launchReviewRequired": true
+    },
+    {
       "path": "/",
       "title": "CRM and AI Automation for Caribbean Businesses | AyudaGrow",
       "description": "Explore CRM, AI and automation for your Caribbean business. Connect enquiries and follow-up with practical AyudaGrow setup, training and ongoing support.",
@@ -175,7 +207,7 @@
     {
       "path": "/privacy",
       "title": "Privacy Information and Website Contact Details | AyudaGrow",
-      "description": "Read confirmed information about AyudaGrow’s contact-only website and browser session storage. A complete privacy notice still needs to be finalised.",
+      "description": "Read confirmed information about AyudaGrow’s signup forms, chat, Stripe checkout and browser session storage. A complete privacy notice still needs to be finalised.",
       "canonical": "https://ayudagrow.com/privacy",
       "indexable": false,
       "launchReviewRequired": true

@@ -129,6 +129,7 @@
     const link=event.target.closest('a[href]');
     if(!link||link.hasAttribute('download')||(link.target&&link.target!=='_self'))return;
     let url=new URL(link.href,location.href);
+    if(location.pathname.startsWith('/signup/')||url.pathname.startsWith('/signup/'))return;
     if(window.AyudaSearch && url.origin===location.origin && url.hash.startsWith('#/')){const target=window.AyudaSearch.read(url);url=new URL(target.path+target.search,location.origin);}
     if(window.AyudaSearch){
       if(url.origin!==location.origin||url.hash||(!url.hash.startsWith('#/')&&/\.[^/]+$/.test(url.pathname)))return;

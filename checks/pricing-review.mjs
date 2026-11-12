@@ -6,12 +6,12 @@ const html=readFileSync('dist/pricing/index.html','utf8'),d=new JSDOM(html).wind
 const cards=[...d.querySelectorAll('.plan-card')];
 assert.deepEqual(cards.map(c=>c.querySelector('.plan-price strong').textContent),['US$99','US$149','US$249','US$349']);
 assert.deepEqual(cards.map(c=>c.querySelector('h3').textContent),['Essentials','Core','Build','Scale']);
-cards.forEach(c=>assert(c.querySelector('button[data-select-plan]')));
+cards.forEach(c=>assert(c.querySelector('a[data-select-plan][href="/signup/'+c.dataset.plan+'"]')));
 assert.equal(cards.filter(c=>c.textContent.includes('7-day free trial')).length,1);
 assert.equal(cards[2].querySelector('.ag-plan-kicker').textContent,'Most popular');
 assert.match(cards[2].textContent,/1,000 AI responses/);assert.match(cards[3].textContent,/Voice AI on web chat and WhatsApp calls/);
 assert.match(cards[0].textContent,/Card required.*US\$99\/month unless cancelled/);
-assert.equal(d.querySelectorAll('main a[href]').length,0,'No browse-away links in initial pricing content');
+assert([...d.querySelectorAll('main a[href]')].every(a=>a.getAttribute('href').startsWith('/signup/')),'Content links only lead to plan signup');
 assert.equal(d.querySelector('header .logo').getAttribute('href'),'/');
 const platform=new JSDOM(readFileSync('dist/platform/index.html','utf8')).window.document;
 const links=(doc,scope)=>[...doc.querySelectorAll(scope+' a[href]')].map(a=>[a.textContent,a.getAttribute('href')]);
@@ -25,7 +25,7 @@ assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));
 assert.equal(d.querySelectorAll('.plan-table thead th').length,5);
 assert.equal(d.querySelectorAll('main form,main input').length,0);
 assert.match(d.querySelector('.pricing-whatsapp').textContent,/US\$19/);
-assert.match(d.querySelector('main').textContent,/Online checkout is not available yet/);
+assert.match(d.querySelector('main').textContent,/continue to Stripe checkout/);
 const groups=[...d.querySelectorAll('[data-feature-group]')];assert.equal(groups.length,6);
 groups.forEach(g=>assert.equal(g.querySelectorAll('[data-feature-id]:not([hidden])').length,Math.min(4,g.querySelectorAll('[data-feature-id]').length)));
 const texts=d.querySelector('main').textContent;
@@ -43,7 +43,7 @@ for(const f of features)assert.deepEqual([...doc.querySelector('[data-feature-id
 doc.querySelector('[data-billing="annual"]').click();
 assert.deepEqual([...doc.querySelectorAll('.plan-price strong')].map(x=>x.textContent),['US$990','US$1,490','US$2,490','US$3,490']);
 for(const p of w.AyudaPlans.plans){const url=w.location.href;doc.querySelector('[data-select-plan="'+p.id+'"]').click();assert.equal(w.location.href,url);const mail=decodeURIComponent(doc.querySelector('[data-signup-email]').href);assert(mail.includes(p.name));assert(mail.includes('annual'));assert(mail.includes(p.annualPrice.toLocaleString('en-US')));}
-doc.querySelector('[data-select-trial]').click();assert.equal(doc.querySelector('[data-billing="monthly"]').getAttribute('aria-pressed'),'true');assert.match(decodeURIComponent(doc.querySelector('[data-signup-email]').href),/7-day trial/);assert.match(doc.querySelector('.ag-signup-intro').textContent,/US\$99\/month/);
+assert.equal(doc.querySelector('[data-select-trial]').getAttribute('href'),'/signup/essentials?intent=trial');doc.querySelector('[data-billing="monthly"]').click();for(const p of w.AyudaPlans.plans)assert.equal(doc.querySelector('[data-select-plan="'+p.id+'"]').getAttribute('href'),'/signup/'+p.id);
 doc.querySelector('[data-select-demo]').click();assert.match(decodeURIComponent(doc.querySelector('[data-signup-email]').href),/demo request/);
 for(const group of doc.querySelectorAll('[data-feature-group]')){
  const b=group.querySelector('[data-group-toggle]');if(!b)continue;const extras=[...group.querySelectorAll('[data-extra-feature]')];
@@ -54,5 +54,5 @@ for(const group of doc.querySelectorAll('[data-feature-group]')){
  b.click();assert(extras.every(x=>!x.hidden));b.click();assert(extras.every(x=>x.hidden));
 }
 dom.window.close();
-console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; trial reset; on-page plan and demo requests; shared menu and footer; no content browse-away CTA; honest checkout status.');
+console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; monthly plan links; annual and demo email requests; shared menu and footer; no content browse-away CTA; honest checkout status.');
 
