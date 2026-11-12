@@ -6,7 +6,7 @@ mkdirSync(root+'/qa',{recursive:true});
 const project=root;
 const server=spawn(process.execPath,['--import','./scripts/offline-guard.mjs','scripts/serve.mjs'],{cwd:project,windowsHide:true,stdio:'inherit'});
 const chromeLog=openSync(root+'/qa/chrome-startup.log','w');
-const chrome=spawn(process.env.CHROME_BIN || 'C:/Program Files/Google/Chrome/Application/chrome.exe',['--headless=new','--disable-crashpad-for-testing','--remote-debugging-port=9333','--user-data-dir='+root+'/qa/chrome-profile','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--disable-sync','--disable-component-update','--disable-gpu','--disable-features=OptimizationHints,MediaRouter','about:blank'],{windowsHide:true,stdio:['ignore','ignore',chromeLog]});
+const chrome=spawn(process.env.CHROME_BIN || 'C:/Program Files/Google/Chrome/Application/chrome.exe',['--headless=new','--remote-debugging-port=9333','--user-data-dir='+root+'/qa/chrome-profile','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-extensions','--disable-sync','--disable-component-update','--disable-gpu','--disable-features=OptimizationHints,MediaRouter','about:blank'],{windowsHide:true,stdio:['ignore','ignore',chromeLog]});
 let sock,seq=0;const pending=new Map(),errors=[];
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 async function command(method,params={}){const id=++seq;return new Promise((resolve,reject)=>{pending.set(id,{resolve,reject});sock.send(JSON.stringify({id,method,params}));setTimeout(()=>{if(pending.has(id)){pending.delete(id);reject(new Error('Timeout '+method));}},15000).unref();});}
