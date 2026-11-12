@@ -4,7 +4,7 @@ import {JSDOM} from 'jsdom';
 const d=new JSDOM(readFileSync('dist/pricing/index.html','utf8')).window.document;
 const cards=[...d.querySelectorAll('.plan-card')];
 assert.deepEqual(cards.map(c=>c.querySelector('.plan-price strong').textContent),['US$99','US$149','US$249','US$349']);
-assert.deepEqual(cards.map(c=>c.querySelector('h3').textContent),['Essentials','AI Starter','AI Growth','AI Unlimited']);
+assert.deepEqual(cards.map(c=>c.querySelector('h3').textContent),['Essentials','Core','Build','Scale']);
 cards.forEach(c=>assert(c.querySelector('a.button').getAttribute('href').includes('/get-started?plan=')));
 assert.equal(cards.filter(c=>c.textContent.includes('7-day free trial')).length,1);
 assert(d.querySelector('.plan-table-scroll[tabindex="0"][role="region"]'));

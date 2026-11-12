@@ -18,7 +18,7 @@ Source of truth: AyudaGrow_Pricing_and_Tier_Breakout_2026-11-11 claude.xlsx, Pla
 
 ## Deliberate exceptions and decisions still needed
 
-- Plan names remain Essentials, AI Starter, AI Growth, AI Unlimited pending the user's selection. Suggested ladder: Essentials, Assist, Engage, Scale.
+- Confirmed by the user: Essentials US$99, Core US$149, Build US$249, Scale US$349 per month. The free seven-day trial applies to Essentials only.
 - Google Business Messages is not advertised. Google confirms its former chat/API service ended in July 2024. This differs from the workbook's inbox row.
 - The workbook's SMS add-on row has not been promoted on the website because the earlier explicit brand instruction excluded SMS. Confirm any desired change separately.
 - First-month setup follows the primary comparison row: 2/3/5/5 hours. Other tabs recommend self-serve Tier 1; clarify trial-versus-paid setup before signup activation.

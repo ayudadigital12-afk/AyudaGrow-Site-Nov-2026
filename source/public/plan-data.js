@@ -12,24 +12,24 @@ window.AyudaPlans = {
       "purpose": "Bring leads, bookings and follow-up together."
     },
     {
-      "id": "ai-starter",
-      "name": "AI Starter",
+      "id": "core",
+      "name": "Core",
       "price": 149,
       "trialDays": 0,
       "setupHours": 3,
       "purpose": "Add AI tools for your team and marketing."
     },
     {
-      "id": "ai-growth",
-      "name": "AI Growth",
+      "id": "build",
+      "name": "Build",
       "price": 249,
       "trialDays": 0,
       "setupHours": 5,
       "purpose": "Let AI answer customer enquiries and capture details."
     },
     {
-      "id": "ai-unlimited",
-      "name": "AI Unlimited",
+      "id": "scale",
+      "name": "Scale",
       "price": 349,
       "trialDays": 0,
       "setupHours": 5,
@@ -447,9 +447,9 @@ window.AyudaPlans = {
   ],
   "checkoutUrls": {
     "essentials": null,
-    "ai-starter": null,
-    "ai-growth": null,
-    "ai-unlimited": null
+    "core": null,
+    "build": null,
+    "scale": null
   },
   "trialUrl": null
 };
