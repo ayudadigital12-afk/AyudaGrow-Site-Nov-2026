@@ -22,7 +22,7 @@ SMS/phone calling and phone-line Voice AI are withheld pending Jamaica routing/r
 
 ## Conversion behaviour
 
-Primary journey: website to pricing to plan signup. Secondary: Essentials trial or sales/demo request. Pricing uses focused navigation with no campaign cross-sell or browsing footer. Privacy stays accessible within the page.
+Primary journey: website to pricing to plan signup. Secondary: Essentials trial or sales/demo request. Pricing retains the same active main menu, linked home logo, mobile menu and full footer as the rest of the site. The user corrected the earlier instruction on 12 November 2026: only the pricing content CTAs should focus on signup, the Essentials trial and sales/demo enquiries. Do not add campaign or other browse-away CTAs to the pricing content. The shared footer retains its normal privacy link.
 
 Each category initially shows four priority features. Hover expands; click, tap and keyboard can pin or collapse. Escape dismisses the hover expansion, and focus is preserved.
 
@@ -32,3 +32,7 @@ Checkout/trial/demo booking URLs have not been supplied. Keep selection on prici
 
 Staging only. Preserve root Apache rules and noindex. Production and DNS are out of scope. Rollback base: c5fd7a0b8e84cd5fa95701bc54970d4bb28d54aa.
 
+
+## Navigation correction release
+
+Restore shared header and footer on pricing, retaining prices, comparison categories and signup/trial/demo behaviour. Staging only. Rollback commit: 58a15dda4793b2e29ec9a4ef0241786a9f677d70. Preserve root Apache rules and noindex.

@@ -189,16 +189,8 @@ body>header nav{gap:17px;font-size:12px}
  #main:has(.ag-sales-hero) .av-ai-chapter-copy>strong{font-size:22px}
 }
 
-/* Focused pricing journey and compact category comparison. */
-.ag-pricing-nav,.ag-pricing-footer{display:none}
-body.ag-pricing-focus>header>#nav,body.ag-pricing-focus>header>#menu,body.ag-pricing-focus>footer{display:none!important}
-body.ag-pricing-focus>header{min-height:74px}
-body.ag-pricing-focus>header .logo{cursor:default}
-body.ag-pricing-focus .ag-pricing-nav{display:flex;align-items:center;gap:20px}
-.ag-pricing-nav button,.ag-pricing-footer button{border:0;background:none;color:inherit;font:600 12px Poppins,sans-serif;padding:10px 0;cursor:pointer}
-.ag-pricing-nav button{color:#dcecff}.ag-pricing-nav button:first-child{color:#a3f0c5}
-body.ag-pricing-focus .ag-pricing-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px max(4%,calc((100vw - 1240px)/2));background:#071c3e;color:#dcecff;font-size:12px}
-.ag-pricing-focused button:focus-visible,.ag-pricing-nav button:focus-visible,.ag-pricing-footer button:focus-visible{outline:3px solid #1f79ef;outline-offset:3px}
+/* Conversion-focused page content with the shared site navigation and footer. */
+.ag-pricing-focused button:focus-visible{outline:3px solid #1f79ef;outline-offset:3px}
 #main .ag-pricing-focused .page-hero{padding:24px 0 20px}
 #main .ag-pricing-focused .page-hero h1{font-size:clamp(29px,3.7vw,46px);margin:9px 0 12px}
 #main .ag-pricing-focused .page-hero p{max-width:900px;font-size:15px;line-height:1.6}
@@ -251,21 +243,7 @@ body.ag-pricing-focus .ag-pricing-footer{display:flex;justify-content:space-betw
 #main .ag-pricing-focused .pricing-terms{margin:8px 0}
 #main .ag-pricing-focused .pricing-terms summary{font-size:13px;padding:12px 14px;min-height:44px}
 #main .ag-pricing-focused .pricing-terms>p{font-size:12px;padding:0 14px 14px;line-height:1.65}
-#ag-pricing-privacy{width:min(760px,92vw);max-height:85vh;overflow:auto;padding:22px;border:1px solid #b9cfe6;border-radius:14px;background:white;color:#0b2c53}
-#ag-pricing-privacy::backdrop{background:#031832b8}
-#ag-pricing-privacy .page-hero{background:transparent;color:#0b2c53;padding:15px 0}
-#ag-pricing-privacy .page-hero:after{display:none}
-#ag-pricing-privacy .wrap{width:100%}
-#ag-pricing-privacy .section{padding:15px 0}
-#ag-pricing-privacy p,#ag-pricing-privacy li{font-size:13px;line-height:1.65}
-#ag-pricing-privacy h2{font-size:25px}#ag-pricing-privacy h3{font-size:19px}
-.ag-dialog-close{display:block;margin-left:auto;background:#0c3262;border:0;border-radius:7px;padding:10px 14px;color:white;font:600 12px Poppins,sans-serif;cursor:pointer}
 @media(max-width:720px){
- body.ag-pricing-focus>header{flex-wrap:wrap;gap:10px;padding-top:10px;padding-bottom:10px}
- body.ag-pricing-focus>header .logo{flex-basis:128px;width:128px}
- body.ag-pricing-focus .ag-pricing-nav{width:100%;justify-content:space-between;gap:8px}
- .ag-pricing-nav button{font-size:11px;min-height:40px}
- body.ag-pricing-focus .ag-pricing-footer{display:block;font-size:11px}.ag-pricing-footer button{margin-top:8px}
  #main .ag-pricing-focused .page-hero h1{font-size:31px}
  #main .ag-pricing-focused .plan-card{padding:20px}
  #main .ag-pricing-focused .ag-plan-purpose,#main .ag-pricing-focused .plan-card ul,#main .ag-pricing-focused .ag-plan-setup,#main .ag-pricing-focused .ag-plan-billing{min-height:0}
