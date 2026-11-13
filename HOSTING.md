@@ -1,29 +1,25 @@
-# Hosting and launch checklist
+# Hosting and staging release
 
-## Current state
+## Scope
 
-- Static site, no application backend.
-- Intended domain references use `https://ayudagrow.com`; account-specific preview origins have been removed. These references do not connect the domain.
-- All generated pages retain `noindex,nofollow`, `robots.txt` disallows crawling, the sitemap is intentionally empty, and `_headers` requests `X-Robots-Tag: noindex, nofollow`.
-- No forms, chatbot, checkout or analytics tag are installed. Email and phone links open the visitor's own applications.
-- The privacy notice and unresolved commercial terms are still review drafts. Current review banners and the `/ai-concepts` page are retained.
+Target: https://staging2.ayudagrow.com only. The user authorised its update through GitHub. Production, DNS, email and CRM configuration are outside this release.
 
-## Before public hosting
+The existing staging integration uses this repository's main branch and tracked root .htaccess to serve dist internally. Prior deployed-output verification succeeded at 449c38cc1448d7480fb1b59f26645d04c388900a. Hostinger's GitHub App is installed for the repository. No repository webhook is listed in GitHub settings; automatic host pickup has not been independently established. A push is not a deployment confirmation.
 
-1. Finish the privacy notice from the actual practices: provider details, designated request handling, any onward use/sharing, retention/deletion, applicable rights, cookies/logging and an effective date. Do not assume the admin mailbox is connected to a CRM or used for marketing.
-2. Finalize public commercial wording and remove internal review copy when approved. Keep truthful illustrative-persona and configured-capability limitations. Decide whether `/ai-concepts` belongs on the public website.
-3. Verify hosting ownership, account/plan, deployment repository/branch, document root and rollback. Back up the existing site and any host-specific configuration before replacing it. Keep email/MX/TXT and ownership-verification records unchanged unless a specific change is intended.
-4. Serve `dist/` only. If the host deploys repository files without a build step or publish-directory setting, prepare a separate release artifact/branch containing the contents of `dist/` at its root. Do not upload this full source ZIP as the public web root.
-5. Verify clean URLs, direct reloads, HTTPS, one canonical apex/www host, permanent redirects and an HTTP 404 for missing routes. `_redirects` and `_headers` are host-specific conventions; their presence does not prove the selected host applies them. Configure equivalent rules for hosts that do not support them.
-6. Review the legacy redirects in `dist/_redirects`. `/book` and `/login` are not functioning booking/account services in this build. Do not invent destinations for them.
-7. Only for an approved release, implement the public indexing configuration consistently in `scripts/build-search-pages.mjs`, `dist/search-routing.js`, `source/shell.html`, generated HTML and real HTTP headers. Publish a sitemap of approved canonical pages and update the draft-specific tests accordingly. Never remove safeguards only to make a test pass.
-8. Smoke-test the exact released artifact: navigation, mobile rendering, assets, email/phone links, privacy, status codes, canonical/social URLs and indexing. A previous artifact or revert commit is the rollback path; do not rewrite published history.
+## Release procedure
 
-## Optional later integrations
+1. Build and test source before changing main. Commit the matching dist, root .htaccess and internal build/route-manifest.json together for this existing integration.
+2. Preserve the current main commit for rollback. rollback/staging-20261113-before-approved-update preserves 449c38cc1448d7480fb1b59f26645d04c388900a.
+3. Update main using an expected-SHA guard. The main workflow verifies staging HTML/assets byte for byte, policy routes, login and other redirects, query retention, real 404s, protected source paths and noindex safeguards.
+4. If the workflow says the host did not serve the new commit, report host pickup as pending. Do not claim success or change production as a workaround.
+5. Restore the previous complete tree with a forward rollback commit if deployed routing, forms, assets or indexing regress. Verify the restored hosted output too.
 
-- Add the specific approved GHL form/chatbot configuration later and verify receipt and handoff. Update privacy and consent before activating collection.
-- Add GA4 only with the correct property/stream ID and collection/consent configuration. Verify page-view handling and avoid duplicate events. Tracking is not retroactive.
-- Search Console can verify a domain with DNS or a URL-prefix property using an approved HTML tag/file. Preserve any existing verification, submit the canonical sitemap, and inspect representative URLs. It is not a visitor analytics script.
-- Keep all tokens and provider credentials in the host's approved secret storage, not source control.
+## Public-output boundary
 
-No live hosting, DNS, indexing or service integration changes are performed by these repository files.
+The existing root configuration denies source/configuration paths and routes requests into dist. Keep those rules and verify the denials. For a newly configured host, prefer the contents of release/staging as the document root, using its .htaccess. Do not upload source, tests, internal manifests, credentials or handoff documents as public content. Changing the existing integration's document root requires a separate confirmed host configuration change.
+
+Staging remains noindex,nofollow, with robots Disallow and an empty sitemap. Canonical marketing URLs and sharing metadata are prepared in source; production activation uses a separately verified SITE_ENV=production build and separate publication authorisation.
+
+## Approved services and outstanding production checks
+
+Four supplied signup forms and the AI chat widget are installed. Signup/payment was user-confirmed; the read-only browser checks do not submit forms or payments. GA4 and Meta remain held. Privacy and Cookie Policy text is approved. Actual embedded-storage/consent behaviour, retention operations, commercial terms and downstream onboarding still need the relevant evidence before a production decision.
