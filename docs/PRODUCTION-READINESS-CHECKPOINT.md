@@ -29,8 +29,8 @@ Browser access was interrupted repeatedly. Local execution later failed before s
 |7|Migration redirects|Implemented, verification pending.|Map below prepared. Full live/campaign/Search Console inventory and hosted redirect verification remain pending. Login target is now user-confirmed.|
 |8|Favicons and sharing|Implemented, verification pending.|Existing approved logo used for favicon set and 1200x630 PNG fallback. Artifact existence checks passed. Social platform previews and production image responses pending.|
 |9|Security|Implemented, verification pending.|Header candidates prepared. Full CSP inventory, report-only test, host enforcement, HSTS/TLS coverage and hosting controls still pending. No claim of complete security.|
-|10|Privacy and terms|Blocked by missing information or access.|Current privacy notice unfinished. October terms draft contains superseded pricing and assumptions; not approved for publication. Precise decisions below.|
-|11|Cookies and consent|Blocked by missing information or access.|Clean-session request/storage attribution not completed. No decorative consent banner installed.|
+|10|Privacy and terms|Blocked by missing information or access.|Privacy Policy approved by Rasheed on 13 November 2026 and implemented in candidate, alongside a separate Cookie Policy at /cookies. Deployment, embedded-storage behaviour and retention operations remain unverified. October terms draft contains superseded pricing and assumptions; not approved for publication. Precise decisions below.|
+|11|Cookies and consent|Blocked by missing information or access.|Cookie Policy added with verified first-party session-storage key and separate provider disclosures. Clean-session embedded request/storage attribution remains incomplete. No consent banner or consent-enforcement claim added.|
 |12|Conversion regression|Implemented, verification pending.|Read-only form and layout observations captured. No successful submission, duplicate handling, provisioning, cancellation or failure-path verification claimed.|
 |13|Annual/demo/contact|get-started and labels: Implemented, verification pending.|Annual CTA labels and monthly-only trial wording prepared; demo links standardised. Contact form exists in CRM but routing/calendar approval not verified.|
 |14|Product consistency|Implemented, verification pending.|Approved matrix reviewed. Eligible WhatsApp voice wording preserved. Remaining cross-page/chatbot and usage enforcement reconciliation pending.|
@@ -39,7 +39,7 @@ Browser access was interrupted repeatedly. Local execution later failed before s
 |17|Local business eligibility|Blocked by missing information or access.|Qualifying in-person service/location and existing profile not established. No profile created.|
 |18|Performance|Implemented, verification pending.|Responsive variants and hashed CSS/JS prepared. No lab LCP/CLS/INP or field Core Web Vitals result claimed.|
 |19|Mobile/accessibility|Implemented, verification pending.|Targeted focus/text/control CSS prepared; form viewport observations recorded. Full WCAG/manual checks and mobile chat overlap remediation unfinished.|
-|20|Measurement|Implemented, verification pending.|Disabled measurement specification prepared. No analytics/advertising tags installed; accounts, consent, success signals and deduplication remain to verify.|
+|20|Measurement|Implemented, verification pending.|Owner instructed GA4 and Meta to remain on hold for launch; public AI chat remains enabled. Source remains without analytics/advertising tags. Embedded-provider behaviour, accounts, consent, success signals and deduplication remain to verify.|
 |21|Final handover|Blocked by missing information or access.|This is a checkpoint, not the final release handover. Remaining verification and staging deployment required.|
 
 ## Redirect candidate
@@ -98,3 +98,4 @@ Stop if critical routing, assets, forms, chat or indexing regress. Restore the e
 Additional educational articles, genuine approved case studies, llms.txt, extra accurate schema and new social profiles are not release blockers.
 
 Recommendation: **Not ready for publication**. Technical verification, staging deployment and the unresolved policy/customer-access decisions above remain.
+

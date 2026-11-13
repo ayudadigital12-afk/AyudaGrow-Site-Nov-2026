@@ -8,7 +8,7 @@ export function apacheStagingRules(routes,aliases,config={production:false}){
  'DirectorySlash Off',
  'ErrorDocument 404 /404.html',
  '<IfModule mod_headers.c>',
- ...(config.production?['  Header always unset X-Robots-Tag','  Header always set X-Robots-Tag "noindex, follow" "expr=%{REQUEST_URI} =~ m#^/(signup(?:/|$)|privacy(?:/|$)|terms(?:/|$)|404\\.html)#"','  Header always set X-Robots-Tag "noindex, nofollow" "expr=%{HTTP_HOST} =~ m#^staging#"']:['  Header always set X-Robots-Tag "noindex, nofollow"']),
+ ...(config.production?['  Header always unset X-Robots-Tag','  Header always set X-Robots-Tag "noindex, follow" "expr=%{REQUEST_URI} =~ m#^/(signup(?:/|$)|privacy(?:/|$)|cookies(?:/|$)|terms(?:/|$)|404\\.html)#"','  Header always set X-Robots-Tag "noindex, nofollow" "expr=%{HTTP_HOST} =~ m#^staging#"']:['  Header always set X-Robots-Tag "noindex, nofollow"']),
  '  Header always set X-Content-Type-Options "nosniff"',
  '  Header always set Referrer-Policy "strict-origin-when-cross-origin"',
  '  Header always set Content-Security-Policy "upgrade-insecure-requests; base-uri \'self\'; object-src \'none\'; frame-ancestors \'self\'"',
@@ -45,3 +45,4 @@ export function apacheStagingRules(routes,aliases,config={production:false}){
  lines.push('RewriteRule ^$ index.html [END]','RewriteCond %{REQUEST_FILENAME} !-f','RewriteRule ^ - [R=404,L]','');
  return lines.join('\n');
 }
+

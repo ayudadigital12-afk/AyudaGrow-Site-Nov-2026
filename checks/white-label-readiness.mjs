@@ -35,15 +35,15 @@ const forbidden=[
   /(?:privacy|pricing) review draft/i
 ];
 const approvedWidget="<script defer src=\"https://widgets.leadconnectorhq.com/loader.js\" data-resources-url=\"https://widgets.leadconnectorhq.com/chat-widget/loader.js\" data-widget-id=\"6adbe6959f0ad5b6ad0a7a22\"></script>";
-function clean(s,label){s=s.replaceAll(approvedWidget,'').replaceAll(approvedWidget.replace('<script defer ','<script defer="" '),'');for(const pattern of forbidden)assert(!pattern.test(s),`${label} contains ${pattern}`);}
+function clean(s,label){s=s.replaceAll(approvedWidget,'').replaceAll(approvedWidget.replace('<script defer ','<script defer="" '),'');if(/(?:^|\/)(?:privacy|cookies)(?:\/| |$)|(?:^|\/)policy-pages(?:\.[a-f0-9]{12})?\.js(?:$| )/.test(label)){s=s.replace(/https:\/\/www\.gohighlevel\.com\/(?:data-processing-agreement|sub-processors|cookies-policy)/g,'approved-provider-policy').replace(/\bHighLevel\b/g,'approved-provider');}for(const pattern of forbidden)assert(!pattern.test(s),`${label} contains ${pattern}`);}
 // Guard the guard: encoded names, URL variants and split DOM text must be rejected.
 for(const fixture of ['GHL','GoHighLevel','Go&#72;ighLevel','Go%48ighLevel','Go\\u0048ighLevel','High\u200BLevel','https://api.leadconnectorhq.com','/ai-concepts','reviewbar']){
   assert.throws(()=>clean(decoded(fixture),'fixture'),undefined,'Detector missed '+fixture);
 }
 clean(decoded('Illustrative conversations. Customer reviews. SIL OPEN FONT LICENSE.'),'allowed fixture');
 const manifest=JSON.parse(read('build/route-manifest.json')),origin=manifest.origin;
-const expected=['/signup/essentials','/signup/core','/signup/build','/signup/scale','/','/platform','/solutions','/inbox','/ai','/crm','/appointments','/consultative-sales','/use-cases','/lead-capture','/follow-up','/reactivation','/automation','/reporting','/reputation','/integrations','/marketing','/commerce','/learning','/support','/pricing','/privacy','/get-started','/contact','/growth-assessment','/learn','/solutions/book-more-appointments','/solutions/convert-more-leads','/solutions/generate-more-reviews','/solutions/improve-customer-communication','/solutions/improve-sales-follow-up','/solutions/manage-sales-opportunities','/solutions/reactivate-customers'];
-const aliases={'platform/unified-conversations':'inbox','platform/follow-up-automation':'follow-up','platform/customer-reactivation':'reactivation','platform/crm-sales-pipeline':'crm','platform/lead-capture':'lead-capture','platform/appointments':'appointments','platform/reputation-reviews':'reputation','platform/reporting-forecasting':'reporting','who-its-for':'use-cases','who-its-for/b2b':'consultative-sales','who-its-for/b2c':'appointments','how-it-works':'support','free-trial':'get-started'};
+const expected=['/signup/essentials','/signup/core','/signup/build','/signup/scale','/','/platform','/solutions','/inbox','/ai','/crm','/appointments','/consultative-sales','/use-cases','/lead-capture','/follow-up','/reactivation','/automation','/reporting','/reputation','/integrations','/marketing','/commerce','/learning','/support','/pricing','/privacy','/cookies','/contact','/growth-assessment','/learn','/solutions/book-more-appointments','/solutions/convert-more-leads','/solutions/generate-more-reviews','/solutions/improve-customer-communication','/solutions/improve-sales-follow-up','/solutions/manage-sales-opportunities','/solutions/reactivate-customers'];
+const aliases={'platform/unified-conversations':'inbox','platform/follow-up-automation':'follow-up','platform/customer-reactivation':'reactivation','platform/crm-sales-pipeline':'crm','platform/lead-capture':'lead-capture','platform/appointments':'appointments','platform/reputation-reviews':'reputation','platform/reporting-forecasting':'reporting','who-its-for':'use-cases','who-its-for/b2b':'consultative-sales','who-its-for/b2c':'appointments','how-it-works':'support','free-trial':'signup/essentials','get-started':'pricing','book':'contact'};
 const approvedFormAssets=new Set(['https://grow.ayudagrow.com/js/form_embed.js',...['CkmLMXN55hD2X9hCfO4j','65wBICRDMlJ7RTZPK3dG','XidHogjcgDQ48zVVZKSz','abrMomyu1JJgrxPvWYLh'].map(id=>'https://grow.ayudagrow.com/widget/form/'+id)]);
 const routes=new Set(expected),approvedContacts=new Set(['mailto:admin@ayudagrow.com','tel:+18764800413']);
 check('manifest',()=>{
@@ -105,7 +105,7 @@ function inspect(d,path,canonical,{error=false}={}){
       if(url.origin===origin){
         assert(routes.has(url.pathname)||(error&&url.hash==='#main'),'Unknown internal route '+raw);
         if(url.hash&&url.pathname===canonical)assert(d.getElementById(decodeURIComponent(url.hash.slice(1))),'Missing fragment '+raw);
-      }else assert(url.hostname==='support.google.com'||approvedFormAssets.has(url.href),'Unapproved outbound destination '+url.href);
+      }else {const policyLinks=new Set(['https://www.ayudagrow.com/','https://stripe.com/privacy','https://stripe.com/legal/cookies-policy','https://www.gohighlevel.com/data-processing-agreement','https://www.gohighlevel.com/sub-processors','https://www.gohighlevel.com/cookies-policy','https://www.oic.gov.jm/']);assert(url.hostname==='support.google.com'||approvedFormAssets.has(url.href)||(['/privacy','/cookies'].includes(canonical)&&policyLinks.has(url.href)),'Unapproved outbound destination '+url.href);}
     }
   }
   for(const el of d.querySelectorAll('[src],[poster],link[href],image[href],use[href],image[xlink\\:href],use[xlink\\:href]')){
@@ -178,8 +178,10 @@ check('motion CSS',()=>{const css=files.filter(f=>extname(f)==='.css').map(f=>re
 check('honest content boundaries',()=>{
   assert.match(staticText.get('/')||'',/illustrative/i);
   const privacy=staticText.get('/privacy')||'';
-  assert.match(privacy,/not (?:yet )?(?:an? )?(?:effective |final |published )*production privacy notice|not a complete privacy notice|privacy notice.*(?:being finali[sz]ed|not yet final)|final privacy notice.*(?:pending|being prepared)/i,'Keep an explicit pending-notice boundary');
-  assert.match(privacy,/confirm|finali[sz]|pending|not yet/i);
+  assert.match(privacy,/AyudaGrow Privacy Policy/);
+  assert(!/not a complete privacy notice|notice is being prepared|staging website/.test(privacy));
+  assert.match(privacy,/Website chat and AI/);
+  assert.match(privacy,/12 months after the conversation ends/);
   assert(!/we (?:never|do not) (?:collect|store|share) (?:any )?(?:personal )?data/i.test(privacy),'Do not replace pending policy with invented guarantees');
   const pricing=staticText.get('/pricing')||'';assert.match(pricing,/confirm|agreed|scope/i);assert.match(pricing,/usage|allowance|additional|separate/i);
 });
@@ -226,3 +228,4 @@ try{
 }catch(e){failures.push('SPA runtime: '+e.stack);}finally{live?.window.close();decoder.window.close();}
 if(failures.length){console.error('White-label artifact regressions ('+failures.length+'):\n'+failures.map(f=>' - '+f).join('\n'));process.exitCode=1;}
 else console.log('White-label artifact PASS: 37 canonical pages, 13 aliases, 404, full shipped-file scan, clean links/assets/metadata/schema, static/hydrated/SPA parity, approved contacts, motion and noindex safeguards. NOT public-launch approval: privacy practices/final notice, pricing inclusions/terms, service claims, visual QA and hosting release remain separate review gates.');
+

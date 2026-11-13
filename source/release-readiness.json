@@ -3,7 +3,7 @@
   "canonicalOrigin": "https://ayudagrow.com",
   "publicLaunchApproved": false,
   "approvals": {
-    "privacy": false,
+    "privacy": true,
     "commercialTerms": false,
     "hostingAndRollback": false,
     "legacyBookingAndLogin": false,

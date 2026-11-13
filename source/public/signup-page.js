@@ -36,7 +36,7 @@
           <p class="ag-purchase-email-note">Use the same email here and at checkout so we can match your payment to your signup.</p>
           <iframe src="${formUrl}" style="width:100%;height:560px;border:none;" id="inline-${formId}" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate" data-form-id="${formId}" title="${p.name} Checkout Sign-up" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           <p class="ag-purchase-secure">${lock}<span>Secure checkout powered by Stripe</span></p>
-          <p class="ag-purchase-privacy">We use these details to handle your signup and account setup. <a href="/privacy">Privacy information</a>. Don&rsquo;t enter card details in this form.</p>
+          <p class="ag-purchase-privacy">We use these details to handle your signup and account setup. <a href="/privacy">Privacy Policy</a> and <a href="/cookies">Cookie Policy</a>. Don&rsquo;t enter card details in this form.</p>
           <details class="ag-purchase-help"><summary>Form not loading?</summary><p><a href="${formUrl}" target="_blank" rel="noopener">Open the ${p.name} signup form in a new tab</a>, or email <a href="mailto:admin@ayudagrow.com">admin@ayudagrow.com</a> for help.</p></details>
           <div class="ag-purchase-next"><h2>What happens next?</h2><p>Submit your details, then review your subscription on Stripe. After checkout, keep your confirmation and look out for your account setup instructions.</p><p class="ag-purchase-small">Submitting this form alone doesn&rsquo;t activate a paid account.</p></div>
         </div>
@@ -52,3 +52,4 @@
   document.addEventListener('DOMContentLoaded',loadEmbed,{once:true});
   render();
 })();
+
