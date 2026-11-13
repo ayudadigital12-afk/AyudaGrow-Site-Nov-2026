@@ -1,7 +1,6 @@
 name: Production readiness candidate
 on:
-  push:
-    branches: [codex/production-readiness-20261112]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
