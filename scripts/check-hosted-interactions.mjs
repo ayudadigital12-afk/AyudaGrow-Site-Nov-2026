@@ -27,4 +27,3 @@ const stages=[...d.querySelectorAll('[data-growth-stage]')];assert.equal(stages.
 assert.deepEqual(errors,[]);
 console.log(JSON.stringify({scriptsVerified:fetched.length,syntax:'pass',exactBytes:'pass',puzzleHover:12,puzzleFocus:'pass',puzzleClick:'pass',growthStages:5,appLogos:34,headerMotionButton:'removed',noindex:true}));
 dom.window.close();
-

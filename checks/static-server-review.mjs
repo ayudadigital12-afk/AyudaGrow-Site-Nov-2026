@@ -15,7 +15,7 @@ function request(url,method='GET'){
  const r={statusCode:200,headers:{},setHeader(k,v){this.headers[k.toLowerCase()]=v;},writeHead(code,headers={}){this.statusCode=code;for(const [k,v] of Object.entries(headers))this.setHeader(k,v);},end(body){this.body=body;this.ended=true;}};
  handler({url,method},r);assert(r.ended,url);assert.equal(r.headers['x-robots-tag'],'noindex, nofollow');return r;
 }
-const manifest=JSON.parse(readFileSync(new URL('../dist/route-manifest.json',import.meta.url),'utf8'));
+const manifest=JSON.parse(readFileSync(new URL('../build/route-manifest.json',import.meta.url),'utf8'));
 for(const p of manifest.pages){
  for(const path of [p.path]){
   const r=request(path);assert.equal(r.statusCode,200,path);assert.match(r.headers['content-type'],/text\/html/);assert(r.body.toString().includes(`href="${p.canonical}"`));

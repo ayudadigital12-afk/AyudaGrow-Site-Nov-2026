@@ -1,0 +1,62 @@
+name: Production readiness candidate
+on:
+  push:
+    branches: [codex/production-readiness-20261112]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm install --no-save --package-lock=false --ignore-scripts sharp@0.35.5
+      - run: node make-release-assets.cjs
+      - run: node scripts/offline-build.mjs
+      - run: node scripts/check-release-artifact.mjs
+      - run: node scripts/package-release.mjs
+      - name: Existing repository checks
+        continue-on-error: true
+        run: node scripts/run-checks.mjs > build/existing-checks.log 2>&1
+      - name: Browser signup regression (read only)
+        run: node checks/browser-signup-review.mjs
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+      - name: Production candidate (not deployment)
+        run: |
+          SITE_ENV=production node scripts/offline-build.mjs
+          node scripts/check-release-artifact.mjs
+          node scripts/package-release.mjs
+      - name: Production approval gate (expected blocked until sign-off)
+        run: |
+          if node scripts/check-production-readiness.mjs > build/production-gate.log 2>&1; then
+            echo 'Unexpected approval: publication is not authorised'; exit 1
+          fi
+          cat build/production-gate.log
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: release-candidates-and-evidence
+          path: |
+            release/
+            build/
+            qa/*.json
+            qa/*.png
+            qa/*.log
+          include-hidden-files: true
+          retention-days: 14
+      - name: Local verification dependencies
+        run: tar -czf verification-dependencies.tar.gz node_modules
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: verification-dependencies
+          path: verification-dependencies.tar.gz
+          retention-days: 1

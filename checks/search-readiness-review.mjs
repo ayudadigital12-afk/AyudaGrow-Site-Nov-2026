@@ -3,7 +3,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {renderPage} from '../scripts/render-page.mjs';
 const read=file=>readFileSync(new URL('../'+file,import.meta.url),'utf8');
-const manifest=JSON.parse(read('dist/route-manifest.json'));
+const manifest=JSON.parse(read('build/route-manifest.json'));
 const origin=manifest.origin;
 const routes=new Set(manifest.pages.map(p=>p.path));
 const titles=new Set(),descriptions=new Set();

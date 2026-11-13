@@ -55,4 +55,3 @@ for(const group of doc.querySelectorAll('[data-feature-group]')){
 }
 dom.window.close();
 console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; monthly plan links; annual and demo email requests; shared menu and footer; no content browse-away CTA; honest checkout status.');
-

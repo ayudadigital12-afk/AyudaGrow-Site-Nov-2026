@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {apacheStagingRules} from './apache-rules.mjs';
-const manifest=JSON.parse(readFileSync(new URL('../dist/route-manifest.json',import.meta.url)));
+const manifest=JSON.parse(readFileSync(new URL('../build/route-manifest.json',import.meta.url)));
 const aliases=Object.fromEntries(readFileSync(new URL('../dist/_redirects',import.meta.url),'utf8').trim().split('\n').filter(l=>!l.split(' ')[0].endsWith('/')).map(l=>{const [a,b]=l.split(' ');return [a.slice(1),b.slice(1)]}));
 let rules=apacheStagingRules(manifest.pages.map(p=>p.path),aliases);
 rules=rules.replace('RewriteEngine On','<IfModule mod_passenger.c>\n  PassengerEnabled off\n</IfModule>\nRewriteEngine On\n# Hide build-directory URLs from visitors.\nRewriteCond %{THE_REQUEST} [[:space:]]/+dist(?:/|[[:space:]?]) [NC]\nRewriteRule ^dist(?:/(.*))?$ /$1 [R=301,L]');

@@ -1,0 +1,8 @@
+/* Targeted functional corrections; approved visual system is retained. */
+:where(a,button,summary,[tabindex]):focus-visible{outline:3px solid #1661d8;outline-offset:4px}
+.ag-plan-billing,.ag-trial-terms,.ag-purchase-small,.ag-purchase-privacy,.pricing-small,.ag-currency-note{font-size:.875rem;line-height:1.6;color:#425168}
+footer small,footer .site-directory a{font-size:.875rem;line-height:1.65}
+.ag-billing-options button,.ag-comparison-group button,summary{min-height:36px}
+.ag-purchase-form-card iframe{display:block;max-width:100%}
+@media(max-width:600px){.ag-plan-billing,.ag-trial-terms,.ag-purchase-small,.ag-purchase-privacy,.pricing-small{font-size:.9rem}.ag-trial-link{display:inline-block;padding-block:8px}.ag-purchase-form-card{min-width:0}.ag-purchase-steps{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{scroll-behavior:auto!important}}

@@ -1,17 +1,63 @@
 {
-  "status": "proposal-not-activated",
+  "status": "prepared-not-activated",
   "collectionEnabled": false,
   "analyticsProperty": null,
   "searchConsoleProperty": null,
-  "candidateEvents": [
-    {"name": "contact_email_click", "meaning": "Visitor opens an email link; not a confirmed enquiry submission."},
-    {"name": "contact_phone_click", "meaning": "Visitor opens a phone link; not a completed call."},
-    {"name": "plan_discussion_click", "meaning": "Visitor opens contact information from a plan; not a purchase."}
+  "events": [
+    {
+      "name": "select_plan",
+      "signal": "Plan CTA",
+      "conversion": false,
+      "allowed": [
+        "plan_id",
+        "billing_interval"
+      ]
+    },
+    {
+      "name": "signup_start",
+      "signal": "Matching signup page loaded once per navigation",
+      "conversion": false,
+      "allowed": [
+        "plan_id"
+      ]
+    },
+    {
+      "name": "generate_lead",
+      "signal": "Verified CRM form submission or supported signed webhook",
+      "conversion": true,
+      "deduplication": "form submission ID",
+      "blocked": "No verified success event contract"
+    },
+    {
+      "name": "begin_checkout",
+      "signal": "Verified handoff to the matching Stripe checkout",
+      "conversion": false
+    },
+    {
+      "name": "purchase",
+      "signal": "Verified Stripe paid invoice or subscription webhook handled server-side",
+      "conversion": true,
+      "deduplication": "Stripe event ID plus invoice ID",
+      "blocked": "No authorised backend adapter inspected"
+    },
+    {
+      "name": "demo_enquiry",
+      "signal": "Verified CRM enquiry submission",
+      "conversion": true,
+      "deduplication": "CRM submission ID"
+    },
+    {
+      "name": "booking_complete",
+      "signal": "Confirmed calendar appointment",
+      "conversion": true,
+      "deduplication": "Appointment ID"
+    }
   ],
-  "requiresBeforeActivation": [
-    "Approve the analytics tool, exact property/stream and collection scope.",
-    "Verify applicable privacy and consent requirements before collection.",
-    "Verify Search Console ownership and the effective Search generative AI inclusion setting.",
-    "Define reporting owners and distinguish contact-link intent from completed conversions."
+  "rules": [
+    "No purchase event from a success-page visit.",
+    "No PII, full URLs, email, names or phone numbers in analytics.",
+    "Allowlist plan and billing fields; do not pass arbitrary query parameters.",
+    "No advertising pixels or session recording.",
+    "Verify consent and cross-domain attribution before activation."
   ]
 }

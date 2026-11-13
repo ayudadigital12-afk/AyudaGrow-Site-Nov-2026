@@ -4,7 +4,7 @@ import {resolve,extname,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=resolve(fileURLToPath(new URL('../dist/',import.meta.url)));
 const redirects=new Map(readFileSync(resolve(root,'_redirects'),'utf8').split('\n').filter(Boolean).map(line=>line.trim().split(/\s+/)).map(([from,to,code])=>[from,{to,code:Number(code)}]));
-const manifest=JSON.parse(readFileSync(resolve(root,'route-manifest.json'),'utf8'));
+const manifest=JSON.parse(readFileSync(resolve(root,'../build/route-manifest.json'),'utf8'));
 // Managed preview proxies can normalize directory slashes themselves.
 // Test candidate canonical redirects explicitly; default dev mode accepts both forms.
 if(process.env.NORMALIZE_URLS==='1'){

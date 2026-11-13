@@ -4,7 +4,7 @@ import {JSDOM} from 'jsdom';
 import {renderPage} from '../scripts/render-page.mjs';
 import {apacheStagingRules} from '../scripts/apache-rules.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const manifest=JSON.parse(read('dist/route-manifest.json')),origin=manifest.origin;
+const manifest=JSON.parse(read('build/route-manifest.json')),origin=manifest.origin;
 const routeSet=new Set(manifest.pages.map(p=>p.path)),edges=new Map();
 for(const p of manifest.pages){
  const file=p.path==='/'?'dist/index.html':`dist${p.path}/index.html`;

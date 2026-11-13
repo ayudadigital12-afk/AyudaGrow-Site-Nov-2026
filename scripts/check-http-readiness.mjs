@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 const base=process.env.BASE_URL;
 assert(base,'Set BASE_URL to the verified staging deployment or local preview URL.');
 const origin=new URL(base).origin;
-const manifest=JSON.parse(readFileSync(new URL('../dist/route-manifest.json',import.meta.url),'utf8'));
+const manifest=JSON.parse(readFileSync(new URL('../build/route-manifest.json',import.meta.url),'utf8'));
 const redirects=readFileSync(new URL('../dist/_redirects',import.meta.url),'utf8').trim().split('\n').map(l=>l.split(/\s+/));
 let requests=0;
 async function read(path){

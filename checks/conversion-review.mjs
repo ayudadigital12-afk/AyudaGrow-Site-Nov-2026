@@ -3,7 +3,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {renderPage} from '../scripts/render-page.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8'),shell=read('source/shell.html');
-const manifest=JSON.parse(read('dist/route-manifest.json'));
+const manifest=JSON.parse(read('build/route-manifest.json'));
 for(const {path} of manifest.pages){const d=new JSDOM(read('dist/'+(path==='/'?'index.html':path.slice(1)+'/index.html'))).window.document;
  assert(d.querySelector('header nav a[href="/pricing"]'),'Pricing navigation on '+path);
  assert.equal(d.querySelector('meta[name="robots"]').content,'noindex,nofollow');
