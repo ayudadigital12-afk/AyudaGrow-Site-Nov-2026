@@ -1,0 +1,59 @@
+name: Build approved staging release
+on:
+  push:
+    branches: [codex/staging-release-20261113]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm install --no-save --package-lock=false --ignore-scripts sharp@0.35.5
+      - run: node make-release-assets.cjs
+      - run: node scripts/offline-build.mjs
+      - run: node scripts/check-release-artifact.mjs
+      - run: node scripts/build-hostinger-root.mjs
+      - name: Regression suites
+        shell: bash
+        run: |
+          failed=0
+          for check in checks/*.mjs; do
+            case "$check" in checks/browser-*) continue ;; esac
+            echo "::group::$check"
+            node --import ./scripts/offline-guard.mjs "$check" || failed=1
+            echo "::endgroup::"
+          done
+          exit "$failed"
+      - run: node scripts/package-release.mjs
+      - name: Save tested output to review branch only
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = refs/heads/codex/staging-release-20261113
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B codex/staging-output-20261113
+          git add -A dist source/public .htaccess deploy/hostinger-staging-root.htaccess
+          git add -f build/route-manifest.json
+          git commit -m 'Build verified staging release from approved source'
+          git push origin HEAD:refs/heads/codex/staging-output-20261113
+          echo "STAGING_OUTPUT_COMMIT=$(git rev-parse HEAD)"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: staging-release-evidence
+          path: |
+            build/
+            release/staging/
+          include-hidden-files: true
+          retention-days: 7
