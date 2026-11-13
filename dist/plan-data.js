@@ -657,4 +657,3 @@ window.AyudaPlans = {
   "trialUrl": "/signup/essentials?intent=trial",
   "demoUrl": null
 };
-

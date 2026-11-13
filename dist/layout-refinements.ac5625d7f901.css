@@ -1,0 +1,41 @@
+/* Six typographic points = eight CSS pixels; preserve the second statement. */
+.heading-lead{font-size:calc(1em - 8px);line-height:1.12;display:inline-block}
+.hero .wrap{align-items:start}
+.hero .wrap>div:first-child{padding-top:8px}
+.home-workspace-section{background:var(--navy);color:#fff}
+.home-workspace-section .how-intro>p,.home-workspace-section .service-strip p{color:#c6d4e7}
+.home-workspace-section .eyebrow,.home-workspace-section .textlink{color:var(--mint)}
+.home-workspace-section .service-strip{border-color:#395372}
+.home-workspace-section .workspace{background:#fff;color:var(--navy)}
+.inbox-home .section-head{display:block}
+.inbox-home .section-head h2{max-width:none}
+.inbox-home .section-head>p{max-width:650px;margin-top:22px}
+.paths .path-copy h3{font-size:28px;letter-spacing:-.045em}
+.paths .path-card:first-child h3>span{display:block}
+.cta .wrap{display:grid;grid-template-columns:1fr;gap:28px}
+.cta h2{max-width:1000px}
+.cta .button{justify-self:start}
+@media(min-width:1200px){.inbox-home .section-head h2{font-size:clamp(42px,3.8vw,56px)}}
+@media(max-width:720px){.hero .wrap>div:first-child{padding-top:0}.paths .path-copy h3{font-size:23px}.cta .wrap{gap:24px}.cta h2{font-size:clamp(29px,5.4vw,39px)}.cta h2 br{display:none}.inbox-home .section-head>p{margin-top:18px}}
+@media(max-width:380px){.paths .path-copy h3{font-size:23px}}
+
+.home-workspace-section .platform-scene>.micro{color:#52637c}
+/* Who We Serve: feedback is confined to the two existing journey links. */
+.ag-who .ag-person-card{transition:transform 220ms ease,background-color 220ms ease,box-shadow 220ms ease}
+.ag-who .ag-person-card .ag-portrait-frame>svg,.ag-who .ag-person-card .ag-portrait-frame>img{transition:transform 320ms ease;transform-origin:center 35%}
+.ag-who .ag-person-card .ag-person-link b{display:inline-block;transition:transform 220ms ease}
+.ag-who .ag-person-card:focus-visible{background:#f1f7fc;box-shadow:0 8px 22px #173c6a12;transform:translateY(-2px);outline:3px solid #1668d9;outline-offset:6px}
+.ag-who .ag-person-card:focus-visible .ag-portrait-frame>svg,.ag-who .ag-person-card:focus-visible .ag-portrait-frame>img{transform:scale(1.035)}
+.ag-who .ag-person-card:focus-visible .ag-person-link{color:#0e5cae}
+.ag-who .ag-person-card:focus-visible .ag-person-link b{transform:translateX(4px)}
+@media(hover:hover) and (pointer:fine){
+ .ag-who .ag-person-card:hover{background:#f1f7fc;box-shadow:0 8px 22px #173c6a12;transform:translateY(-2px)}
+ .ag-who .ag-person-card:hover .ag-portrait-frame>svg,.ag-who .ag-person-card:hover .ag-portrait-frame>img{transform:scale(1.035)}
+ .ag-who .ag-person-card:hover .ag-person-link b{transform:translateX(4px)}
+}
+@media(hover:none){.ag-who .ag-person-card:active{background:#e9f3fa}.ag-who .ag-person-card,.ag-who .ag-person-card *{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.ag-who .ag-person-card,.ag-who .ag-person-card *{transition:none!important;transform:none!important}}
+body.paused .ag-who .ag-person-card,body.paused .ag-who .ag-person-card *{transition:none!important;transform:none!important}
+
+/* Standalone high-resolution persona portraits replace tiny sheet crops. */
+.paths .path-image .natural-persona-portrait{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block}

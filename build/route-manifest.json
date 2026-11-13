@@ -1,5 +1,6 @@
 {
   "mode": "private-preview",
+  "environment": "staging",
   "origin": "https://ayudagrow.com",
   "indexing": "noindex,nofollow",
   "publicLaunchApproved": false,
@@ -206,17 +207,17 @@
     },
     {
       "path": "/privacy",
-      "title": "Privacy Information and Website Contact Details | AyudaGrow",
-      "description": "Read confirmed information about AyudaGrow’s signup forms, chat, Stripe checkout and browser session storage. A complete privacy notice still needs to be finalised.",
+      "title": "Privacy Policy | AyudaGrow",
+      "description": "How Ayuda Grow LLC handles personal information, AI chat, signup, payments, retention and privacy requests.",
       "canonical": "https://ayudagrow.com/privacy",
       "indexable": false,
       "launchReviewRequired": true
     },
     {
-      "path": "/get-started",
-      "title": "Get Started with CRM, AI and Business Automation | AyudaGrow",
-      "description": "Discuss your business, customer enquiries and follow-up with AyudaGrow. Use the confirmed email and phone links to agree a practical next step together.",
-      "canonical": "https://ayudagrow.com/get-started",
+      "path": "/cookies",
+      "title": "Cookie Policy | AyudaGrow",
+      "description": "Learn about AyudaGrow navigation storage, embedded signup and AI chat, Stripe checkout, and your browser privacy choices.",
+      "canonical": "https://ayudagrow.com/cookies",
       "indexable": false,
       "launchReviewRequired": false
     },

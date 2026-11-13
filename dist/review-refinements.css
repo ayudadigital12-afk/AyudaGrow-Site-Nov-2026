@@ -40,4 +40,3 @@
 body.paused .cta-marks span{animation-play-state:paused}
 @media(max-width:720px){.ch-app-card{min-height:96px;flex-basis:140px;width:140px}.cta:not(:has(.cta-marks)) .wrap{align-items:flex-start;flex-direction:column;gap:8px}.cta-marks span{opacity:.16;width:60px;height:60px}}
 @media(prefers-reduced-motion:reduce){.cta-marks span{animation:none!important}}
-

@@ -8,7 +8,7 @@
     'platform/lead-capture':'lead-capture', 'platform/appointments':'appointments',
     'platform/reputation-reviews':'reputation', 'platform/reporting-forecasting':'reporting',
     'who-its-for':'use-cases', 'who-its-for/b2b':'consultative-sales',
-    'who-its-for/b2c':'appointments', 'how-it-works':'support', 'free-trial':'get-started'
+    'who-its-for/b2c':'appointments', 'how-it-works':'support', 'free-trial':'signup/essentials', 'get-started':'pricing', 'book':'contact'
   };
   const titles = {
   "signup/essentials": "Start Your Essentials Plan | AyudaGrow",
@@ -36,8 +36,8 @@
   "learning": "Courses and Communities for Your Customers | AyudaGrow",
   "support": "CRM Setup, Training and Support for Teams | AyudaGrow",
   "pricing": "CRM and AI Plans from US$99 per Month | AyudaGrow",
-  "privacy": "Privacy Information and Website Contact Details | AyudaGrow",
-  "get-started": "Get Started with CRM, AI and Business Automation | AyudaGrow",
+  "privacy": "Privacy Policy | AyudaGrow",
+  "cookies": "Cookie Policy | AyudaGrow",
   "contact": "Contact Our CRM, AI and Business Automation Team | AyudaGrow",
   "growth-assessment": "Business Growth Assessment and Follow-Up Guide | AyudaGrow",
   "learn": "What Is CRM? A Practical Business Guide | AyudaGrow",
@@ -75,8 +75,8 @@
   "learning": "Explore course, membership and community tools within your customer journey. Discuss content, moderation and access configuration with AyudaGrow’s team.",
   "support": "Turn a useful business priority into a practical setup. Learn how AyudaGrow approaches assessment, configuration, team training and ongoing support.",
   "pricing": "Compare four AyudaGrow plans at US$99, US$149, US$249 and US$349 per month. Explore the free 7-day Essentials trial, tools, AI allowances and setup.",
-  "privacy": "Read confirmed information about AyudaGrow’s signup forms, chat, Stripe checkout and browser session storage. A complete privacy notice still needs to be finalised.",
-  "get-started": "Discuss your business, customer enquiries and follow-up with AyudaGrow. Use the confirmed email and phone links to agree a practical next step together.",
+  "privacy": "How Ayuda Grow LLC handles personal information, AI chat, signup, payments, retention and privacy requests.",
+  "cookies": "Learn about AyudaGrow navigation storage, embedded signup and AI chat, Stripe checkout, and your browser privacy choices.",
   "contact": "Contact AyudaGrow about customer enquiries, sales follow-up and your business workflow. Email or call the team to discuss where practical support can help.",
   "growth-assessment": "Use six questions to review enquiries, follow-up and business growth. Prepare for an AyudaGrow conversation with this guide, not an online assessment.",
   "learn": "Learn how CRM connects customer records, conversation history and next actions. Explore practical examples and a clear starting point for your business.",
@@ -125,11 +125,11 @@
     const canonical=origin + (currentKey==='home'?'/':'/'+currentKey);
     title=titles[currentKey]||title;
     document.title=title;
-    setMeta('meta[name="robots"]',{name:'robots',content:'noindex,nofollow'});
+    setMeta('meta[name="robots"]',{name:'robots',content:(document.documentElement.dataset.environment==='production'&&!location.hostname.startsWith('staging')&&!missing&&!/^(signup\/|privacy$|cookies$|terms$)/.test(currentKey)?'index,follow':document.documentElement.dataset.environment==='production'&&!missing&&!location.hostname.startsWith('staging')?'noindex,follow':'noindex,nofollow')});
     setMeta('meta[name="description"]',{name:'description',content:description || 'Explore AyudaGrow’s AI, automation and practical support. Capabilities and service scope depend on the agreed setup.'});
-    const image=origin+'/assets/logo.webp';
-    for(const [property,content] of Object.entries({'og:type':'website','og:site_name':'AyudaGrow','og:title':title,'og:description':description,'og:image':image,'og:image:alt':'AyudaGrow logo','og:locale':'en_US'}))setMeta('meta[property="'+property+'"]',{property,content:content||''});
-    for(const [name,content] of Object.entries({'twitter:card':'summary','twitter:title':title,'twitter:description':description,'twitter:image':image,'twitter:image:alt':'AyudaGrow logo'}))setMeta('meta[name="'+name+'"]',{name,content:content||''});
+    const image=origin+'/assets/share-default.png';
+    for(const [property,content] of Object.entries({'og:type':'website','og:site_name':'AyudaGrow','og:title':title,'og:description':description,'og:image':image,'og:image:alt':'AyudaGrow. Connect. Automate. Grow. CRM and AI for your business.','og:image:type':'image/png','og:image:width':'1200','og:image:height':'630','og:locale':'en_US'}))setMeta('meta[property="'+property+'"]',{property,content:content||''});
+    for(const [name,content] of Object.entries({'twitter:card':'summary_large_image','twitter:title':title,'twitter:description':description,'twitter:image':image,'twitter:image:alt':'AyudaGrow logo'}))setMeta('meta[name="'+name+'"]',{name,content:content||''});
     document.head.querySelector('#ayuda-structured-data')?.remove();
     if(missing){document.head.querySelector('link[rel="canonical"]')?.remove();document.head.querySelector('meta[property="og:url"]')?.remove();}
     else {
@@ -137,7 +137,7 @@
       setMeta('meta[property="og:url"]',{property:'og:url',content:canonical});
       const label=title.replace(/^AyudaGrow \| /,'').replace(/ \| AyudaGrow$/,'');
       const graph=[
-        {'@type':'Organization','@id':origin+'/#organization',name:'AyudaGrow',url:origin+'/',logo:image},
+        {'@type':'Organization','@id':origin+'/#organization',name:'AyudaGrow',url:origin+'/',logo:origin+'/assets/logo.webp',description:'CRM, AI and automation with practical setup and support for businesses in Jamaica and the Caribbean',founder:{'@type':'Person',name:'Rasheed Girvan'},areaServed:['Jamaica','Caribbean']},
         {'@type':'WebSite','@id':origin+'/#website',name:'AyudaGrow',url:origin+'/',publisher:{'@id':origin+'/#organization'}},
         {'@type':'WebPage','@id':canonical+'#webpage',url:canonical,name:title,description,isPartOf:{'@id':origin+'/#website'}}
       ];
@@ -160,3 +160,4 @@
   // New controls can insert legacy links. Make their native open-in-new-tab targets clean too.
   new MutationObserver(records=>{if(records.some(record=>record.type==='childList'||record.attributeName==='href'))cleanLinks();}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['href']});
 })();
+

@@ -1,10 +1,14 @@
-# STAGING ONLY: retain noindex. Do not deploy this configuration to the production domain.
+# STAGING ONLY: retain noindex.
 Options -Indexes -MultiViews
 DirectoryIndex index.html
 DirectorySlash Off
 ErrorDocument 404 /dist/404.html
 <IfModule mod_headers.c>
   Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Content-Security-Policy "upgrade-insecure-requests; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+  Header always set Permissions-Policy "camera=(), geolocation=(), browsing-topics=(), microphone=(self)"
   <FilesMatch "\.(?:html|xml|txt|json)$">
     Header set Cache-Control "no-cache, max-age=0, must-revalidate"
   </FilesMatch>
@@ -50,7 +54,7 @@ RewriteRule ^dist/learning/?$ https://%{HTTP_HOST}/learning [R=301,L]
 RewriteRule ^dist/support/?$ https://%{HTTP_HOST}/support [R=301,L]
 RewriteRule ^dist/pricing/?$ https://%{HTTP_HOST}/pricing [R=301,L]
 RewriteRule ^dist/privacy/?$ https://%{HTTP_HOST}/privacy [R=301,L]
-RewriteRule ^dist/get-started/?$ https://%{HTTP_HOST}/get-started [R=301,L]
+RewriteRule ^dist/cookies/?$ https://%{HTTP_HOST}/cookies [R=301,L]
 RewriteRule ^dist/contact/?$ https://%{HTTP_HOST}/contact [R=301,L]
 RewriteRule ^dist/growth-assessment/?$ https://%{HTTP_HOST}/growth-assessment [R=301,L]
 RewriteRule ^dist/learn/?$ https://%{HTTP_HOST}/learn [R=301,L]
@@ -64,10 +68,11 @@ RewriteRule ^dist/solutions/reactivate-customers/?$ https://%{HTTP_HOST}/solutio
 # Hide build-directory URLs from visitors.
 RewriteCond %{THE_REQUEST} [[:space:]]/+dist(?:/|[[:space:]?]) [NC]
 RewriteRule ^dist(?:/(.*))?$ /$1 [R=301,L]
+# User-confirmed staff and customer login. Fixed destination; query retained.
+RewriteRule ^login(?:/|/index\.html)?$ https://app.ayudagrow.com/ [R=301,L]
 # Normalise direct build-directory requests at the served-directory level too.
 RewriteCond %{THE_REQUEST} \s/+dist/([^\s?]*) [NC]
 RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L]
-# Production canonical-host enforcement must be added after the host choice is approved.
 # Resolve legacy and slash/index variants directly to an HTTPS final path; preserve the query.
 RewriteRule ^platform/unified-conversations(?:/|/index\.html)?$ https://%{HTTP_HOST}/inbox [R=301,L]
 RewriteRule ^platform/follow-up-automation(?:/|/index\.html)?$ https://%{HTTP_HOST}/follow-up [R=301,L]
@@ -81,7 +86,9 @@ RewriteRule ^who-its-for(?:/|/index\.html)?$ https://%{HTTP_HOST}/use-cases [R=3
 RewriteRule ^who-its-for/b2b(?:/|/index\.html)?$ https://%{HTTP_HOST}/consultative-sales [R=301,L]
 RewriteRule ^who-its-for/b2c(?:/|/index\.html)?$ https://%{HTTP_HOST}/appointments [R=301,L]
 RewriteRule ^how-it-works(?:/|/index\.html)?$ https://%{HTTP_HOST}/support [R=301,L]
-RewriteRule ^free-trial(?:/|/index\.html)?$ https://%{HTTP_HOST}/get-started [R=301,L]
+RewriteRule ^free-trial(?:/|/index\.html)?$ https://%{HTTP_HOST}/signup/essentials [R=301,L]
+RewriteRule ^get-started(?:/|/index\.html)?$ https://%{HTTP_HOST}/pricing [R=301,L]
+RewriteRule ^book(?:/|/index\.html)?$ https://%{HTTP_HOST}/contact [R=301,L]
 RewriteRule ^index\.html$ https://%{HTTP_HOST}/ [R=301,L]
 RewriteRule ^signup/essentials(?:/|/index\.html)$ https://%{HTTP_HOST}/signup/essentials [R=301,L]
 RewriteRule ^signup/core(?:/|/index\.html)$ https://%{HTTP_HOST}/signup/core [R=301,L]
@@ -108,7 +115,7 @@ RewriteRule ^learning(?:/|/index\.html)$ https://%{HTTP_HOST}/learning [R=301,L]
 RewriteRule ^support(?:/|/index\.html)$ https://%{HTTP_HOST}/support [R=301,L]
 RewriteRule ^pricing(?:/|/index\.html)$ https://%{HTTP_HOST}/pricing [R=301,L]
 RewriteRule ^privacy(?:/|/index\.html)$ https://%{HTTP_HOST}/privacy [R=301,L]
-RewriteRule ^get-started(?:/|/index\.html)$ https://%{HTTP_HOST}/get-started [R=301,L]
+RewriteRule ^cookies(?:/|/index\.html)$ https://%{HTTP_HOST}/cookies [R=301,L]
 RewriteRule ^contact(?:/|/index\.html)$ https://%{HTTP_HOST}/contact [R=301,L]
 RewriteRule ^growth-assessment(?:/|/index\.html)$ https://%{HTTP_HOST}/growth-assessment [R=301,L]
 RewriteRule ^learn(?:/|/index\.html)$ https://%{HTTP_HOST}/learn [R=301,L]
@@ -122,7 +129,7 @@ RewriteRule ^solutions/reactivate-customers(?:/|/index\.html)$ https://%{HTTP_HO
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # Do not expose host configuration or the fallback-host rule files.
-RewriteRule ^(?:\.htaccess|_(?:headers|redirects))$ - [R=404,L]
+RewriteRule ^(?:\.htaccess|_(?:headers|redirects)|route-manifest\.json|source(?:/|$)|scripts(?:/|$)|docs(?:/|$)|deploy(?:/|$)|build(?:/|$)|checks(?:/|$)|node_modules(?:/|$)|\.git(?:/|$)|package(?:-lock)?\.json|README\.md|HOSTING\.md) - [R=404,L]
 RewriteRule ^signup/essentials$ dist/signup/essentials/index.html [END]
 RewriteRule ^signup/core$ dist/signup/core/index.html [END]
 RewriteRule ^signup/build$ dist/signup/build/index.html [END]
@@ -148,7 +155,7 @@ RewriteRule ^learning$ dist/learning/index.html [END]
 RewriteRule ^support$ dist/support/index.html [END]
 RewriteRule ^pricing$ dist/pricing/index.html [END]
 RewriteRule ^privacy$ dist/privacy/index.html [END]
-RewriteRule ^get-started$ dist/get-started/index.html [END]
+RewriteRule ^cookies$ dist/cookies/index.html [END]
 RewriteRule ^contact$ dist/contact/index.html [END]
 RewriteRule ^growth-assessment$ dist/growth-assessment/index.html [END]
 RewriteRule ^learn$ dist/learn/index.html [END]

@@ -22,5 +22,12 @@
 /who-its-for/b2c/ /appointments 301
 /how-it-works /support 301
 /how-it-works/ /support 301
-/free-trial /get-started 301
-/free-trial/ /get-started 301
+/free-trial /signup/essentials 301
+/free-trial/ /signup/essentials 301
+/get-started /pricing 301
+/get-started/ /pricing 301
+/book /contact 301
+/book/ /contact 301
+/login https://app.ayudagrow.com/ 301
+/login/ https://app.ayudagrow.com/ 301
+/login/index.html https://app.ayudagrow.com/ 301
