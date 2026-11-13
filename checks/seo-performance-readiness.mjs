@@ -1,4 +1,7 @@
-import assert from 'node:assert/strict';
+import strict from 'node:assert/strict';
+const failures=[];
+function assert(...args){try{strict(...args);}catch(error){failures.push(error.message);}}
+assert.equal=(...args)=>{try{strict.equal(...args);}catch(error){failures.push(error.message);}};
 import {readFileSync,readdirSync,existsSync,statSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {renderPage} from '../scripts/render-page.mjs';
@@ -45,6 +48,6 @@ for(const item of optimizations){
 }
 assert(optimizations.reduce((s,x)=>s+x.new_bytes,0)<optimizations.reduce((s,x)=>s+x.old_bytes,0)*.25,'At least 75% smaller selected asset payload');
 assert.equal(read('dist/assets/fonts/OFL.txt'),read('source/public/assets/fonts/OFL.txt'));
-console.log('SEO/performance preparation passed: 33 topic-first titles/descriptions, no skipped main headings, image dimensions/loading, deferred scripts, WOFF2 preloads, three-click reachability, generated Apache staging rules, source/output consistency and >75% smaller selected assets. This is NOT a measured Core Web Vitals pass or a hosted Apache test.');
-
+if(failures.length)throw new Error('SEO/performance regressions:\n'+failures.map(x=>' - '+x).join('\n'));
+console.log('SEO/performance preparation passed: useful titles/descriptions, no skipped main headings, image dimensions/loading, deferred scripts, WOFF2 preloads, three-click reachability, generated Apache staging rules, source/output consistency and >75% smaller selected assets. This is NOT a measured Core Web Vitals pass or a hosted Apache test.');
 
