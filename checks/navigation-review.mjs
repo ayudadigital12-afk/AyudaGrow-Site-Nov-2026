@@ -1,3 +1,4 @@
+import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
@@ -36,9 +37,10 @@ assert.equal(click('#/crm',{ctrlKey:true}).defaultPrevented,false,'modified clic
 assert.equal(click('#main').defaultPrevented,false,'non-route anchors remain native');
 click('#/reporting');travel(-1);flush();assert.equal(c.scrollY,950,'rapid traversal cancels stale restoration frames');
 assert(buttons[2].pressed);
-const html=readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert(html.indexOf('navigation.js')>html.indexOf('subpage-theme.js'));
+const html=normaliseAssetNames(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8'));assert(html.indexOf('navigation.js')>html.indexOf('subpage-theme.js'));
 assert(!readFileSync(new URL('../dist/app.js',import.meta.url),'utf8').includes('window.scrollTo(0,0)'));
 console.log('Navigation checks passed: entry-specific Back/Forward, scroll, tabs, disclosures, focus, independent repeat visits, duplicate-event suppression, rapid traversal and native modified/anchor clicks.');
 
 click('#/platform?growth=convert-close');flush();assert.equal(c.scrollY,576);assert(buttons[2].pressed);assert.equal(document.activeElement,buttons[2]);c.scrollY=900;travel(-1);flush();assert.equal(c.scrollY,950);travel(1);flush();assert.equal(c.scrollY,900,'Forward restores a saved position instead of reapplying the entry anchor');
 console.log('Context landing checks passed: new stage entry selects/focuses its stage and scrolls to the loop; history returns retain the saved position.');
+

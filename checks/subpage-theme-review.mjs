@@ -1,7 +1,8 @@
+import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=f=>readFileSync(new URL('../'+f,import.meta.url),'utf8');
-const js=read('dist/subpage-theme.js'), css=read('dist/subpage-theme.css'),html=read('dist/index.html');
+const js=read('dist/subpage-theme.js'), css=read('dist/subpage-theme.css'),html=normaliseAssetNames(read('dist/index.html'));
 assert(js.includes("!main.querySelector('.hero')"));
 assert(js.includes("main.classList.toggle('subpage-theme',isSubpage)"));
 assert(js.includes('if(!isSubpage)return'));
@@ -17,3 +18,4 @@ assert(css.includes('scope-list{padding:22px}'));
 assert(css.includes('.feature-grid:has(>.feature:nth-child(3):last-child)'));
 assert(html.indexOf('subpage-theme.js')>html.indexOf('connections-home.js'));
 console.log('Subpage theme checks passed: homepage isolation, semantic heading treatment, mobile spacing, balanced grids, keyboard/touch and reduced-motion handling.');
+

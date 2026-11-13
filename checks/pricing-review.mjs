@@ -7,7 +7,9 @@ const cards=[...d.querySelectorAll('.plan-card')];
 assert.deepEqual(cards.map(c=>c.querySelector('.plan-price strong').textContent),['US$99','US$149','US$249','US$349']);
 assert.deepEqual(cards.map(c=>c.querySelector('h3').textContent),['Essentials','Core','Build','Scale']);
 cards.forEach(c=>assert(c.querySelector('a[data-select-plan][href="/signup/'+c.dataset.plan+'"]')));
-assert.equal(cards.filter(c=>c.textContent.includes('7-day free trial')).length,1);
+assert.equal(cards.filter(c=>c.querySelector('[data-select-trial]')).length,1);
+assert.match(cards[0].querySelector('.ag-trial-terms').textContent,/Monthly trial only/);
+assert.match(cards[0].querySelector('[data-select-trial]').textContent,/free for 7 days/);
 assert.equal(cards[2].querySelector('.ag-plan-kicker').textContent,'Most popular');
 assert.match(cards[2].textContent,/1,000 AI responses/);assert.match(cards[3].textContent,/Voice AI on web chat and WhatsApp calls/);
 assert.match(cards[0].textContent,/Card required.*US\$99\/month unless cancelled/);
@@ -44,7 +46,7 @@ doc.querySelector('[data-billing="annual"]').click();
 assert.deepEqual([...doc.querySelectorAll('.plan-price strong')].map(x=>x.textContent),['US$990','US$1,490','US$2,490','US$3,490']);
 for(const p of w.AyudaPlans.plans){const url=w.location.href;doc.querySelector('[data-select-plan="'+p.id+'"]').click();assert.equal(w.location.href,url);const mail=decodeURIComponent(doc.querySelector('[data-signup-email]').href);assert(mail.includes(p.name));assert(mail.includes('annual'));assert(mail.includes(p.annualPrice.toLocaleString('en-US')));}
 assert.equal(doc.querySelector('[data-select-trial]').getAttribute('href'),'/signup/essentials?intent=trial');doc.querySelector('[data-billing="monthly"]').click();for(const p of w.AyudaPlans.plans)assert.equal(doc.querySelector('[data-select-plan="'+p.id+'"]').getAttribute('href'),'/signup/'+p.id);
-doc.querySelector('[data-select-demo]').click();assert.match(decodeURIComponent(doc.querySelector('[data-signup-email]').href),/demo request/);
+assert.match(doc.querySelector('[data-select-demo]').onclick.toString(),/location\.href='\/contact\?intent=demo'/,'Demo uses the approved contact journey');
 for(const group of doc.querySelectorAll('[data-feature-group]')){
  const b=group.querySelector('[data-group-toggle]');if(!b)continue;const extras=[...group.querySelectorAll('[data-extra-feature]')];
  assert(extras.every(x=>x.hidden));group.dispatchEvent(Object.assign(new w.Event('pointerenter'),{pointerType:'touch'}));assert(extras.every(x=>x.hidden));
@@ -55,3 +57,4 @@ for(const group of doc.querySelectorAll('[data-feature-group]')){
 }
 dom.window.close();
 console.log('PASS: final matrix; all public features; compact four-row categories; hover/touch/click/keyboard; monthly/annual USD; monthly plan links; annual and demo email requests; shared menu and footer; no content browse-away CTA; honest checkout status.');
+

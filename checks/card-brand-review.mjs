@@ -1,3 +1,4 @@
+import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 const read=f=>readFileSync(new URL('../dist/'+f,import.meta.url),'utf8');
@@ -14,3 +15,4 @@ assert(read('homepage.js').includes('Different ways of selling</span>'));
 assert(read('expanded.js').includes('<span class="heading-lead">Your Business knowledge.</span><br>A useful conversation.<br>A clear next step.'));
 assert(read('layout-refinements.css').includes('font-size:calc(1em - 8px)'));
 console.log('Card/brand checks passed: compact content-led shared card families, unchanged five-column stage width, 78/52px stage targets, six supplied marks, reserved hero spacing, mobile in-flow CTA, semantic Who We Serve swap and exact 6pt first-line reduction.');
+

@@ -1,3 +1,4 @@
+import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
@@ -9,5 +10,6 @@ for(const s of ['Additional managed service','scope and fees agreed separately',
 assert(c.reputationPlan('multi').includes('Kingston, Mandeville and Montego Bay'));assert(c.reputationPlan('single').includes('One location.'));
 const a=c.pages.appointments();assert(a.includes('href="#/reputation"'));assert(a.indexOf('reputation management')<a.indexOf('<section class="cta">'));
 const css=read('dist/reputation-page.css');assert(css.includes('@media(max-width:640px)'));assert(css.includes('min-height:48px'));assert(read('dist/reputation-page.js').includes('prefers-reduced-motion'));
-assert(read('dist/index.html').indexOf('reputation-page.js')>read('dist/index.html').indexOf('inbox-page.js'));
+assert(normaliseAssetNames(read('dist/index.html')).indexOf('reputation-page.js')>normaliseAssetNames(read('dist/index.html')).indexOf('inbox-page.js'));
 console.log('Reputation checks passed: dedicated route, appointment bridge, managed-service boundaries, policy qualifications, location selector, accessible controls and responsive rules.');
+

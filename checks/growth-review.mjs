@@ -1,3 +1,4 @@
+import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
@@ -21,7 +22,7 @@ assert(source.includes("['ArrowRight','ArrowLeft','Home','End']"));
 assert(source.includes("setAttribute('tabindex'"));
 assert(source.includes("setAttribute('aria-controls','demo-content')"));
 assert(read('dist/growth-pages.css').includes('prefers-reduced-motion'));
-assert(read('dist/index.html').indexOf('growth-pages.js')>read('dist/index.html').indexOf('reporting-page.js'));
+assert(normaliseAssetNames(read('dist/index.html')).indexOf('growth-pages.js')>normaliseAssetNames(read('dist/index.html')).indexOf('reporting-page.js'));
 console.log('Growth review passed: hierarchy, six routes, five lifecycle stages, three CRM roles, simultaneous calendar paths, audience scope, parked pages, keyboard tabs and reduced motion.');
 const slugs=['attract-capture','follow-up-nurture','convert-close','delight-grow','reactivate'];
 for(const [index,slug] of slugs.entries()){
@@ -37,3 +38,4 @@ c.location={hash:'#/platform?growth=unknown'};assert(c.pages.platform().includes
 console.log('Growth destination checks passed: all 20 homepage links target the matching Platform stage, direct-entry context, invalid-stage fallback and deeper Platform tool links remain intact.');
 
 assert(source.includes("e.pointerType==='mouse'&&(e.movementX||e.movementY)"),'A stationary cursor must not change the landing stage');
+
