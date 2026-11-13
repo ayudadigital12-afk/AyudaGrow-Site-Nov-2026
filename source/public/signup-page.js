@@ -22,7 +22,7 @@
       <div class="ag-purchase-grid">
         <aside class="ag-purchase-summary" aria-label="Your selected plan">
           <div class="ag-purchase-badges"><span class="ag-purchase-pill">${p.name}</span>${p.id==='build'?'<span class="ag-purchase-popular">Most popular</span>':''}</div>
-          <h2>A stronger next step<br>for your business.</h2><p class="ag-purchase-purpose">${p.purpose}</p>
+          <p class="ag-purchase-headline">A stronger next step<br>for your business.</p><p class="ag-purchase-purpose">${p.purpose}</p>
           <p class="ag-purchase-price"><strong>US$${p.price}</strong><span>/month</span></p><p class="ag-purchase-billing">Monthly subscription. Billed in US dollars.</p>
           ${p.trialDays?'<div class="ag-purchase-trial"><span class="ag-purchase-pill">7-day free trial</span><p>Card required. Then US$99/month unless cancelled before the trial ends. Check the trial and amount due on Stripe before confirming.</p></div>':''}
           <ul class="ag-purchase-features">${features[p.id].map(f=>'<li><span aria-hidden="true">&#10003;</span>'+f+'</li>').join('')}</ul>

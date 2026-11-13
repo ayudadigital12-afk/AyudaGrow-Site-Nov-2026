@@ -35,6 +35,10 @@ jobs:
             echo "::endgroup::"
           done
           exit "$failed"
+      - name: Browser signup regression (read only)
+        run: node checks/browser-signup-review.mjs
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
       - run: node scripts/package-release.mjs
       - name: Save tested output to review branch only
         shell: bash

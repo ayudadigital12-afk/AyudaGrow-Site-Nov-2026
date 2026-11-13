@@ -2,7 +2,7 @@ import {normaliseAssetNames} from '../scripts/normalise-asset-names.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 const read=f=>readFileSync(new URL('../dist/'+f,import.meta.url),'utf8');
-const css=read('card-refinements.css'),brand=read('brand-growth.css'),index=read('index.html');
+const css=read('card-refinements.css'),brand=read('brand-growth.css'),index=normaliseAssetNames(read('index.html'));
 for(const name of ['explore-card','feature','gp-loop-tabs','gp-exception-card','channel-capabilities','plan-card','learning-steps','rp-response-grid','rf-deals','rf-decisions','rf-pipeline','knowledge-stack'])assert(css.includes(name),name);
 assert(!/(?:^|[;{])\s*height\s*:|text-overflow|line-clamp|overflow\s*:\s*hidden/.test(css));
 assert(css.includes('min-height:78px'));assert(css.includes('min-height:52px'));assert(css.includes('min-height:0'));
