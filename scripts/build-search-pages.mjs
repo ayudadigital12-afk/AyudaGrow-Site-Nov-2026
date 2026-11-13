@@ -57,5 +57,6 @@ writeFileSync(join(dist,'robots.txt'),robots(config));
 writeFileSync(join(dist,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+manifest.pages.filter(p=>p.indexable).map(p=>'\n  <url><loc>'+p.canonical+'</loc></url>').join('')+'\n</urlset>\n');
 writeFileSync(join(dist,'_headers'),config.production?'# Apache rules are authoritative. Apply equivalent route-specific policy on other hosts.\n':'/*\n  X-Robots-Tag: noindex, nofollow\n');
 writeFileSync(join(dist,'_redirects'),Object.entries(aliases).map(([from,to])=>`/${from} /${to} 301\n/${from}/ /${to} 301`).join('\n')+'\n');
+writeFileSync(join(dist,'_redirects'),readFileSync(join(dist,'_redirects'),'utf8')+'/login https://app.ayudagrow.com/ 301\n/login/ https://app.ayudagrow.com/ 301\n/login/index.html https://app.ayudagrow.com/ 301\n');
 writeFileSync(join(dist,'.htaccess'),apacheStagingRules(manifest.pages.map(p=>p.path),aliases,config));
 console.log(`Built ${routes.length} complete HTML pages, ${Object.keys(aliases).length} legacy fallbacks, a 404 document, private metadata, robots, sitemap and redirect/header candidates.`);

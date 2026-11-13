@@ -23,10 +23,10 @@ for(const page of manifest.pages){for(const variant of page.path==='/'?['/index.
 for(const [path,to,status] of redirects){
  const r=await read(path+'?source=readiness');assert.equal(r.status,Number(status),path);
  const target=new URL(r.headers.get('location'),origin);
- assert.equal(target.pathname,to);assert.equal(target.search,'?source=readiness');
- assert.equal((await read(to)).status,200,`${path}: target`);
+ const expected=new URL(to,origin);assert.equal(target.origin,expected.origin);assert.equal(target.pathname,expected.pathname);assert.equal(target.search,'?source=readiness');
+ if(target.origin===origin)assert.equal((await read(to)).status,200,`${path}: target`); // External login is checked separately, without signing in.
 }
-for(const path of ['/ai-concepts','/ai-concepts/','/not-a-real-ayudagrow-route','/book','/login','/source/shell.html','/package.json','/node_modules/jsdom/package.json']){
+for(const path of ['/ai-concepts','/ai-concepts/','/not-a-real-ayudagrow-route','/source/shell.html','/package.json','/node_modules/jsdom/package.json']){
  const r=await read(path);assert.equal(r.status,404,`${path}: must not expose removed/private/unsupported route`);
  assert.match(await r.text(),/That page is not here/);
 }

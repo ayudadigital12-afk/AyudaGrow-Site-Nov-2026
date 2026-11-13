@@ -26,7 +26,7 @@ Browser access was interrupted repeatedly. Local execution later failed before s
 |4|Exposure and packaging|Implemented, verification pending.|Generated-output-only packaging check passed. Actual hosting still serves the existing repository-root arrangement. History secret scan, visibility intent and authenticated deployment dependency unresolved.|
 |5|Environment indexing|Implemented, verification pending.|Staging checks passed. Production configuration prepared; production build and actual headers/DOM need verification.|
 |6|Sitemap and canonical host|Implemented, verification pending.|Canonical production sitemap generator and hostname rules prepared. Production output and redirect-chain testing pending.|
-|7|Migration redirects|Implemented, verification pending.|Map below prepared. Full live/campaign/Search Console inventory and login target missing.|
+|7|Migration redirects|Implemented, verification pending.|Map below prepared. Full live/campaign/Search Console inventory and hosted redirect verification remain pending. Login target is now user-confirmed.|
 |8|Favicons and sharing|Implemented, verification pending.|Existing approved logo used for favicon set and 1200x630 PNG fallback. Artifact existence checks passed. Social platform previews and production image responses pending.|
 |9|Security|Implemented, verification pending.|Header candidates prepared. Full CSP inventory, report-only test, host enforcement, HSTS/TLS coverage and hosting controls still pending. No claim of complete security.|
 |10|Privacy and terms|Blocked by missing information or access.|Current privacy notice unfinished. October terms draft contains superseded pricing and assumptions; not approved for publication. Precise decisions below.|
@@ -61,9 +61,9 @@ All mappings are permanent server-side candidates, retaining query parameters. V
 |/free-trial|/signup/essentials|
 |/get-started|/pricing|
 |/book|/contact|
-|/login|Unresolved: verified customer login destination required|
+|/login|https://app.ayudagrow.com/ (user-confirmed)|
 
-The existing live /login was inspected and displayed a route placeholder. No destination was invented. /book goes to the relevant contact journey; it is not a verified calendar booking experience. Genuine nonexistent routes must return HTTP 404.
+The existing live /login was inspected and displayed a route placeholder. Rasheed subsequently confirmed https://app.ayudagrow.com as the staff and client email/password login. A fixed permanent redirect is prepared for /login, /login/ and /login/index.html; query parameters are retained. This is user-confirmed destination information, not an independently tested sign-in or deployed redirect. /book goes to the relevant contact journey; it is not a verified calendar booking experience. Genuine nonexistent routes must return HTTP 404.
 
 ## Indexing policy candidate
 Staging: noindex,nofollow in source, runtime metadata and HTTP headers; robots disallows all. This is not access security.
@@ -73,7 +73,7 @@ Production activation uses SITE_ENV=production, not a launch-day search-and-repl
 
 ## Decisions and access needed
 - Confirm public repository intent and deployment authentication before considering private visibility.
-- Supply or verify the actual customer login destination. Approve a public consultation calendar if booking is to go beyond contact.
+- Deploy and verify the prepared login redirect to the user-confirmed destination. Approve a public consultation calendar if booking is to go beyond contact.
 - Approve cancellation method, notice/timing, annual renewal rules, refund treatment, trial conversion presentation, support expiry/rollover and additional-charge disclosures.
 - Confirm operating entity/contact details, AYUDA Digital relationship, privacy provider contracts/roles, processing locations, retention/deletion practice, rights-request process and effective date.
 - Verify actual cookies/storage and target audiences before deciding consent controls.

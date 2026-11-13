@@ -28,6 +28,8 @@ export function apacheStagingRules(routes,aliases,config={production:false}){
  '  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json application/xml text/xml image/svg+xml',
  '</IfModule>',
  'RewriteEngine On',
+ '# User-confirmed staff and customer login. Fixed destination; query retained.',
+ 'RewriteRule ^login(?:/|/index\\.html)?$ https://app.ayudagrow.com/ [R=301,L]',
  '# Normalise direct build-directory requests at the served-directory level too.',
  'RewriteCond %{THE_REQUEST} \\s/+dist/([^\\s?]*) [NC]',
  'RewriteRule ^ https://%{HTTP_HOST}/%1 [R=301,L]',

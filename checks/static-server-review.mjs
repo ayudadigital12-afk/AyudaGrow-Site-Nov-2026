@@ -22,9 +22,9 @@ for(const p of manifest.pages){
  }
 }
 for(const line of readFileSync(new URL('../dist/_redirects',import.meta.url),'utf8').trim().split('\n')){
- const [path,target,code]=line.split(/\s+/);const r=request(path+'?source=test');assert.equal(r.statusCode,Number(code));assert.equal(r.headers.location,target+'?source=test');assert.equal(request(target).statusCode,200);
+ const [path,target,code]=line.split(/\s+/);const r=request(path+'?source=test');assert.equal(r.statusCode,Number(code));assert.equal(r.headers.location,target+'?source=test');if(!target.startsWith('https://'))assert.equal(request(target).statusCode,200);
 }
-for(const path of ['/ai-concepts','/ai-concepts/','/book','/login','/missing-route','/source/shell.html','/package.json','/node_modules/jsdom/package.json']){
+for(const path of ['/ai-concepts','/ai-concepts/','/missing-route','/source/shell.html','/package.json','/node_modules/jsdom/package.json']){
  const r=request(path);assert.equal(r.statusCode,404,path);assert.match(r.body.toString(),/That page is not here/);
 }
 for(const p of manifest.pages){for(const variant of p.path==='/'?['/index.html']:[p.path+'/',p.path+'/index.html']){const r=request(variant+'?check=1');assert.equal(r.statusCode,301);assert.equal(r.headers.location,p.path+'?check=1');}}
@@ -32,3 +32,5 @@ const head=request('/','HEAD');assert.equal(head.statusCode,200);assert.equal(he
 assert.equal(request('/','POST').statusCode,405);
 assert.equal(request('/%E0%A4%A').statusCode,400);
 console.log('Static handler checks passed: 33 routes and slash variants, 26 query-preserving 301s, correct targets, 404/source isolation, HEAD, malformed URL and unsupported method. Network/hosting still requires separate verification.');
+
+for(const path of ['/login','/login/','/login/index.html']){const r=request(path+'?source=test&next=https%3A%2F%2Fexample.org');assert.equal(r.statusCode,301);assert.equal(r.headers.location,'https://app.ayudagrow.com/?source=test&next=https%3A%2F%2Fexample.org');}
