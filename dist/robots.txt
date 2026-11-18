@@ -1,3 +1,0 @@
-# Staging only. Not an access-control mechanism.
-User-agent: *
-Disallow: /
