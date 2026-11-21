@@ -10,7 +10,7 @@
   const features = {
     essentials:['Up to 5 team members','Unlimited contacts','3 calendars and 3 sales pipelines','Email, web chat and social inbox','AI website and workflow builders','2 hours of guided setup in your first paid month'],
     core:['Unlimited team members, contacts and pipelines','10 calendars','Everything in Essentials','AI writing and content tools','Email campaigns and social planner','3 hours of guided setup in your first paid month'],
-    build:['Unlimited team members, calendars and pipelines','Everything in Core','1,000 AI text responses per month across 4 channels','AI review replies and Google Business Profile tools','Custom reports','5 hours of guided setup in your first paid month'],
+    build:['Unlimited team members, calendars and pipelines','Everything in Core','1,000 AI text responses per month across 5 channels','AI review replies and Google Business Profile tools','Custom reports','5 hours of guided setup in your first paid month'],
     scale:['Unlimited team members, calendars and pipelines','Everything in Build','Unlimited AI text responses, subject to fair use','Voice AI on web chat and eligible WhatsApp calls','Online store, webinars and quizzes','5 hours of guided setup in your first paid month']
   };
   const lock='<svg width="16" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="12" rx="3"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 6v2"/></svg>';

@@ -1,13 +1,13 @@
 # Pricing source and decisions
 
-Updated 12 November 2026. Supersedes the previous Plan comparison workbook.
+Updated 21 November 2026. Supersedes the previous Plan comparison workbook.
 
 Authoritative source: AyudaGrow Features Matrix, All Four Plans from GHL.xlsx. Full extracted workbook and private Developer Notes: pricing-matrix-20261112.json.
 Library identity: libfile_fde3_f-c9e5c04ef4c88191929ba6e548e8c920_59a27f61de5081919553c4aa4c66cd85, version 0.
 
 - Monthly USD: Essentials 99, Core 149, Build 249, Scale 349. Annual USD: 990, 1490, 2490, 3490. Annual billing is ten months for twelve. JMD display remains unapproved.
 - Essentials trial: seven days, card required, automatic conversion to US$99/month unless cancelled. Self-service Start Here/video library only during trial. Guided hours start with the paid subscription. Trial converts to monthly billing regardless of the pricing toggle.
-- Build: 1,000 text AI responses shared across web chat, Instagram DM, Facebook DM and WhatsApp. No Voice AI minutes. Additional responses cost US$0.028 each if pay-as-you-go is chosen. Hard stop is the alternative; account behaviour must be configured and checked before activation.
+- Build: 1,000 text AI responses shared across WhatsApp, Instagram DMs, Facebook Messenger, email and web chat. No Voice AI minutes. Additional responses cost US$0.028 each if pay-as-you-go is chosen. Hard stop is the alternative; account behaviour must be configured and checked before activation.
 - Scale: unlimited text and Voice AI under fair use. Voice on web chat and WhatsApp calls was confirmed by account-holder testing. Phone-line AI remains unavailable pending a Jamaica route.
 - Reviews AI and Google Business Profile optimisation belong to Build and Scale. Other entitlements follow the final matrix.
 - WhatsApp is US$19/month optional on Essentials, included on Core/Build/Scale. Message usage remains separate. Do not publish unverified free-message windows or supplier rates.
@@ -36,3 +36,7 @@ Staging only. Preserve root Apache rules and noindex. Production and DNS are out
 ## Navigation correction release
 
 Restore shared header and footer on pricing, retaining prices, comparison categories and signup/trial/demo behaviour. Staging only. Rollback commit: 58a15dda4793b2e29ec9a4ef0241786a9f677d70. Preserve root Apache rules and noindex.
+
+## Channel wording approved 21 November 2026
+
+The owner approved adding email as the fifth channel and the order WhatsApp, Instagram DMs, Facebook Messenger, email and web chat. This supersedes four-channel wording in the archived 12 November workbook extract. Public inbox, pricing and signup copy now uses five channels; response allowances and prices are unchanged. This is a website copy change, not CRM channel activation.
