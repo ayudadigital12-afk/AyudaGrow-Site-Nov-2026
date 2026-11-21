@@ -481,8 +481,8 @@ window.AyudaPlans = {
       "values": [
         "None",
         "None",
-        "Web chat, Instagram DMs, Facebook DMs, WhatsApp messaging",
-        "All 4 text channels plus voice on web chat and WhatsApp calls"
+        "WhatsApp, Instagram DMs, Facebook Messenger, email and web chat",
+        "All 5 text channels plus voice on web chat and WhatsApp calls"
       ]
     },
     {
@@ -493,7 +493,7 @@ window.AyudaPlans = {
       "values": [
         "None",
         "None",
-        "1,000 responses (shared across all 4 channels)",
+        "1,000 responses (shared across all 5 channels)",
         "Unlimited (fair use)"
       ]
     },
